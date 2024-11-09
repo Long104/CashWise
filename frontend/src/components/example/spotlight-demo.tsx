@@ -1,10 +1,12 @@
 import React from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Spotlight } from "../ui/spotlight";
 
 export function SpotlightPreview() {
 	return (
-		<div className="h-[40rem] w-full flex md:items-center md:justify-center bg-primary antialiased bg-grid-white/[0.02] relative overflow-hidden">
+		<div className="h-[40rem] w-full flex md:items-center md:justify-center bg-primary antialiased bg-grid-white/[0.02] relative overflow-hidden select-none">
+			{/* <div className="h-[40rem] w-full flex md:items-center md:justify-center bg-primary antialiased bg-grid-white/[0.02] relative "> */}
 			<Spotlight
 				className="-top-40 left-0 md:left-60 md:-top-20"
 				fill="white"
@@ -19,7 +21,9 @@ export function SpotlightPreview() {
 				</p>
 				<p className="mt-10 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
 					<button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-          <a href="/workspace" className="text-white">Start Planing</a>
+						<Link href="/createPlan" className="text-white">
+							Start Planing
+						</Link>
 					</button>
 				</p>
 			</div>

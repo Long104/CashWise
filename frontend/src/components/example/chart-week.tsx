@@ -56,7 +56,7 @@ const data = [
 	},
 ];
 
-export function ChartDay() {
+export function ChartWeek() {
 	return (
 		<ResponsiveContainer width={"100%"} height={"100%"}>
 			<BarChart width={650} height={300} data={data}>

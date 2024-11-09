@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
-import { ChartDay } from "@example/chart-day";
+import { ChartWeek } from "@/components/example/chart-week";
 import { ChartMonth } from "@example/chart-month";
 import { HeroScrollDemo } from "@example/container-scroll-animation-demo";
 import { motion } from "framer-motion";
@@ -16,7 +16,7 @@ export function TimelineDemo() {
 						Save time and money with our revolutionary services. Our application
 						will help you with your budgeting needs.
 					</p>
-					<ChartDay />
+					<ChartWeek />
 				</div>
 			),
 		},

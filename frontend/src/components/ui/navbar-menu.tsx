@@ -13,6 +13,7 @@ import {
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { ProfileDropdown } from "@/components/ui/profile-dropdown";
 
 const components: { title: string; href: string; description: string }[] = [
 	{
@@ -21,26 +22,31 @@ const components: { title: string; href: string; description: string }[] = [
 		description: "view your plan",
 	},
 ];
+import { useAuth } from "@/context/auth";
 
 export function NavigationMenuDemo() {
+	const { user, login, logout, good } = useAuth();
 	return (
-		<NavigationMenu className="[&_*]:bg-primary [&_*]:text-accent-foreground z-50">
+		// <NavigationMenu className="[&_*]:bg-primary [&_*]:text-accent-foreground z-50">
+		<NavigationMenu className="[&>*]:bg-primary [&>*]:text-accent-foreground z-50">
 			<NavigationMenuList>
 				<NavigationMenuItem>
-					<NavigationMenuTrigger>Create Plan</NavigationMenuTrigger>
-					<NavigationMenuContent>
-						<ul className="grid gap-2 p-6 md:w-[400px] lg:w-[400px] lg:grid-cols-1">
-							<ListItem href="/docs" title="Weekly">
-								Create your budgeting plan for weekly
-							</ListItem>
-							<ListItem href="/docs/installation" title="Monthly">
-								Create your budgeting plan for monthly
-							</ListItem>
-							<ListItem href="/docs/primitives/typography" title="Customize">
-								Customize your budgeting plan
-							</ListItem>
-						</ul>
-					</NavigationMenuContent>
+					<Link href="/createPlan">
+						<NavigationMenuTrigger>Create Plan</NavigationMenuTrigger>
+						<NavigationMenuContent>
+							{/* <ul className="grid gap-2 p-6 md:w-[400px] lg:w-[400px] lg:grid-cols-1"> */}
+							{/* 	<ListItem href="/docs" title="Weekly"> */}
+							{/* 		Create your budgeting plan for weekly */}
+							{/* 	</ListItem> */}
+							{/* 	<ListItem href="/docs/installation" title="Monthly"> */}
+							{/* 		Create your budgeting plan for monthly */}
+							{/* 	</ListItem> */}
+							{/* 	<ListItem href="/docs/primitives/typography" title="Customize"> */}
+							{/* 		Customize your budgeting plan */}
+							{/* 	</ListItem> */}
+							{/* </ul> */}
+						</NavigationMenuContent>
+					</Link>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>View Plan</NavigationMenuTrigger>
@@ -59,11 +65,12 @@ export function NavigationMenuDemo() {
 					</NavigationMenuContent>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
-					<Link href="/docs" legacyBehavior passHref>
-						<NavigationMenuLink className={navigationMenuTriggerStyle()}>
-							Profile
-						</NavigationMenuLink>
-					</Link>
+					{/* <Link href="/profile" legacyBehavior passHref> */}
+					{/* <NavigationMenuLink className={navigationMenuTriggerStyle()}> */}
+					{/* <NavigationMenuLink > */}
+					<ProfileDropdown />
+					{/* </NavigationMenuLink> */}
+					{/* </Link> */}
 				</NavigationMenuItem>
 			</NavigationMenuList>
 		</NavigationMenu>

@@ -24,6 +24,13 @@ const config = {
 			},
 		},
 		extend: {
+			dropShadow: {
+				"3xl": "0 35px 35px rgba(255, 255, 255, 0.15)",
+				"4xl": [
+					"0 35px 35px rgba(255, 255, 255, 0.25)",
+					"0 45px 65px rgba(255, 255, 255, 0.15)",
+				],
+			},
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
@@ -113,7 +120,7 @@ const config = {
 						transform: "translate(-72%, -62%) scale(0.5)",
 					},
 					"100%": {
-						opacity: '1',
+						opacity: "1",
 						transform: "translate(-50%,-40%) scale(1)",
 					},
 				},

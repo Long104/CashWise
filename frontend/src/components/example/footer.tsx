@@ -12,19 +12,24 @@ export const Footer = () => {
 		<footer className="flex h-72 md:h-96 dark:bg-primary">
 			{/* <div className="grid grid-cols-2"> */}
 			<Card className="w-screen flex justify-around items-center">
-				<div className="text-2xl flex">
-					<Image
-						src={"/logo.webp"}
-						alt="Basic responsive image"
-						className="mx-auto rounded-3xl object-cover object-center mr-2"
-						width={30}
-						height={0}
-						sizes="(max-width: 768px) 50vw, (max-width: 1200px) 500vw, 300vw"
-						style={{
-							height: "auto",
-						}}
-					/>
-					CashWise
+				<div>
+					<div className="text-2xl flex">
+						<Image
+							src={"/logo.webp"}
+							alt="Basic responsive image"
+							// className="mx-auto rounded-3xl object-cover object-center mr-2"
+							className="rounded-3xl object-cover object-center mr-2"
+							width={30}
+							height={0}
+							sizes="(max-width: 768px) 50vw, (max-width: 1200px) 500vw, 300vw"
+							style={{
+								height: "auto",
+							}}
+						/>
+						CashWise
+					</div>
+					<br />© 2023 CashWise. All rights reserved.
+
 				</div>
 				<div className="grid grid-cols-3">
 					<CardHeader>
