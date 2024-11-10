@@ -48,7 +48,7 @@ export default function LoginPage() {
 				console.log("Login successful:", data);
 				const token = Cookies.get("jwt");
 				login(String(token));
-				router.push("/dashboard");
+				router.push("/home");
 				// router.refresh();
 			} else {
 				console.error("Login failed");

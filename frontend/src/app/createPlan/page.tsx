@@ -22,8 +22,12 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { CalendarDays, CreditCard, Lock, Users } from "lucide-react";
+import { fetchPost } from "@/fetch/client";
+import { useAuth } from "@/context/auth";
+import Link from "next/link";
 
 export default function CreatePlan() {
+	const { user } = useAuth();
 	const [planName, setPlanName] = useState("");
 	const [planDescription, setPlanDescription] = useState("");
 	const [planType, setPlanType] = useState("personal");
@@ -32,18 +36,47 @@ export default function CreatePlan() {
 	const [initialBudget, setInitialBudget] = useState("");
 	const [autoSave, setAutoSave] = useState(true);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	interface Plan {
+		name: string;
+		user_id: number | undefined; // Since `user` might be undefined
+		description: string;
+		plan_type: string;
+		visibility: string;
+		duration: string;
+		initial_budget: number;
+		auto_save?: boolean;
+	}
+
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		// Here you would typically send the data to your backend
-		console.log("Submitting plan:", {
-			planName,
-			planDescription,
-			planType,
-			planVisibility,
-			planDuration,
-			initialBudget,
-			autoSave,
-		});
+		const planData: Plan = {
+			name: planName,
+			user_id: user?.user_id,
+			description: planDescription,
+			plan_type: planType,
+			visibility: planVisibility,
+			duration: planDuration,
+			initial_budget: isNaN(parseFloat(initialBudget))
+				? 0
+				: parseFloat(initialBudget),
+			auto_save: autoSave,
+		};
+
+		try {
+			const res = await fetchPost("plan", planData);
+			setPlanName("");
+			setPlanDescription("");
+			setPlanType("personal");
+			setPlanVisibility("private");
+			setPlanDuration("");
+			setInitialBudget("");
+			setAutoSave(true);
+
+			console.log(res);
+		} catch (error) {
+			console.error("Error submitting plan:", error);
+		}
 		// Reset form or redirect to the new plan page
 	};
 
@@ -184,9 +217,11 @@ export default function CreatePlan() {
 							</div>
 						</CardContent>
 						<CardFooter>
-							<Button type="submit" className="w-full">
-								Create Financial Plan
-							</Button>
+							<Link href="/plan">
+								<Button type="submit" className="w-full">
+									Create Financial Plan
+								</Button>
+							</Link>
 						</CardFooter>
 					</Card>
 				</form>

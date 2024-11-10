@@ -49,7 +49,9 @@ export function NavigationMenuDemo() {
 					</Link>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
+        <Link href="/viewPlan">
 					<NavigationMenuTrigger>View Plan</NavigationMenuTrigger>
+          </Link>
 					<NavigationMenuContent>
 						<ul className="grid w-[400px] gap-3 p-2 md:w-[400px] md:grid-cols-1 lg:w-[400px] ">
 							{components.map((component) => (

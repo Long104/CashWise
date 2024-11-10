@@ -29,7 +29,6 @@ export const Footer = () => {
 						CashWise
 					</div>
 					<br />© 2023 CashWise. All rights reserved.
-
 				</div>
 				<div className="grid grid-cols-3">
 					<CardHeader>

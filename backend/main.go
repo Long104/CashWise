@@ -34,6 +34,7 @@ func main() {
 
 	routes.SetupUserRoutes(app)
 	routes.SetupCategoryRoutes(app)
+	routes.SetupPlanRoutes(app)
 
 	// setupRoutes(app)
 

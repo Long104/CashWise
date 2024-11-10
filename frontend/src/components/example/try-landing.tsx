@@ -94,7 +94,7 @@ export default function ProfilePage() {
 					<h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
 						Ready to Take Control of Your Finances?
 					</h3>
-					<Link href="/createPlan">
+					<Link href="/sign-in">
 						<Button size="lg" className="mt-4">
 							Get Started for Free
 							<DollarSign className="ml-2 h-5 w-5" />

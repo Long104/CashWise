@@ -74,6 +74,13 @@
   }
 }
 
+@layer utilities {
+  /* Add filter manually as Tailwind doesn’t have direct support */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -82,4 +89,3 @@
     @apply bg-background text-foreground;
   }
 }
-

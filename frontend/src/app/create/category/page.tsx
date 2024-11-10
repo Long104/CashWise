@@ -46,7 +46,7 @@ const Page = () => {
 				const data = await postWithBearer(
 					"http://localhost:8080/category",
 					token,
-					{ name },
+					category,
 				);
 				if (data) {
 					setResult(data);

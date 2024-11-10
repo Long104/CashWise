@@ -1,57 +1,50 @@
 package handlers
 
 import (
-	// "fmt"
-	// "log"
-	// "time"
-	//
 	"github.com/gofiber/fiber/v2"
-	// "github.com/golang-jwt/jwt/v4"
-	// "golang.org/x/crypto/bcrypt"
+	"github.com/long104/CashWise/config"
 	"github.com/long104/CashWise/models"
-	"gorm.io/gorm"
 )
 
-// gorm.Model
+func createCategory(c *fiber.Ctx) error {
+	category := new(models.Category)
+	if err := c.BodyParser(category); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse JSON"})
+	}
+	if err := config.DB.Create(&category).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot create category"})
+	}
+	return c.Status(fiber.StatusCreated).JSON(category)
+}
 
-func GetCategory(db *gorm.DB, c *fiber.Ctx) error {
+func getCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var category models.Category
-	db.First(&category, id)
-	return c.JSON(category)
-}
-
-func GetCategories(db *gorm.DB, c *fiber.Ctx) error {
-	var users []models.Category
-	db.Find(&users)
-	return c.JSON(users)
-}
-
-// createCategory creates a new category
-func CreateCategory(db *gorm.DB, c *fiber.Ctx) error {
-	category := new(models.Category)
-	if err := c.BodyParser(category); err != nil {
-		return err
+	if err := config.DB.First(&category, id).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Category not found"})
 	}
-	db.Create(&category)
 	return c.JSON(category)
 }
 
-// updateCategory updates a category by id
-func UpdateCategory(db *gorm.DB, c *fiber.Ctx) error {
+func updateCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
-	category := new(models.Category)
-	db.First(&category, id)
-	if err := c.BodyParser(category); err != nil {
-		return err
+	var category models.Category
+	if err := config.DB.First(&category, id).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Category not found"})
 	}
-	db.Save(&category)
+	if err := c.BodyParser(&category); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse JSON"})
+	}
+	if err := config.DB.Save(&category).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot update category"})
+	}
 	return c.JSON(category)
 }
 
-// deleteCategory deletes a category by id
-func DeleteCategory(db *gorm.DB, c *fiber.Ctx) error {
+func deleteCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
-	db.Delete(&models.Category{}, id)
-	return c.SendString("Category successfully deleted")
+	if err := config.DB.Delete(&models.Category{}, id).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete category"})
+	}
+	return c.SendStatus(fiber.StatusNoContent)
 }
