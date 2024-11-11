@@ -6,7 +6,7 @@ import (
 	"github.com/long104/CashWise/models"
 )
 
-func createBudget(c *fiber.Ctx) error {
+func CreateBudget(c *fiber.Ctx) error {
 	budget := new(models.Budget)
 	if err := c.BodyParser(budget); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse JSON"})
@@ -17,7 +17,7 @@ func createBudget(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusCreated).JSON(budget)
 }
 
-func getBudget(c *fiber.Ctx) error {
+func GetBudget(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var budget models.Budget
 	if err := config.DB.First(&budget, id).Error; err != nil {
@@ -26,7 +26,7 @@ func getBudget(c *fiber.Ctx) error {
 	return c.JSON(budget)
 }
 
-func updateBudget(c *fiber.Ctx) error {
+func UpdateBudget(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var budget models.Budget
 	if err := config.DB.First(&budget, id).Error; err != nil {
@@ -41,7 +41,7 @@ func updateBudget(c *fiber.Ctx) error {
 	return c.JSON(budget)
 }
 
-func deleteBudget(c *fiber.Ctx) error {
+func DeleteBudget(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if err := config.DB.Delete(&models.Budget{}, id).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete budget"})

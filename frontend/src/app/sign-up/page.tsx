@@ -13,16 +13,21 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Component() {
+	const router = useRouter();
 	const [passwordMatch, setPasswordMatch] = useState(true);
+	const [data, setData] = useState<{ message: string; success: boolean }>();
+
 	// const [password, setPassword] = useState("");
 	// const [email, setEmail] = useState("");
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
-    const {email,password,name,confirmPassword} = Object.fromEntries(formData)
+		const { email, password, name, confirmPassword } =
+			Object.fromEntries(formData);
 		// const password = formData.get("password") as string;
 		// const confirmPassword = formData.get("confirmPassword") as string;
 		// const email = formData.get("email") as string;
@@ -36,10 +41,9 @@ export default function Component() {
 		setPasswordMatch(true);
 		// Here you would typically send the form data to your backend
 		// console.log("Form submitted", Object.fromEntries(formData));
-    // console.log(email,password,name)
+		// console.log(email,password,name)
 
 		try {
-
 			const response = await fetch("http://localhost:8080/signup", {
 				method: "POST",
 				headers: {
@@ -47,12 +51,17 @@ export default function Component() {
 				},
 				// body: JSON.stringify({ email, password }),
 
-				body: JSON.stringify({ name,email,password }),
+				body: JSON.stringify({ name, email, password }),
 			});
 
 			if (response.ok) {
 				const data = await response.json();
+				setData(data);
 				console.log("Login successful:", data);
+				if (data.success) {
+					(event.currentTarget as HTMLFormElement)?.reset();
+					router.push("/login");
+				}
 			} else {
 				console.error("Login failed");
 			}
@@ -97,6 +106,9 @@ export default function Component() {
 						</div>
 						{!passwordMatch && (
 							<p className="text-sm text-red-500">Passwords do not match</p>
+						)}
+						{!data?.success && (
+							<p className="text-sm text-red-500">{data?.message}</p>
 						)}
 						<Button type="submit" className="w-full">
 							Sign Up

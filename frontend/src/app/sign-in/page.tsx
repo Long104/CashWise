@@ -22,10 +22,11 @@ export default function LoginPage() {
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const router = useRouter();
+	const [data, setData] = useState<boolean>(false);
 
 	const { user, login, logout } = useAuth();
 	const handleSubmitLogin = async (
-		event: React.SyntheticEvent<HTMLFormElement>,
+		event: React.FormEvent<HTMLFormElement>,
 	) => {
 		event.preventDefault();
 
@@ -48,10 +49,12 @@ export default function LoginPage() {
 				console.log("Login successful:", data);
 				const token = Cookies.get("jwt");
 				login(String(token));
+				(event.currentTarget as HTMLFormElement)?.reset();
 				router.push("/home");
 				// router.refresh();
 			} else {
-				console.error("Login failed");
+				setData(true);
+				return;
 			}
 		} catch (error) {
 			console.error("Error:", error);
@@ -170,6 +173,12 @@ export default function LoginPage() {
 							Login
 						</Button>
 					</form>
+
+					{data && (
+						<p className="text-sm text-red-500">
+							check your email and password again
+						</p>
+					)}
 				</CardContent>
 				<CardFooter className="flex flex-col">
 					<p className="mt-2 text-xs text-center text-gray-700">

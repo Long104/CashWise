@@ -6,7 +6,13 @@ import (
 	"github.com/long104/CashWise/handlers"
 )
 
-func SetupPlanRoutes(app *fiber.App) {
+func SetupRoutes(app *fiber.App) {
+	// category
+
+	app.Post("/transaction", handlers.CreateTransaction)
+	app.Get("/categories", handlers.GetCategories)
+	app.Post("/category", handlers.CreateCategory)
+
 	app.Get("/plan", func(c *fiber.Ctx) error {
 		return handlers.GetPlans(config.DB, c)
 	})

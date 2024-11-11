@@ -21,7 +21,7 @@ func CreateUser(c *fiber.Ctx) error {
 	// Check if the user already exists
 	var existingUser models.User
 	if err := config.DB.Where("email = ?", user.Email).First(&existingUser).Error; err == nil {
-		return c.JSON(fiber.Map{"message": "user already exists"})
+		return c.JSON(fiber.Map{"message": "email already exists", "success": false})
 	}
 
 	// Encrypt the password
@@ -36,7 +36,7 @@ func CreateUser(c *fiber.Ctx) error {
 		log.Fatalf("Error creating user: %v", err)
 	}
 
-	return c.JSON(user)
+	return c.JSON(fiber.Map{"message": "user login success", "success": true, "user": user})
 }
 
 func LoginUser(c *fiber.Ctx) error {
@@ -71,9 +71,9 @@ func LoginUser(c *fiber.Ctx) error {
 
 	// Set cookie
 	c.Cookie(&fiber.Cookie{
-		Name:     "jwt",
-		Value:    t,
-		Expires:  time.Now().Add(time.Hour * 72),
+		Name:    "jwt",
+		Value:   t,
+		Expires: time.Now().Add(time.Hour * 72),
 		// HTTPOnly: true,
 		HTTPOnly: false,
 		SameSite: "Lax",

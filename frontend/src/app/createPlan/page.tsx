@@ -25,8 +25,10 @@ import { CalendarDays, CreditCard, Lock, Users } from "lucide-react";
 import { fetchPost } from "@/fetch/client";
 import { useAuth } from "@/context/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CreatePlan() {
+	const router = useRouter();
 	const { user } = useAuth();
 	const [planName, setPlanName] = useState("");
 	const [planDescription, setPlanDescription] = useState("");
@@ -74,6 +76,8 @@ export default function CreatePlan() {
 			setAutoSave(true);
 
 			console.log(res);
+      // router.push(`/plan/${res.plan_id}`);
+      router.push(`/plan`);
 		} catch (error) {
 			console.error("Error submitting plan:", error);
 		}
@@ -217,11 +221,9 @@ export default function CreatePlan() {
 							</div>
 						</CardContent>
 						<CardFooter>
-							<Link href="/plan">
-								<Button type="submit" className="w-full">
-									Create Financial Plan
-								</Button>
-							</Link>
+							<Button type="submit" className="w-full">
+								Create Financial Plan
+							</Button>
 						</CardFooter>
 					</Card>
 				</form>

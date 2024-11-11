@@ -33,8 +33,7 @@ func main() {
 	app.Get("/validate-token", middleware.ValidateToken)
 
 	routes.SetupUserRoutes(app)
-	routes.SetupCategoryRoutes(app)
-	routes.SetupPlanRoutes(app)
+	routes.SetupRoutes(app)
 
 	// setupRoutes(app)
 

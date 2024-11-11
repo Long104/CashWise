@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -19,9 +19,19 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+	DollarSign,
+	PlusCircle,
+	Trash2,
+	Star,
+	Users,
+	Filter,
+	Share,
+	MoreHorizontal,
+} from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { PlusCircle, DollarSign, Calendar, Tag, Trash2 } from "lucide-react";
+import { fetchPost, fetchGet } from "@/fetch/client";
 
 // Mock data for initial expenses
 const initialExpenses = [
@@ -62,54 +72,101 @@ const initialExpenses = [
 	},
 ];
 
-const categories = [
-	"Food",
-	"Transportation",
-	"Entertainment",
-	"Utilities",
-	"Shopping",
-	"Other",
-];
-
 export default function DailyExpenses() {
-	const [expenses, setExpenses] = useState(initialExpenses);
-	const [newExpense, setNewExpense] = useState({
-		description: "",
-		amount: "",
-		category: "",
-		date: new Date().toISOString().split("T")[0],
-	});
+	// const [expenses, setExpenses] = useState(initialExpenses);
+	const [categories, setCategories] = useState<any[]>([]);
+	const [transactions, setTransactions] = useState<any[]>([]);
+	// const [newExpense, setNewExpense] = useState({
+	// 	description: "",
+	// 	amount: "",
+	// 	category: "",
+	// 	date: new Date().toISOString().split("T")[0],
+	// });
 
-	const addExpense = () => {
-		if (newExpense.description && newExpense.amount && newExpense.category) {
-			setExpenses([
-				...expenses,
-				{
-					...newExpense,
-					id: Date.now(),
-					amount: parseFloat(newExpense.amount),
-				},
-			]);
-			setNewExpense({
-				description: "",
-				amount: "",
-				category: "",
-				date: new Date().toISOString().split("T")[0],
-			});
+	// const addExpense = () => {
+	// 	if (newExpense.description && newExpense.amount && newExpense.category) {
+	// 		setExpenses([
+	// 			...expenses,
+	// 			{
+	// 				...newExpense,
+	// 				id: Date.now(),
+	// 				amount: parseFloat(newExpense.amount),
+	// 			},
+	// 		]);
+	// 		setNewExpense({
+	// 			description: "",
+	// 			amount: "",
+	// 			category: "",
+	// 			date: new Date().toISOString().split("T")[0],
+	// 		});
+	// 	}
+	// };
+	//
+	// const deleteExpense = (id: number) => {
+	// 	setExpenses(expenses.filter((expense) => expense.id !== id));
+	// };
+	//
+	// const totalExpenses = expenses.reduce(
+	// 	(sum, expense) => sum + expense.amount,
+	// 	0,
+	// );
+
+	useEffect(() => {
+		async function fetchCategories() {
+			const response = await fetchGet("categories");
+			setCategories(response);
 		}
-	};
 
-	const deleteExpense = (id: number) => {
-		setExpenses(expenses.filter((expense) => expense.id !== id));
-	};
+		async function fetchPlan() {
+			const response = await fetchGet("plan");
+			setTransactions(response);
+		}
 
-	const totalExpenses = expenses.reduce(
-		(sum, expense) => sum + expense.amount,
-		0,
-	);
+		fetchCategories();
+		fetchPlan();
+	}, []);
+	// console.log(categories)
 
+	console.log(transactions[0]?.id);
+	console.log(transactions[0]?.Transactions);
+	console.log(transactions)
+	// console.log(transactions.transactions.auto_save)
 	return (
 		<div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+			{/* <div className="bg-[#1e1e2e] text-white sticky top-0 z-50"> */}
+			<div className="bg-[#1e1e2e] text-white ">
+				<div className="max-w-7xl mx-auto">
+					<div className="flex items-center justify-between h-16 px-4">
+						<div className="flex items-center space-x-4">
+							{/* <h1 className="text-xl font-semibold">{planName}</h1> */}
+							<h1 className="text-xl font-semibold">{transactions[0]?.name}</h1>
+							<Star className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
+							<Users className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
+							<Button
+								variant="secondary"
+								className="bg-[#2a2a3c] text-white hover:bg-[#3a3a4c]"
+							>
+								Board
+							</Button>
+						</div>
+						<div className="flex items-center space-x-4">
+							<Filter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
+							<div className="bg-red-500 rounded-full w-8 h-8 flex items-center justify-center">
+								AA
+							</div>
+							<Button
+								variant="secondary"
+								className="bg-[#2a2a3c] text-white hover:bg-[#3a3a4c]"
+							>
+								<Share className="w-4 h-4 mr-2" />
+								Share
+							</Button>
+							<MoreHorizontal className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 				<div className="px-4 py-6 sm:px-0">
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -126,13 +183,14 @@ export default function DailyExpenses() {
 											<Input
 												id="description"
 												placeholder="What did you spend on?"
-												value={newExpense.description}
-												onChange={(e) =>
-													setNewExpense({
-														...newExpense,
-														description: e.target.value,
-													})
-												}
+												name="description"
+												// value={newExpense.description}
+												// onChange={(e) =>
+												// 	setNewExpense({
+												// 		...newExpense,
+												// 		description: e.target.value,
+												// 	})
+												// }
 											/>
 										</div>
 										<div className="space-y-2">
@@ -141,16 +199,17 @@ export default function DailyExpenses() {
 												<DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
 												<Input
 													id="amount"
+													name="amount"
 													type="number"
 													placeholder="0.00"
 													className="pl-10"
-													value={newExpense.amount}
-													onChange={(e) =>
-														setNewExpense({
-															...newExpense,
-															amount: e.target.value,
-														})
-													}
+													// value={newExpense.amount}
+													// onChange={(e) =>
+													// 	setNewExpense({
+													// 		...newExpense,
+													// 		amount: e.target.value,
+													// 	})
+													// }
 												/>
 											</div>
 										</div>
@@ -159,18 +218,18 @@ export default function DailyExpenses() {
 										<div className="space-y-2">
 											<Label htmlFor="category">Category</Label>
 											<Select
-												value={newExpense.category}
-												onValueChange={(value) =>
-													setNewExpense({ ...newExpense, category: value })
-												}
+											// value={newExpense.category}
+											// onValueChange={(value) =>
+											// 	setNewExpense({ ...newExpense, category: value })
+											// }
 											>
 												<SelectTrigger>
 													<SelectValue placeholder="Select a category" />
 												</SelectTrigger>
 												<SelectContent>
 													{categories.map((category) => (
-														<SelectItem key={category} value={category}>
-															{category}
+														<SelectItem key={category.id} value={category.name}>
+															{category.name}
 														</SelectItem>
 													))}
 												</SelectContent>
@@ -180,19 +239,20 @@ export default function DailyExpenses() {
 											<Label htmlFor="date">Date</Label>
 											<Input
 												id="date"
+												name="date"
 												type="date"
-												value={newExpense.date}
-												onChange={(e) =>
-
-													setNewExpense({ ...newExpense, date: e.target.value })
-												}
+												// value={newExpense.date}
+												// onChange={(e) =>
+												// 	setNewExpense({ ...newExpense, date: e.target.value })
+												// }
 											/>
 										</div>
 									</div>
 								</form>
 							</CardContent>
 							<CardFooter>
-								<Button className="w-full" onClick={addExpense}>
+								{/* <Button className="w-full" onClick={addExpense}> */}
+								<Button className="w-full">
 									<PlusCircle className="mr-2 h-4 w-4" /> Add Expense
 								</Button>
 							</CardFooter>
@@ -205,26 +265,27 @@ export default function DailyExpenses() {
 							</CardHeader>
 							<CardContent>
 								<div className="text-2xl font-bold">
-									${totalExpenses.toFixed(2)}
+									{/* ${totalExpenses.toFixed(2)} */}
+									let's go
 								</div>
 								<p className="text-sm text-muted-foreground">Total Expenses</p>
 								<div className="mt-4 space-y-2">
-									{categories.map((category) => {
-										const categoryTotal = expenses
-											.filter((expense) => expense.category === category)
-											.reduce((sum, expense) => sum + expense.amount, 0);
-										return (
-											<div
-												key={category}
-												className="flex justify-between items-center"
-											>
-												<span className="text-sm">{category}</span>
-												<span className="text-sm font-medium">
-													${categoryTotal.toFixed(2)}
-												</span>
-											</div>
-										);
-									})}
+									{/* {categories.map((category) => { */}
+									{/* 	const categoryTotal = expenses */}
+									{/* 		.filter((expense) => expense.category === category.name) */}
+									{/* 		.reduce((sum, expense) => sum + expense.amount, 0); */}
+									{/* 	return ( */}
+									{/* 		<div */}
+									{/* 			key={category.id} */}
+									{/* 			className="flex justify-between items-center" */}
+									{/* 		> */}
+									{/* 			<span className="text-sm">{category.name}</span> */}
+									{/* 			<span className="text-sm font-medium"> */}
+									{/* 				${categoryTotal.toFixed(2)} */}
+									{/* 			</span> */}
+									{/* 		</div> */}
+									{/* 	); */}
+									{/* })} */}
 								</div>
 							</CardContent>
 						</Card>
@@ -245,43 +306,43 @@ export default function DailyExpenses() {
 								<TabsContent value="all">
 									<ScrollArea className="h-[300px]">
 										<div className="space-y-4">
-											{expenses.map((expense) => (
-												<div
-													key={expense.id}
-													className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow"
-												>
-													<div className="flex items-center space-x-4">
-														<div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
-															<DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-300" />
-														</div>
-														<div>
-															<p className="font-medium">
-																{expense.description}
-															</p>
-															<p className="text-sm text-gray-500 dark:text-gray-400">
-																{expense.date}
-															</p>
-														</div>
+											{/* {expenses.map((expense) => ( */}
+											<div
+												// key={expense.id}
+												className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow"
+											>
+												<div className="flex items-center space-x-4">
+													<div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
+														<DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-300" />
 													</div>
-													<div className="flex items-center space-x-4">
-														<div className="text-right">
-															<p className="font-medium">
-																${expense.amount.toFixed(2)}
-															</p>
-															<p className="text-sm text-gray-500 dark:text-gray-400">
-																{expense.category}
-															</p>
-														</div>
-														<Button
-															variant="ghost"
-															size="icon"
-															onClick={() => deleteExpense(expense.id)}
-														>
-															<Trash2 className="h-4 w-4 text-red-500" />
-														</Button>
+													<div>
+														<p className="font-medium">
+															{/* {expense.description} */}
+														</p>
+														<p className="text-sm text-gray-500 dark:text-gray-400">
+															{/* {expense.date} */}
+														</p>
 													</div>
 												</div>
-											))}
+												<div className="flex items-center space-x-4">
+													<div className="text-right">
+														<p className="font-medium">
+															{/* ${expense.amount.toFixed(2)} */}
+														</p>
+														<p className="text-sm text-gray-500 dark:text-gray-400">
+															{/* {expense.category} */}
+														</p>
+													</div>
+													<Button
+														variant="ghost"
+														size="icon"
+														// onClick={() => deleteExpense(expense.id)}
+													>
+														<Trash2 className="h-4 w-4 text-red-500" />
+													</Button>
+												</div>
+											</div>
+											{/* ))} */}
 										</div>
 									</ScrollArea>
 								</TabsContent>

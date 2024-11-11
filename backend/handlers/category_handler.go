@@ -6,7 +6,7 @@ import (
 	"github.com/long104/CashWise/models"
 )
 
-func createCategory(c *fiber.Ctx) error {
+func CreateCategory(c *fiber.Ctx) error {
 	category := new(models.Category)
 	if err := c.BodyParser(category); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse JSON"})
@@ -17,7 +17,7 @@ func createCategory(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusCreated).JSON(category)
 }
 
-func getCategory(c *fiber.Ctx) error {
+func GetCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var category models.Category
 	if err := config.DB.First(&category, id).Error; err != nil {
@@ -26,7 +26,16 @@ func getCategory(c *fiber.Ctx) error {
 	return c.JSON(category)
 }
 
-func updateCategory(c *fiber.Ctx) error {
+
+func GetCategories(c *fiber.Ctx) error {
+	var categories []models.Category
+	if err := config.DB.Find(&categories).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to retrieve categories"})
+	}
+	return c.JSON(categories)
+}
+
+func UpdateCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var category models.Category
 	if err := config.DB.First(&category, id).Error; err != nil {
@@ -41,7 +50,7 @@ func updateCategory(c *fiber.Ctx) error {
 	return c.JSON(category)
 }
 
-func deleteCategory(c *fiber.Ctx) error {
+func DeleteCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if err := config.DB.Delete(&models.Category{}, id).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete category"})
