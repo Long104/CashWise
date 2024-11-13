@@ -4,6 +4,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/long104/CashWise/config"
 	"github.com/long104/CashWise/models"
+  "log"
 )
 
 func CreateCategory(c *fiber.Ctx) error {
@@ -53,6 +54,7 @@ func UpdateCategory(c *fiber.Ctx) error {
 func DeleteCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if err := config.DB.Delete(&models.Category{}, id).Error; err != nil {
+		log.Println("Error delete plan to database:", err) // Log database error
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete category"})
 	}
 	return c.SendStatus(fiber.StatusNoContent)

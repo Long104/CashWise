@@ -2,18 +2,23 @@ const {
 	default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
+import fluid, { extract, screens, fontSize } from "fluid-tailwind";
+
 const plugin = require("tailwindcss/plugin");
 
 import type { Config } from "tailwindcss";
 
 const config = {
 	darkMode: ["class"],
-	content: [
-		"./src/pages/**/*.{ts,tsx}",
-		"./src/components/**/*.{ts,tsx}",
-		"./src/app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
-	],
+	content: {
+		files: [
+			"./src/pages/**/*.{ts,tsx}",
+			"./src/components/**/*.{ts,tsx}",
+			"./src/app/**/*.{ts,tsx}",
+			"./src/**/*.{ts,tsx}",
+		],
+		extract,
+	},
 	prefix: "",
 	theme: {
 		container: {
@@ -23,7 +28,12 @@ const config = {
 				"2xl": "1400px",
 			},
 		},
+		screens, // Tailwind's default screens, in `rem`
+		fontSize, // Tailwind's default font sizes, in `rem` (including line heights)
 		extend: {
+			screens: {
+				xs: "20rem",
+			},
 			dropShadow: {
 				"3xl": "0 35px 35px rgba(255, 255, 255, 0.15)",
 				"4xl": [
@@ -142,6 +152,7 @@ const config = {
 			addVariant("child", "& > *");
 			addVariant("child-hover", "& > *:hover");
 		}),
+		fluid,
 	],
 } satisfies Config;
 

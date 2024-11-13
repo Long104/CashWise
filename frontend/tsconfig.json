@@ -24,6 +24,6 @@
       "@components*": ["./src/components/ui/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/middleware.ts.old", "src/app/api/auth/route.js", "src/app/sign-in/damn", "src/components/ui/profile-dropdown.go"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/middleware.ts.old", "src/app/api/auth/route.js", "src/app/sign-in/damn", "src/components/ui/profile-dropdown.go", "src/app/plan/p"],
   "exclude": ["node_modules"]
 }

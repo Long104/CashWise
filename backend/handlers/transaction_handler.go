@@ -20,9 +20,16 @@ func CreateTransaction(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse JSON"})
 	}
 	if err := config.DB.Create(&transaction).Error; err != nil {
+
 		log.Println("Error saving plan to database:", err) // Log database error
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot create transaction"})
 	}
+
+	if err := config.DB.Model(&models.Transaction{}).Preload("Category").First(&transaction, transaction.ID).Error; err != nil {
+		log.Println("Error get plan to database:", err) // Log database error
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot create transaction"})
+	}
+
 	return c.Status(fiber.StatusCreated).JSON(transaction)
 }
 
