@@ -19,7 +19,11 @@ import (
 func GetPlan(db *gorm.DB, c *fiber.Ctx) error {
 	id := c.Params("id")
 	var plan models.Plan
-	db.First(&plan, id)
+	// db.First(&plan, id)
+	err := db.Model(&models.Plan{}).Preload("Transactions.Category").First(&plan,id).Error
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, "Could not retrieve users")
+	}
 	return c.JSON(plan)
 }
 

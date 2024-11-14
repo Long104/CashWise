@@ -49,6 +49,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useParams } from "next/navigation";
 
 type Expense = {
 	budget_id: number;
@@ -59,19 +60,65 @@ type Expense = {
 	transaction_date: string;
 };
 
+type Transaction = {
+	id: number;
+	name: string; // Assuming every transaction needs a name
+	transaction_date: string;
+	category: {
+		name: string;
+	};
+	budget_id?: number; // Optional if not always present
+	plan_id?: number; // Optional if not always present
+	description?: string;
+	amount?: number | string;
+	category_id?: number;
+};
+
+type Plan = {
+	name: string;
+	id: number;
+	created_at: string;
+	description: string;
+	duration: number;
+	initial_budget: number;
+	plan_type: string;
+	user_id: number;
+	visibility: string;
+	Transactions: Transaction[];
+	budget?: any[];
+	auto_save?: boolean;
+};
+
 export default function DailyExpenses() {
+	// params
+	const params = useParams<{ planId: string }>();
+	// console.log(params.planId[0]);
+
 	const now = new Date();
 	const currentHours = now.getHours();
 	const currentMinutes = now.getMinutes();
 	const currentSeconds = now.getSeconds();
 
+	// useState
 	const [isAddingCategory, setIsAddingCategory] = useState(false);
 	const [newCategory, setNewCategory] = useState("");
 	const [categories, setCategories] = useState<any[]>([]);
-	const [transactions, setTransactions] = useState<any[]>([]);
+	const [transactions, setTransactions] = useState<Plan>({
+		name: "",
+		id: 0,
+		created_at: "",
+		description: "",
+		duration: 0,
+		initial_budget: 0,
+		plan_type: "",
+		user_id: 0,
+		visibility: "",
+		Transactions: [], // initialize as an empty array
+	});
 	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 	const [categoryToDelete, setCategoryToDelete] = useState<number | null>(null);
 
+	//handle
 	const handleAddCategory = async () => {
 		if (newCategory.trim()) {
 			try {
@@ -84,7 +131,6 @@ export default function DailyExpenses() {
 			}
 		}
 	};
-	// TODO: after the time
 
 	const [newExpense, setNewExpense] = useState<Expense>({
 		budget_id: 1,
@@ -105,8 +151,6 @@ export default function DailyExpenses() {
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		// const fullISODate = new Date(newExpense.transaction_date).toISOString();
-		// const fullISODate = `${new Date(newExpense.transaction_date).toISOString().split("T")[0]}T${currentHours}:${currentMinutes}:${currentSeconds}Z`;
 		const padZero = (num: number) => num.toString().padStart(2, "0");
 
 		const fullISODate = `${new Date(newExpense.transaction_date).toISOString().split("T")[0]}T${padZero(currentHours)}:${padZero(currentMinutes)}:${padZero(currentSeconds)}Z`;
@@ -119,22 +163,11 @@ export default function DailyExpenses() {
 
 			console.log("response", response);
 
-			setTransactions((prevTransactions) => [
-				{
-					...prevTransactions[0], // Keep the rest of the transaction structure
-					Transactions: [
-						...prevTransactions[0].Transactions,
-						{
-							...newExpense,
-							transaction_date: fullISODate,
-							id: response.id,
-							category: {
-								name: response.category?.name,
-							},
-						},
-					],
-				},
-			]);
+			setTransactions((prev) => ({
+				...prev,
+				Transactions: [...prev.Transactions, response],
+			}));
+			console.log("transaction this is it ", transactions);
 
 			// Reset the form using setNewExpense
 			setNewExpense({
@@ -164,22 +197,15 @@ export default function DailyExpenses() {
 	const handleDelete = async (id: number) => {
 		try {
 			await fetchDelete("transaction", id);
-			// setTransactions((prevTransactions) =>
-			// 	prevTransactions.filter(
-			// 		(transaction) => transaction.id !== id,
-			// 		// (transaction) => transaction[0]?.Transactions[0]?.id !== id,
-			// 	),
-			// );
-			setTransactions((prevTransactions) =>
-				prevTransactions.map((plan) => ({
-					...plan,
-					Transactions: plan.Transactions?.filter(
-						(transaction: any) => transaction.id !== id,
-					),
-				})),
-			);
 
-			console.log("delete transaction", transactions[0]?.Transactions[0]?.id);
+			setTransactions({
+				...transactions,
+				Transactions: transactions.Transactions.filter(
+					(plan) => plan.id !== id,
+				),
+			});
+
+			console.log("delete transaction", transactions);
 		} catch (error) {
 			console.error("Failed to delete transaction:", error);
 		}
@@ -206,8 +232,9 @@ export default function DailyExpenses() {
 		}
 
 		async function fetchPlan() {
-			const response = await fetchGet("plan");
+			const response = await fetchGet(`plan/${params.planId[0]}`);
 			setTransactions(response);
+			console.log("fetchPlan", response);
 		}
 
 		fetchCategories();
@@ -216,9 +243,6 @@ export default function DailyExpenses() {
 		// }, [transactions]);
 	}, []);
 
-	console.log("render start");
-	// console.log("Transaction deleted:", transactions[0]?.Transactions.id);
-	console.log(transactions);
 	return (
 		<div className="min-h-screen bg-gray-100 dark:bg-gray-900">
 			{/* <div className="bg-[#1e1e2e] text-white sticky top-0 z-50"> */}
@@ -227,7 +251,7 @@ export default function DailyExpenses() {
 					<div className="flex items-center justify-between h-16 px-4">
 						<div className="flex items-center space-x-4">
 							{/* <h1 className="text-xl font-semibold">{planName}</h1> */}
-							<h1 className="text-xl font-semibold">{transactions[0]?.name}</h1>
+							<h1 className="text-xl font-semibold">{transactions?.name}</h1>
 							<Star className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
 							<Users className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
 							<Button
@@ -420,24 +444,34 @@ export default function DailyExpenses() {
 							</CardHeader>
 							<CardContent>
 								<div className="text-2xl font-bold">
-									$
-									{transactions[0]?.Transactions.reduce(
-										(sum: number, transaction: any) =>
-											sum + parseFloat(transaction.amount),
-										0,
-									).toFixed(2)}
+									${/* {(transactions?.Transactions ?? []) */}
+									{/* 	.reduce( */}
+									{/* 		(sum: number, transaction: any) => */}
+									{/* 			sum + parseFloat(transaction.amount), */}
+									{/* 		0, */}
+									{/* 	) */}
+									{/* 	.toFixed(2)} */}
+									{Array.isArray(transactions?.Transactions)
+										? transactions.Transactions.reduce(
+												(sum: number, transaction: any) =>
+													sum + parseFloat(transaction.amount),
+												0,
+											).toFixed(2)
+										: 0}
 								</div>
 								<p className="text-sm text-muted-foreground">Total Expenses</p>
 								<div className="mt-4 space-y-2">
 									{categories.map((category) => {
-										const categoryTotal = transactions[0]?.Transactions.filter(
-											(transaction: any) =>
-												transaction.category_id === category.id,
-										).reduce(
-											(sum: number, transaction: any) =>
-												sum + parseFloat(transaction.amount),
-											0,
-										);
+										const categoryTotal = (transactions?.Transactions ?? [])
+											.filter(
+												(transaction: any) =>
+													transaction.category_id === category.id,
+											)
+											.reduce(
+												(sum: number, transaction: any) =>
+													sum + parseFloat(transaction.amount),
+												0,
+											);
 										return (
 											<div
 												key={category.id}
@@ -470,45 +504,47 @@ export default function DailyExpenses() {
 								<TabsContent value="all">
 									<ScrollArea className="h-[300px]">
 										<div className="space-y-4">
-											{transactions[0]?.Transactions.map((expense: any) => (
-												<div
-													key={expense.id}
-													className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow"
-												>
-													<div className="flex items-center space-x-4">
-														<div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
-															<DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-300" />
+											{(transactions?.Transactions ?? []).map(
+												(expense: any) => (
+													<div
+														key={expense.id}
+														className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow"
+													>
+														<div className="flex items-center space-x-4">
+															<div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
+																<DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-300" />
+															</div>
+															<div>
+																<p className="font-medium">
+																	{/* {expense.description} */}
+																	{expense?.category?.name}
+																</p>
+																<p className="text-sm text-gray-500 dark:text-gray-400">
+																	{expense.transaction_date}
+																</p>
+															</div>
 														</div>
-														<div>
-															<p className="font-medium">
-																{/* {expense.description} */}
-																{expense?.category?.name}
-															</p>
-															<p className="text-sm text-gray-500 dark:text-gray-400">
-																{expense.transaction_date}
-															</p>
+														<div className="flex items-center space-x-4">
+															<div className="text-right">
+																<p className="font-medium">
+																	${expense.amount.toFixed(2)}
+																</p>
+																<p className="text-sm text-gray-500 dark:text-gray-400">
+																	{/* {expense?.category?.name} */}
+																	{expense.description}
+																</p>
+															</div>
+															<Button
+																variant="ghost"
+																size="icon"
+																onClick={() => handleDelete(expense.id)}
+															>
+																<Trash2 className="h-4 w-4 text-red-500" />
+															</Button>
 														</div>
 													</div>
-													<div className="flex items-center space-x-4">
-														<div className="text-right">
-															<p className="font-medium">
-																${expense.amount.toFixed(2)}
-															</p>
-															<p className="text-sm text-gray-500 dark:text-gray-400">
-																{/* {expense?.category?.name} */}
-																{expense.description}
-															</p>
-														</div>
-														<Button
-															variant="ghost"
-															size="icon"
-															onClick={() => handleDelete(expense.id)}
-														>
-															<Trash2 className="h-4 w-4 text-red-500" />
-														</Button>
-													</div>
-												</div>
-											))}
+												),
+											)}
 										</div>
 									</ScrollArea>
 								</TabsContent>
