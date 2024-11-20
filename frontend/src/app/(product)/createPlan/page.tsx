@@ -76,8 +76,7 @@ export default function CreatePlan() {
 			setAutoSave(true);
 
 			console.log(res);
-      // router.push(`/plan/${res.plan_id}`);
-      router.push(`/plan`);
+      router.push(`/plan/${res.id}`);
 		} catch (error) {
 			console.error("Error submitting plan:", error);
 		}

@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 
+import { ModeToggle } from "@/components/mode-toggle";
 import { cn } from "@/lib/utils";
 import {
 	NavigationMenu,
@@ -49,9 +50,9 @@ export function NavigationMenuDemo() {
 					</Link>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
-        <Link href="/viewPlan">
-					<NavigationMenuTrigger>View Plan</NavigationMenuTrigger>
-          </Link>
+					<Link href="/viewPlan">
+						<NavigationMenuTrigger>View Plan</NavigationMenuTrigger>
+					</Link>
 					<NavigationMenuContent>
 						<ul className="grid w-[400px] gap-3 p-2 md:w-[400px] md:grid-cols-1 lg:w-[400px] ">
 							{components.map((component) => (
@@ -66,6 +67,10 @@ export function NavigationMenuDemo() {
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>
+				<NavigationMenuItem>
+					<ModeToggle />
+				</NavigationMenuItem>
+
 				<NavigationMenuItem>
 					{/* <Link href="/profile" legacyBehavior passHref> */}
 					{/* <NavigationMenuLink className={navigationMenuTriggerStyle()}> */}

@@ -17,6 +17,8 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
+import useAuthStore from "@/zustand/auth";
+
 import { useAuth } from "@/context/auth";
 export default function LoginPage() {
 	const [password, setPassword] = useState("");
@@ -24,10 +26,11 @@ export default function LoginPage() {
 	const router = useRouter();
 	const [data, setData] = useState<boolean>(false);
 
+	// const logins = useAuthStore((state) => state.login);
+	const state = useAuthStore();
+
 	const { user, login, logout } = useAuth();
-	const handleSubmitLogin = async (
-		event: React.FormEvent<HTMLFormElement>,
-	) => {
+	const handleSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		try {
@@ -49,6 +52,8 @@ export default function LoginPage() {
 				console.log("Login successful:", data);
 				const token = Cookies.get("jwt");
 				login(String(token));
+        // logins(String(token));
+        state.login(String(token));
 				(event.currentTarget as HTMLFormElement)?.reset();
 				router.push("/home");
 				// router.refresh();

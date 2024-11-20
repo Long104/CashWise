@@ -59,9 +59,16 @@ import type { NextRequest } from "next/server";
 import { jwtDecode } from "jwt-decode";
 
 export async function middleware(req: NextRequest) {
+	const requestHeaders = new Headers(req.headers);
+	const url = new URL(req.url);
+	const origin = url.origin;
+	const pathname = url.pathname;
+	requestHeaders.set("x-url", req.url);
+	requestHeaders.set("x-origin", origin);
+	requestHeaders.set("x-pathname", pathname);
+
 	const token = req.cookies.get("jwt");
 
-	// Handle logout if token is present
 	const handleLogout = async () => {
 		try {
 			await fetch("http://localhost:8080/logout", {
@@ -75,35 +82,6 @@ export async function middleware(req: NextRequest) {
 		}
 	};
 
-	// If the user is trying to access /home and already has a valid token, redirect to /dashboard
-	// if (req.nextUrl.pathname === "/" && token) {
-	// 	try {
-	// 		const decoded = jwtDecode<{ exp: number }>(token.value); // Decode the token
-	// 		const exp = decoded.exp * 1000; // Convert to milliseconds
-	// 		const currentTime = Date.now();
-	//
-	// 		if (currentTime >= exp) {
-	// 			return await handleLogout(); // Logout if expired
-	// 		}
-	//
-	// 		// Validate the token with your backend
-	// 		const response = await fetch("http://localhost:8080/validate-token", {
-	// 			headers: { Authorization: `Bearer ${token.value}` },
-	// 		});
-	//
-	// 		if (!response.ok) {
-	// 			return await handleLogout(); // Logout if token is not valid
-	// 		}
-	//
-	// 		// If token is valid, redirect to /dashboard
-	// 		return NextResponse.redirect("/http://localhost:3000/home");
-	// 	} catch (error) {
-	// 		console.error("Error decoding JWT:", error);
-	// 		return await handleLogout(); // Logout on decoding error
-	// 	}
-	// }
-
-	// For other protected routes, validate the token (this applies to /dashboard, /createPlan, etc.)
 	if (token) {
 		try {
 			// if (req.nextUrl.pathname === "/" && token) {
@@ -117,7 +95,8 @@ export async function middleware(req: NextRequest) {
 			const redirectToHome = ["", "/sign-in", "/sign-up"]; // Adjust for root path ""
 
 			if (redirectToHome.includes(path) && token) {
-				return NextResponse.redirect("http://localhost:3000/home");
+				// return NextResponse.redirect("http://localhost:3000/home");
+				return NextResponse.redirect(new URL("/home", req.url));
 			}
 
 			const decoded = jwtDecode<{ exp: number }>(token.value); // Decode the token
@@ -150,7 +129,14 @@ export async function middleware(req: NextRequest) {
 		}
 	}
 
-	return NextResponse.next(); // Continue to the requested route
+	// return NextResponse.next(); // Continue to the requested route
+
+	return NextResponse.next({
+		request: {
+			// Apply new request headers
+			headers: requestHeaders,
+		},
+	});
 }
 
 export const config = {

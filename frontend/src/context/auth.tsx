@@ -1,45 +1,3 @@
-// 'use client'
-// import React, { createContext, useContext, useState, ReactNode } from 'react';
-//
-// // Define the type for the context value
-// type ThemeContextType = {
-//   theme: string | null;
-//   toggleTheme: () => void;
-// };
-//
-// // Set the default value for the context as `undefined`, indicating no default theme is set
-// const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-//
-// interface ThemeProviderProps {
-//   children: ReactNode;
-// }
-//
-// // Create a provider component
-// const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-//   const [theme, setTheme] = useState<string | null>('light');
-//
-//   const toggleTheme = () => {
-//     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-//   };
-//
-//   return (
-//     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-//       {children}
-//     </ThemeContext.Provider>
-//   );
-// };
-//
-// // Create a custom hook to use the ThemeContext
-// export const useTheme = (): ThemeContextType => {
-//   const context = useContext(ThemeContext);
-//   if (!context) {
-//     throw new Error('useTheme must be used within a ThemeProvider');
-//   }
-//   return context;
-// };
-//
-// export default ThemeProvider;
-
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -50,9 +8,9 @@ import Cookies from "js-cookie";
 type User = {
 	user_id: number;
 	exp: number;
-	name?: string;
-	email?: string;
-	role?: string;
+	name: string;
+	email: string;
+	role: string;
 } | null;
 
 type AuthContextType = {

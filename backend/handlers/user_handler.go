@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"log"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/long104/CashWise/config"
 	"github.com/long104/CashWise/models"
@@ -17,7 +19,13 @@ func GetUsers(c *fiber.Ctx) error {
 func GetUser(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var user models.User
-	config.DB.First(&user, id)
+	// config.DB.First(&user, id)
+
+	if err := config.DB.Model(&models.User{}).Preload("Plans").First(&user, id).Error; err != nil {
+		log.Println("Error get plan to database:", err) // Log database error
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot create transaction"})
+	}
+
 	return c.JSON(user)
 }
 
