@@ -7,23 +7,22 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
-  //user
+	// user
 
-  app.Get("/user/:id", handlers.GetUser)
+	app.Get("/user/:id", handlers.GetUser)
 
-  //transaction
+	// transaction
 	app.Post("/transaction", handlers.CreateTransaction)
 	app.Delete("/transaction/:id", handlers.DeleteTransaction)
-  // app.Post("/transaction/:id", handlers.CreateTransaction)
+	// app.Post("/transaction/:id", handlers.CreateTransaction)
 
-
-// category
+	// category
 	app.Get("/categories", handlers.GetCategories)
 	app.Post("/category", handlers.CreateCategory)
 	app.Delete("/category/:id", handlers.DeleteCategory)
 
-// plan
-  app.Get("/plan/:id", func(c *fiber.Ctx) error {
+	// plan
+	app.Get("/plan/:id", func(c *fiber.Ctx) error {
 		return handlers.GetPlan(config.DB, c)
 	})
 	app.Get("/plans", func(c *fiber.Ctx) error {
@@ -31,5 +30,8 @@ func SetupRoutes(app *fiber.App) {
 	})
 	app.Post("/plan", func(c *fiber.Ctx) error {
 		return handlers.CreatePlan(config.DB, c)
+	})
+	app.Delete("/plan/:id", func(c *fiber.Ctx) error {
+		return handlers.DeletePlan(config.DB, c)
 	})
 }

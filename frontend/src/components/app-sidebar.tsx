@@ -2,16 +2,8 @@
 
 import * as React from "react";
 import {
-	AudioWaveform,
-	BookOpen,
-	Bot,
-	Command,
-	Frame,
 	GalleryVerticalEnd,
-	Map,
-	PieChart,
 	Settings2,
-	SquareTerminal,
 	Package,
 	Building2,
 	NotebookPen,
@@ -30,19 +22,18 @@ import {
 	SidebarHeader,
 	SidebarRail,
 } from "@/components/ui/sidebar";
-import { fetchGet, fetchPost, fetchDelete } from "@/fetch/client";
 
-import { useAuth } from "@/context/auth";
+import useAuthStore from "@/zustand/auth";
 // This is sample data.
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-	const { user, login, logout } = useAuth();
+	const users = useAuthStore((state) => state.user);
 
 	const data = {
 		user: {
-			name: user?.name,
-			email: user?.email,
-			avatar: "/avatars/shadcn.jpg",
+			name: users?.name,
+			email: users?.email,
+			avatar: "/logo.webp",
 		},
 		teams: [
 			{

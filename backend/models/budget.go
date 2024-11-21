@@ -14,6 +14,6 @@ type Budget struct {
 	StartDate   time.Time `gorm:"not null" json:"start_date"`
 	EndDate     time.Time `gorm:"not null" json:"end_date"`
 	CreatedAt   time.Time `gorm:"autoCreateTime" json:"created_at"`
-	Plan        Plan      `gorm:"foreignKey:PlanID" json:"plan"`
-	Category    Category  `gorm:"foreignKey:CategoryID" json:"category"`
+  Plan        Plan      `gorm:"foreignKey:PlanID;onDelete:CASCADE" json:"plan"`
+  Category    Category  `gorm:"foreignKey:CategoryID;onDelete:CASCADE" json:"category"`
 }

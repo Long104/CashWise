@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"log"
+
 	// "fmt"
 	// "log"
 	// "time"
@@ -20,7 +21,7 @@ func GetPlan(db *gorm.DB, c *fiber.Ctx) error {
 	id := c.Params("id")
 	var plan models.Plan
 	// db.First(&plan, id)
-	err := db.Model(&models.Plan{}).Preload("Transactions.Category").First(&plan,id).Error
+	err := db.Model(&models.Plan{}).Preload("Transactions.Category").First(&plan, id).Error
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Could not retrieve users")
 	}
@@ -76,6 +77,24 @@ func UpdatePlan(db *gorm.DB, c *fiber.Ctx) error {
 // deleteCategory deletes a category by id
 func DeletePlan(db *gorm.DB, c *fiber.Ctx) error {
 	id := c.Params("id")
-	db.Delete(&models.Category{}, id)
-	return c.SendString("Category successfully deleted")
+
+	if err := db.Where("plan_id = ?", id).Delete(&models.Transaction{}).Error; err != nil {
+		log.Println("Error deleting transactions:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Could not delete transactions"})
+	}
+
+	if err := db.Where("plan_id = ?", id).Delete(&models.Budget{}).Error; err != nil {
+		log.Println("Error deleting budgets:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Could not delete budgets"})
+	}
+
+	if err := db.Unscoped().Delete(&models.Plan{}, id).Error; err != nil {
+		log.Println("Error deleting category from database:", err) // Log database error
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Could not delete plan"})
+	}
+
+	// if err := db.Unscoped().Where("id = ?", id).Delete(&models.Plan{}).Error; err != nil {
+	// 	return fmt.Errorf("failed to soft delete plan: %w", err)
+	// }
+	return c.JSON(fiber.Map{"sucess": "delete sucess"})
 }

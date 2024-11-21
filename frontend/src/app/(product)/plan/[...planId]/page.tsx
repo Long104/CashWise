@@ -51,22 +51,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useParams } from "next/navigation";
 
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import {
-	SidebarInset,
-	SidebarProvider,
-	SidebarTrigger,
-} from "@/components/ui/sidebar";
-
-import { ModeToggle } from "@/components/mode-toggle";
 type Expense = {
 	budget_id: number;
 	plan_id: number;
@@ -108,7 +92,6 @@ type Plan = {
 export default function DailyExpenses() {
 	// params
 	const params = useParams<{ planId: string }>();
-	// console.log(params.planId[0]);
 
 	const now = new Date();
 	const currentHours = now.getHours();

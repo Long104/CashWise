@@ -23,10 +23,8 @@ const components: { title: string; href: string; description: string }[] = [
 		description: "view your plan",
 	},
 ];
-import { useAuth } from "@/context/auth";
 
 export function NavigationMenuDemo() {
-	const { user, login, logout, good } = useAuth();
 	return (
 		// <NavigationMenu className="[&_*]:bg-primary [&_*]:text-accent-foreground z-50">
 		<NavigationMenu className="[&>*]:bg-primary [&>*]:text-accent-foreground z-50">
@@ -68,16 +66,10 @@ export function NavigationMenuDemo() {
 					</NavigationMenuContent>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
-					<ModeToggle />
-				</NavigationMenuItem>
-
-				<NavigationMenuItem>
-					{/* <Link href="/profile" legacyBehavior passHref> */}
-					{/* <NavigationMenuLink className={navigationMenuTriggerStyle()}> */}
-					{/* <NavigationMenuLink > */}
 					<ProfileDropdown />
-					{/* </NavigationMenuLink> */}
-					{/* </Link> */}
+				</NavigationMenuItem>
+				<NavigationMenuItem className="p-2">
+					<ModeToggle />
 				</NavigationMenuItem>
 			</NavigationMenuList>
 		</NavigationMenu>

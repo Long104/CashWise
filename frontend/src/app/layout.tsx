@@ -25,6 +25,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 import { headers } from "next/headers";
 import { jwtDecode } from "jwt-decode";
+
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
 	variable: "--font-geist-sans",
@@ -57,13 +58,13 @@ export default async function RootLayout({
 
 	const pathname = headersList.get("x-pathname");
 	const eachPath = pathname?.split("/") ?? "";
-	const jwtToken = cookieStore.get("jwt");
 
+	const jwtToken = cookieStore.get("jwt");
 	let user_token;
 	if (jwtToken) {
 		user_token = jwtDecode<{ user_id: number | undefined }>(jwtToken?.value); // Define the expected structure
 	} else {
-    console.log('no jwt token')
+		console.log("no jwt token");
 		// return (
 		// 	<html lang="en">
 		// 		<body>
@@ -76,7 +77,7 @@ export default async function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<AuthProvider>
-				<UserProvider auth={user_token?.user_id}>
+				{/* <UserProvider auth={user_token?.user_id}> */}
 					<body
 						className={`${geistSans.variable} ${geistMono.variable} antialiased dark bg-primary [&_*]:select-none overscroll-y-none`}
 					>
@@ -89,7 +90,7 @@ export default async function RootLayout({
 							{children}
 						</ThemeProvider>
 					</body>
-				</UserProvider>
+				{/* </UserProvider> */}
 			</AuthProvider>
 		</html>
 	);

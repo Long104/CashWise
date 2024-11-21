@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/sidebar";
 import useAuthStore from "@/zustand/auth";
 
+import { useRouter } from "next/navigation";
 import { fetchGet, fetchPost, fetchDelete } from "@/fetch/client";
 export function NavUser({
 	user,
@@ -39,8 +40,14 @@ export function NavUser({
 }) {
 	const { isMobile } = useSidebar();
 
-	const user_data = useAuthStore((state) => state.user);
 	const logout = useAuthStore((state) => state.logout);
+
+	const router = useRouter();
+
+	const handleLogout = () => {
+		logout(); // Clear user state and cookies
+		router.push("/sign-in"); // Redirect to sign-in page
+	};
 
 	return (
 		<SidebarMenu>
@@ -103,9 +110,9 @@ export function NavUser({
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>
-							<LogOut onClick={() => logout()} />
-							Log out
+						<DropdownMenuItem onClick={handleLogout}>
+								<LogOut />
+								Log out
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

@@ -9,6 +9,6 @@ type Category struct {
 	ID           int64  `gorm:"primaryKey;autoIncrement" json:"id"`
 	Name         string `gorm:"not null;unique" json:"name"`
 	Description  string
-	Budgets      []Budget      `gorm:"foreignKey:CategoryID"`
-	Transactions []Transaction `gorm:"foreignKey:CategoryID"`
+	Budgets      []Budget      `gorm:"foreignKey:CategoryID;onDelete:CASCADE"`
+	Transactions []Transaction `gorm:"foreignKey:CategoryID;onDelete:CASCADE"`
 }

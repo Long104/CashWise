@@ -26,13 +26,13 @@ export default function LoginPage() {
 	const router = useRouter();
 	const [data, setData] = useState<boolean>(false);
 
-	// const logins = useAuthStore((state) => state.login);
-	const state = useAuthStore();
+	const logins = useAuthStore((state) => state.login);
 
-	const { user, login, logout } = useAuth();
 	const handleSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
+		//DOING: trash code
+		// const { user, login, logout } = useAuth();
 		try {
 			const response = await fetch("http://localhost:8080/login", {
 				method: "POST",
@@ -51,9 +51,9 @@ export default function LoginPage() {
 				const data = await response.json();
 				console.log("Login successful:", data);
 				const token = Cookies.get("jwt");
-				login(String(token));
-        // logins(String(token));
-        state.login(String(token));
+				//DOING: trash code
+				// login(String(token));
+				logins(String(token));
 				(event.currentTarget as HTMLFormElement)?.reset();
 				router.push("/home");
 				// router.refresh();

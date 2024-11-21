@@ -29,7 +29,6 @@ import {
 	Share,
 	MoreHorizontal,
 	ChevronDown,
-	X,
 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -59,7 +58,7 @@ type Expense = {
 	category_id: number;
 	transaction_date: string;
 };
-
+import useAuthStore from "@/zustand/auth";
 export default function DailyExpenses() {
 	// params
 	const params = useParams<{ planId: string }>();
@@ -78,6 +77,8 @@ export default function DailyExpenses() {
 	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 	const [categoryToDelete, setCategoryToDelete] = useState<number | null>(null);
 
+  // zustand
+	const users = useAuthStore((state) => state.user);
 	//handle
 	const handleAddCategory = async () => {
 		if (newCategory.trim()) {
@@ -210,7 +211,7 @@ export default function DailyExpenses() {
 		}
 
 		async function fetchPlan() {
-			const response = await fetchGet(`plans`);
+			const response = await fetchGet(`user/${users?.user_id}`);
 			setTransactions(response);
 			console.log("fetchPlan", response);
 		}
@@ -223,10 +224,7 @@ export default function DailyExpenses() {
 
 	console.log("render start");
 	// console.log("Transaction deleted:", transactions[0]?.Transactions.id);
-	console.log(
-		"this is plan",
-    transactions
-	);
+	console.log("this is plan", transactions);
 	// console.log(transactions.name);
 	return (
 		<div className="min-h-screen bg-gray-100 dark:bg-gray-900">

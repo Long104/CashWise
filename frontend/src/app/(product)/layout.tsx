@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/app/globals.css";
-import { Navbar } from "@example/navbar";
-import { AuthProvider } from "@/context/auth";
-import { UserProvider } from "@/context/user";
 
 import { AppSidebar } from "@/components/app-sidebar";
 import {
@@ -15,26 +12,16 @@ import {
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import {
 	SidebarInset,
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
-import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 import { headers } from "next/headers";
-import { jwtDecode } from "jwt-decode";
-const geistSans = localFont({
-	src: "../fonts/GeistVF.woff",
-	variable: "--font-geist-sans",
-	weight: "100 900",
-});
-const geistMono = localFont({
-	src: "../fonts/GeistMonoVF.woff",
-	variable: "--font-geist-mono",
-	weight: "100 900",
-});
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -57,47 +44,38 @@ export default async function RootLayout({
 	//
 	const pathname = headersList.get("x-pathname");
 	const eachPath = pathname?.split("/") ?? "";
-	// const jwtToken = cookieStore.get("jwt");
-	//
-	// let user_token;
-	// if (jwtToken) {
-	// 	user_token = jwtDecode<{ user_id: number | undefined }>(jwtToken?.value); // Define the expected structure
-	// } else {
-	// 	return null;
-	// }
 
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<body>
-				<SidebarProvider defaultOpen={defaultOpen}>
-					<AppSidebar />
-					<SidebarInset>
-						<header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-							<div className="flex items-center gap-2 px-4">
-								<SidebarTrigger className="-ml-1" />
-								<ModeToggle />
-								<Separator orientation="vertical" className="mr-2 h-4" />
-								<Breadcrumb>
-									<BreadcrumbList>
-										<BreadcrumbItem className="hidden md:block">
-											<BreadcrumbLink href="#">{eachPath[1]}</BreadcrumbLink>
+		<SidebarProvider defaultOpen={defaultOpen}>
+			<AppSidebar />
+			<SidebarInset>
+				<header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+					<div className="flex items-center gap-2 px-4">
+						<SidebarTrigger className="-ml-1" />
+						<ModeToggle />
+						<Separator orientation="vertical" className="mr-2 h-4" />
+						<Breadcrumb>
+							<BreadcrumbList>
+								<BreadcrumbItem className="hidden md:block">
+									<BreadcrumbLink href="#">{eachPath[1]}</BreadcrumbLink>
+								</BreadcrumbItem>
+								{eachPath[2] ? (
+									<>
+										<BreadcrumbSeparator className="hidden md:block" />
+										<BreadcrumbItem>
+											<BreadcrumbPage>{eachPath[2]}</BreadcrumbPage>
 										</BreadcrumbItem>
-										{eachPath[2] ? (
-											<>
-												<BreadcrumbSeparator className="hidden md:block" />
-												<BreadcrumbItem>
-													<BreadcrumbPage>{eachPath[2]}</BreadcrumbPage>
-												</BreadcrumbItem>
-											</>
-										) : null}
-									</BreadcrumbList>
-								</Breadcrumb>
-							</div>
-						</header>
-						{children}
-					</SidebarInset>
-				</SidebarProvider>
-			</body>
-		</html>
+									</>
+								) : null}
+							</BreadcrumbList>
+						</Breadcrumb>
+					</div>
+					<Button variant={"outline"} className="mr-2" asChild>
+						<Link href="/createPlan">+</Link>
+					</Button>
+				</header>
+				{children}
+			</SidebarInset>
+		</SidebarProvider>
 	);
 }
