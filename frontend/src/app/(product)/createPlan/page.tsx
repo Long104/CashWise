@@ -23,13 +23,13 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { CalendarDays, CreditCard, Lock, Users } from "lucide-react";
 import { fetchPost } from "@/fetch/client";
-import { useAuth } from "@/context/auth";
+import useAuthStore from "@/zustand/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function CreatePlan() {
+	const user = useAuthStore((state) => state.user);
 	const router = useRouter();
-	const { user } = useAuth();
 	const [planName, setPlanName] = useState("");
 	const [planDescription, setPlanDescription] = useState("");
 	const [planType, setPlanType] = useState("personal");
@@ -76,7 +76,7 @@ export default function CreatePlan() {
 			setAutoSave(true);
 
 			console.log(res);
-      router.push(`/plan/${res.id}`);
+			router.push(`/plan/${res.id}`);
 		} catch (error) {
 			console.error("Error submitting plan:", error);
 		}

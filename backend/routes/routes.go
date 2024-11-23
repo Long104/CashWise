@@ -10,6 +10,7 @@ func SetupRoutes(app *fiber.App) {
 	// user
 
 	app.Get("/user/:id", handlers.GetUser)
+	app.Get("/users", handlers.GetUsers)
 
 	// transaction
 	app.Post("/transaction", handlers.CreateTransaction)

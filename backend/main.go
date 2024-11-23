@@ -32,7 +32,6 @@ func main() {
 	// app.Use("/books", AuthRequired)
 	app.Get("/validate-token", middleware.ValidateToken)
 
-	routes.SetupUserRoutes(app)
 	routes.SetupRoutes(app)
 
 	// setupRoutes(app)
