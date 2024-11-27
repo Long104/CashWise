@@ -3,11 +3,12 @@
 import { fetchGet, fetchPost } from "@/fetch/client";
 import { Plan } from "@/types";
 
-export const fetchPlans = async (id:number | undefined) => {
+export const fetchUser = async (id:number | undefined) => {
 	try {
 		const response = await fetchGet(`user/${id}`);
 		console.log("damn this is res", response);
-		return response.Plans;
+		// return response.Plans;
+		return response;
 	} catch (error) {
 		console.log("Error fetching plans:", error);
 	}

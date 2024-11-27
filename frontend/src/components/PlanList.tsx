@@ -1,6 +1,6 @@
 "use client";
 
-import { usePlans } from "@/hooks/usePlans";
+import { usePlans } from "@/hooks/useUser";
 import { Plan } from "@/types";
 
 export default function Todos() {

@@ -25,12 +25,12 @@ import {
 
 import useAuthStore from "@/zustand/auth";
 // This is sample data.
-import { usePlans } from "@/hooks/usePlans";
+import { useUser } from "@/hooks/useUser";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const users = useAuthStore((state) => state.user);
-	const { plansQuery } = usePlans();
-	const { data: plans, isPending, error, refetch } = plansQuery;
+	const { userQuery } = useUser();
+	const { data: user, isPending, error, refetch } = userQuery;
 	const data = {
 		user: {
 			name: users?.name,
@@ -61,7 +61,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				icon: NotebookPen,
 				// isActive: true,
 				items:
-					plans?.map((plan: any) => ({
+					user?.Plans?.map((plan: any) => ({
 						title: plan.name || "Unnamed Plan",
 						url: `/plan/${plan.id}`,
 					})) || [],

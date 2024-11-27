@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -24,8 +25,8 @@ import {
 import { fetchPost, fetchGet, fetchDelete } from "@/fetch/client";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/auth";
+import { usePlans } from "@/hooks/usePlans";
 
-import { useUser } from "@/hooks/useUser";
 type Plan = {
 	id: number;
 	name: string;
@@ -35,15 +36,33 @@ type Plan = {
 };
 
 export default function FinancialPlans() {
-	const { userQuery, deleteUserMutation } = useUser();
-	const { data: user, isPending, error, refetch } = userQuery;
-
+	const { plansQuery } = usePlans();
+//	const { data: plans, isPending, error, refetch } = plansQuery;
+	 const [plans, setPlans] = useState<Plan[]>([]);
 	const users = useAuthStore((state) => state.user);
+
+	useEffect(() => {
+		if (users?.user_id) {
+			async function fetchPlans() {
+				try {
+					// const response = await fetchGet(`user/${users?.user_id}`);
+					const response = await fetchGet(`user/${users?.user_id}`);
+					 setPlans(response.Plans);
+					console.log("this is response", response.Plans);
+				} catch (error) {
+					console.error("Failed to fetch plans:", error);
+				}
+			}
+			fetchPlans();
+		} else {
+			console.log("User is not authenticated or user_id is undefined");
+		}
+	}, [users]);
+
 	const router = useRouter();
-	async function goToPlan(planName: string, userId: number) {
+	async function goToPlan(id: number) {
 		try {
-			const formattedPlanName = planName.replace(/ /g, "_");
-			router.push(`/plan/${formattedPlanName}?id=${userId}`);
+			router.push(`/plan/${id}`);
 		} catch (error) {
 			console.log("cannot go to plan", error);
 		}
@@ -51,15 +70,11 @@ export default function FinancialPlans() {
 
 	async function handleDeletePlan(id: number) {
 		try {
-			deleteUserMutation?.mutate(id);
+			await fetchDelete("plan", id);
+			 setPlans(plans.filter((plan) => plan.id !== id));
 		} catch (error) {
 			console.log("cannot delete plan", error);
 		}
-	}
-	if (Array.isArray(users) && users.length > 0) {
-		console.log("plans", users);
-	} else {
-		console.log("no plans");
 	}
 
 	return (
@@ -68,8 +83,8 @@ export default function FinancialPlans() {
 				<main className="flex-1 p-6 overflow-auto">
 					<h1 className="text-3xl font-bold mb-6">Financial Plans Overview</h1>
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-						{Array.isArray(user?.Plans) && user?.Plans.length > 0
-							? user?.Plans?.map((plan: any) => (
+						{Array.isArray(plans) && plans.length > 0
+							? plans.map((plan) => (
 									<Card
 										key={plan.id}
 										className="hover:shadow-lg transition-shadow"
@@ -93,7 +108,7 @@ export default function FinancialPlans() {
 												variant="outline"
 												className="w-full"
 												onClick={() => {
-													goToPlan(plan.name, plan.id);
+													goToPlan(plan.id);
 												}}
 											>
 												View Details <ChevronRight className="ml-2 h-4 w-4" />

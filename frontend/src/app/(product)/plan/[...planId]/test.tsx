@@ -53,8 +53,6 @@ import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useUser } from "@/hooks/useUser";
-import { useCategory } from "@/hooks/useCategory";
-import { useTransaction } from "@/hooks/useTransaction";
 type Expense = {
 	budget_id: number;
 	plan_id: number;
@@ -95,57 +93,54 @@ type Plan = {
 
 export default function DailyExpenses() {
 	// params
-	const params = useParams<{ planId: string }>();
-	console.log("params", params);
+	// const params = useParams<{ planId: string }>();
 	// const router = useRouter();
-	const searchParams = useSearchParams();
-	const currentPlanId = searchParams.get("id");
 	const { userQuery, deleteUserMutation } = useUser();
 	const {
-		data: user,
-		isPending: userIsPending,
-		error: userError,
-		refetch: userRefetch,
+		data: plans,
+		isPending: planIsPending,
+		error: planError,
+		refetch: planRefetch,
 	} = userQuery;
-	console.log("userquery", user);
 
-	const { categoriesQuery, createCategoryMutation, deleteCategoryMutation } =
-		useCategory();
-	const {
-		data: categories,
-		isPending: categoryIsPending,
-		error: categoryError,
-	} = categoriesQuery(currentPlanId);
-	console.log("categories", categories);
-	const {
-		transactionQuery,
-		createTransactionMutation,
-		deleteTransactionMutation,
-	} = useTransaction();
-
-	const {
-		data: transactions,
-		isPending: transactionIsPending,
-		error: transactionError,
-	} = transactionQuery(currentPlanId);
+	const searchParams = useSearchParams();
+	const id = searchParams.get("id");
 	const now = new Date();
 	const currentHours = now.getHours();
 	const currentMinutes = now.getMinutes();
 	const currentSeconds = now.getSeconds();
+
 	// useState
 	const [isAddingCategory, setIsAddingCategory] = useState(false);
 	const [newCategory, setNewCategory] = useState("");
+	// const [categories, setCategories] = useState<any[]>([]);
+	const [transactions, setTransactions] = useState<Plan>({
+		name: "",
+		id: 0,
+		created_at: "",
+		description: "",
+		duration: 0,
+		initial_budget: 0,
+		plan_type: "",
+		user_id: 0,
+		visibility: "",
+		Transactions: [], // initialize as an empty array
+	});
 	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 	const [categoryToDelete, setCategoryToDelete] = useState<number | null>(null);
 
+	//handle
 	const handleAddCategory = async () => {
 		if (newCategory.trim()) {
 			try {
-				createCategoryMutation.mutate({
-					planId: currentPlanId,
-					newCategory: { name: newCategory },
-				});
-				setIsAddingCategory(false);
+
+				// const response = await fetchPost("category", {
+				// 	name: newCategory,
+				// 	plan_id: id,
+				// });
+				// setCategories([...categories, response]);
+				// setNewCategory("");
+				// setIsAddingCategory(false);
 			} catch (error) {
 				console.error("Failed to add category:", error);
 			}
@@ -154,13 +149,13 @@ export default function DailyExpenses() {
 
 	const [newExpense, setNewExpense] = useState<Expense>({
 		budget_id: 1,
-		plan_id: currentPlanId ? parseInt(currentPlanId) : 1,
+		plan_id: id ? parseInt(id) : 1,
 		description: "",
 		amount: 0,
 		category_id: 1,
 		transaction_date: new Date().toISOString().split("T")[0],
 	});
-
+	//
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setNewExpense((prev: any) => ({
@@ -181,25 +176,51 @@ export default function DailyExpenses() {
 				transaction_date: fullISODate,
 			});
 
+			console.log("response", response);
+
+			setTransactions((prev) => ({
+				...prev,
+				Transactions: [...prev.Transactions, response],
+			}));
+			console.log("transaction this is it ", transactions);
+
+			// Reset the form using setNewExpense
 			setNewExpense({
 				budget_id: 1,
-				plan_id: currentPlanId ? parseInt(currentPlanId) : 1,
+				plan_id: id ? parseInt(id) : 1,
 				description: "",
 				amount: 0,
 				category_id: 1,
 				transaction_date: new Date().toISOString().split("T")[0],
 			});
+
+			// Optionally, reset the form fields to ensure UI is in sync
 			if (event.target instanceof HTMLFormElement) {
 				event.target.reset();
 			}
+
+			// You could add a success message here
+			// setSuccessMessage("Transaction added successfully!");
 		} catch (error) {
+			// Handle the error in a way that's meaningful for this component
 			console.error("Failed to add transaction:", error);
+			// You could set an error state here to display to the user
+			// setErrorMessage("Failed to add transaction. Please try again.");
 		}
 	};
 
 	const handleDelete = async (id: number) => {
 		try {
 			await fetchDelete("transaction", id);
+
+			setTransactions({
+				...transactions,
+				Transactions: transactions.Transactions.filter(
+					(plan) => plan.id !== id,
+				),
+			});
+
+			console.log("delete transaction", transactions);
 		} catch (error) {
 			console.error("Failed to delete transaction:", error);
 		}
@@ -207,13 +228,36 @@ export default function DailyExpenses() {
 
 	const handleDeleteCategory = async (categoryId: number) => {
 		try {
-			deleteCategoryMutation.mutate({ planId: currentPlanId, categoryId });
+			// const response = await fetchDelete("category", categoryId);
+			// console.log(response);
+			// setCategories(
+			// 	categories.filter((category) => category.id !== categoryId),
+			// );
 			setIsDeleteDialogOpen(false);
 			setCategoryToDelete(null);
 		} catch (error) {
 			console.error("Failed to delete category:", error);
 		}
 	};
+
+	useEffect(() => {
+		// async function fetchCategories() {
+		// const response = await fetchGet("categories");
+		// setCategories(response);
+		// }
+
+		async function fetchPlan() {
+			// const response = await fetchGet(`plan/${params.planId[0]}`);
+			const response = await fetchGet(`plan/${id}`);
+			setTransactions(response);
+			console.log("fetchPlan", response);
+		}
+
+		// fetchCategories();
+		fetchPlan();
+		console.log("useEffect start");
+		// }, [transactions]);
+	}, []);
 
 	return (
 		<>
@@ -241,44 +285,39 @@ export default function DailyExpenses() {
 																variant="outline"
 																className="w-full justify-between"
 															>
-																{categories > 0
-																	? categories?.find(
-																			(c: any) =>
-																				c.id === newExpense.category_id,
-																		)?.name || "Select a category"
-																	: "add category"}
+																{/* {categories.find( */}
+																{/* 	(c:any) => c.id === newExpense.category_id, */}
+																{/* )?.name || "Select a category"} */}
 																<ChevronDown className="ml-2 h-4 w-4 opacity-50" />
 															</Button>
 														</DropdownMenuTrigger>
 														<DropdownMenuContent className="w-[--radix-dropdown-trigger-width] min-w-[8rem]">
-															{categories > 0
-																? categories?.map((category: any) => (
-																		<DropdownMenuItem
-																			key={category.id}
-																			onClick={() =>
-																				setNewExpense({
-																					...newExpense,
-																					category_id: category.id,
-																				})
-																			}
-																			className="justify-between"
-																		>
-																			{category.name}
-
-																			<Button
-																				variant="outline"
-																				className="h-4 w-4 opacity-50 hover:opacity-100 bg-secondary"
-																				onClick={(e) => {
-																					e.stopPropagation();
-																					setCategoryToDelete(category.id);
-																					setIsDeleteDialogOpen(true);
-																				}}
-																			>
-																				X
-																			</Button>
-																		</DropdownMenuItem>
-																	))
-																: ""}
+															{/* {categories.map((category:any) => ( */}
+															{/* 	<DropdownMenuItem */}
+															{/* 		key={category.id} */}
+															{/* 		onClick={() => */}
+															{/* 			setNewExpense({ */}
+															{/* 				...newExpense, */}
+															{/* 				category_id: category.id, */}
+															{/* 			}) */}
+															{/* 		} */}
+															{/* 		className="justify-between" */}
+															{/* 	> */}
+															{/* 		{category.name} */}
+															{/**/}
+															{/* 		<Button */}
+															{/* 			variant="outline" */}
+															{/* 			className="h-4 w-4 opacity-50 hover:opacity-100 bg-secondary" */}
+															{/* 			onClick={(e) => { */}
+															{/* 				e.stopPropagation(); */}
+															{/* 				setCategoryToDelete(category.id); */}
+															{/* 				setIsDeleteDialogOpen(true); */}
+															{/* 			}} */}
+															{/* 		> */}
+															{/* 			X */}
+															{/* 		</Button> */}
+															{/* 	</DropdownMenuItem> */}
+															{/* ))} */}
 															<DropdownMenuItem
 																onClick={() => setIsAddingCategory(true)}
 																className="justify-center font-medium"
@@ -302,6 +341,8 @@ export default function DailyExpenses() {
 															value={
 																newExpense.amount === 0 ? "" : newExpense.amount
 															}
+															// onChange={handleChange}
+															// value={newExpense.amount}
 															onChange={(e) =>
 																setNewExpense({
 																	...newExpense,
@@ -369,28 +410,28 @@ export default function DailyExpenses() {
 										Total Expenses
 									</p>
 									<div className="mt-4 space-y-2">
-										{categories?.map((category: any) => {
-											const categoryTotal = (transactions?.Transactions ?? [])
-												.filter(
-													(transaction: any) =>
-														transaction.category_id === category.id,
-												)
-												.reduce((sum: number, transaction: any) => {
-													const amount = parseFloat(transaction.amount) || 0;
-													return sum + amount;
-												}, 0);
-											return (
-												<div
-													key={category.id}
-													className="flex justify-between items-center"
-												>
-													<span className="text-sm">{category.name}</span>
-													<span className="text-sm font-medium">
-														${categoryTotal?.toFixed(2) ?? 0}
-													</span>
-												</div>
-											);
-										})}
+										{/* {categories.map((category) => { */}
+										{/* 	const categoryTotal = (transactions?.Transactions ?? []) */}
+										{/* 		.filter( */}
+										{/* 			(transaction: any) => */}
+										{/* 				transaction.category_id === category.id, */}
+										{/* 		) */}
+										{/* 		.reduce((sum: number, transaction: any) => { */}
+										{/* 			const amount = parseFloat(transaction.amount) || 0; */}
+										{/* 			return sum + amount; */}
+										{/* 		}, 0); */}
+										{/* 	return ( */}
+										{/* 		<div */}
+										{/* 			key={category.id} */}
+										{/* 			className="flex justify-between items-center" */}
+										{/* 		> */}
+										{/* 			<span className="text-sm">{category.name}</span> */}
+										{/* 			<span className="text-sm font-medium"> */}
+										{/* 				${categoryTotal?.toFixed(2) ?? 0} */}
+										{/* 			</span> */}
+										{/* 		</div> */}
+										{/* 	); */}
+										{/* })} */}
 									</div>
 								</CardContent>
 							</Card>
@@ -423,6 +464,7 @@ export default function DailyExpenses() {
 																</div>
 																<div>
 																	<p className="font-medium">
+																		{/* {expense.description} */}
 																		{expense?.category?.name}
 																	</p>
 																	<p className="text-sm text-gray-500 dark:text-gray-400">
@@ -433,9 +475,11 @@ export default function DailyExpenses() {
 															<div className="flex items-center space-x-4">
 																<div className="text-right">
 																	<p className="font-medium">
+																		{/* ${expense.amount.toFixed(2)} */}$
 																		{parseFloat(expense.amount || 0).toFixed(2)}
 																	</p>
 																	<p className="text-sm text-gray-500 dark:text-gray-400">
+																		{/* {expense?.category?.name} */}
 																		{expense.description}
 																	</p>
 																</div>

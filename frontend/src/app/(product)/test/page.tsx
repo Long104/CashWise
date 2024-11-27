@@ -1,47 +1,38 @@
 "use client";
+import { useUser } from "@/hooks/useUser";
+import { useTransaction } from "@/hooks/useTransaction";
+import { useCategory } from "@/hooks/useCategory";
 import React from "react";
-import Todos from "@/components/PlanList";
-import useAuthStore from "@/zustand/auth";
-import { fetchGet } from "@/fetch/client";
 
-import { usePlans } from "@/hooks/usePlans";
-const page = () => {
-	const [state, setState] = React.useState();
-	const user = useAuthStore((state) => state.user);
-	const { plansQuery, createPlanMutation } = usePlans();
-	const { data: plans, isPending, error, refetch } = plansQuery;
+const Page = () => {
+	const { userQuery } = useUser();
+	const { data, isPending, error } = userQuery;
+	console.log("this is the best user", data);
 
-	const userId = user?.user_id;
-	// console.log("damn this is user", user?.user_id);
-	React.useEffect(() => {
-		const fetchPlans = async () => {
-			if (!user) return;
-			try {
-				const response = await fetchGet(`user/${userId}`);
-				setState(response);
-			} catch (error) {
-				console.error("Error fetching plans:", error);
-			}
-			// const userId = user?.user_id;
-		};
+	const {
+		transactionQuery,
+		createTransactionMutation,
+		deleteTransactionMutation,
+	} = useTransaction();
 
-		fetchPlans();
-	}, [userId]);
-
-	console.log("damn this is plans", plans );
-	console.log("damn this is res", state);
+	const {
+		data: transactions,
+		isPending: transactionIsPending,
+		error: transactionError,
+	} = transactionQuery("3");
+  console.log("this is the best transaction", transactions);
 	return (
 		<>
-			<Todos />
-			{Array.isArray(plans) && plans.length > 0 ? (
-				plans.map((plan: { id: number }) => (
-					<div key={plan.id}>{plan.id}</div>
-				))
-			) : (
-				<div>No plans available</div>
-			)}
+			<div>
+				{transactions?.Transactions?.map((transaction: any) => (
+					<div key={transaction.id}>
+						{transaction?.description}
+					</div>
+				))}
+			</div>
+			<button>Create Category</button>
 		</>
 	);
 };
 
-export default page;
+export default Page;
