@@ -26,6 +26,7 @@ import { fetchPost } from "@/fetch/client";
 import useAuthStore from "@/zustand/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { usePlan } from "@/hooks/usePlan";
 
 export default function CreatePlan() {
 	const user = useAuthStore((state) => state.user);
@@ -33,9 +34,11 @@ export default function CreatePlan() {
 	const [planName, setPlanName] = useState("");
 	const [planDescription, setPlanDescription] = useState("");
 	const [planType, setPlanType] = useState("personal");
-	const [planVisibility, setPlanVisibility] = useState("private"); const [planDuration, setPlanDuration] = useState("");
+	const [planVisibility, setPlanVisibility] = useState("private");
+	const [planDuration, setPlanDuration] = useState("");
 	const [initialBudget, setInitialBudget] = useState("");
 	const [autoSave, setAutoSave] = useState(true);
+	const { createPlanMutation } = usePlan();
 
 	interface Plan {
 		name: string;
@@ -65,7 +68,8 @@ export default function CreatePlan() {
 		};
 
 		try {
-			const res = await fetchPost("plan", planData);
+			// const res = await fetchPost("plan", planData);
+			const res = await createPlanMutation.mutateAsync(planData);
 			setPlanName("");
 			setPlanDescription("");
 			setPlanType("personal");
@@ -75,7 +79,7 @@ export default function CreatePlan() {
 			setAutoSave(true);
 
 			console.log(res);
-			router.push(`/plan/${res.name.replace(/ /g,"_")}?id=${res.id}`);
+			router.push(`/plan/${res.name.replace(/ /g, "_")}?id=${res.id}`);
 		} catch (error) {
 			console.error("Error submitting plan:", error);
 		}

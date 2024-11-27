@@ -229,7 +229,6 @@ export default function DailyExpenses() {
 																variant="outline"
 																className="w-full justify-between"
 															>
-                              <div>damn</div>
 																{categories?.find(
 																	(c: any) =>
 																		c.id === newTransaction.category_id,
