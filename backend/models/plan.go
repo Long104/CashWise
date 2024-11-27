@@ -22,6 +22,7 @@ type Plan struct {
 	User          User           `gorm:"foreignKey:UserID" json:"-"`
 	Budgets       []Budget       `gorm:"foreignKey:PlanID;onDelete:CASCADE"`
 	Transactions  []Transaction  `gorm:"foreignKey:PlanID;onDelete:CASCADE"`
+  Categories    []Category     `gorm:"foreignKey:PlanID;onDelete:CASCADE"`
 	// Deleted       gorm.DeletedAt `gorm:"index" json:"-"`
 }
 

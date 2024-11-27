@@ -14,13 +14,15 @@ func SetupRoutes(app *fiber.App) {
 
 	// transaction
 	app.Post("/transaction", handlers.CreateTransaction)
-	app.Delete("/transaction/:id", handlers.DeleteTransaction)
+	app.Delete("/transaction", handlers.DeleteTransaction)
+	// app.Delete("/transaction/:id", handlers.DeleteTransaction)
 	// app.Post("/transaction/:id", handlers.CreateTransaction)
 
 	// category
 	app.Get("/categories", handlers.GetCategories)
+	app.Get("/category", handlers.GetCategory)
 	app.Post("/category", handlers.CreateCategory)
-	app.Delete("/category/:id", handlers.DeleteCategory)
+	app.Delete("/category", handlers.DeleteCategory)
 
 	// plan
 	app.Get("/plan/:id", func(c *fiber.Ctx) error {

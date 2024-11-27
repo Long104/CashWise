@@ -21,7 +21,7 @@ func GetUser(c *fiber.Ctx) error {
 	var user models.User
 	// config.DB.First(&user, id)
 
-	if err := config.DB.Model(&models.User{}).Preload("Plans").First(&user, id).Error; err != nil {
+	if err := config.DB.Model(&models.User{}).Preload("Plans.Transactions").First(&user, id).Error; err != nil {
 		log.Println("Error get plan to database:", err) // Log database error
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot create transaction"})
 	}

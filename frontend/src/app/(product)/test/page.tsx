@@ -7,6 +7,8 @@ import React from "react";
 const Page = () => {
 	const { userQuery } = useUser();
 	const { data, isPending, error } = userQuery;
+	const { categoriesQuery } = useCategory();
+	const { data: category } = categoriesQuery("3");
 	console.log("this is the best user", data);
 
 	const {
@@ -20,15 +22,19 @@ const Page = () => {
 		isPending: transactionIsPending,
 		error: transactionError,
 	} = transactionQuery("3");
-  console.log("this is the best transaction", transactions);
+	console.log("this is the best transaction", transactions);
+	console.log("this is the best category", category);
 	return (
 		<>
 			<div>
 				{transactions?.Transactions?.map((transaction: any) => (
-					<div key={transaction.id}>
-						{transaction?.description}
-					</div>
+					<div key={transaction.id}>{transaction?.description}</div>
 				))}
+			</div>
+			<div>
+				{category?.map((cat: any) => {
+					return cat?.name;
+				})}
 			</div>
 			<button>Create Category</button>
 		</>

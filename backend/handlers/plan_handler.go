@@ -31,7 +31,7 @@ func GetPlan(db *gorm.DB, c *fiber.Ctx) error {
 func GetPlans(db *gorm.DB, c *fiber.Ctx) error {
 	var plans []models.Plan
 	// db.Find(&plans)
-	err := db.Model(&models.Plan{}).Preload("Transactions.Category").Find(&plans).Error
+	err := db.Model(&models.Plan{}).Preload("Transactions.Category").Preload("Categories").Find(&plans).Error
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Could not retrieve users")
 	}
@@ -54,6 +54,7 @@ func CreatePlan(db *gorm.DB, c *fiber.Ctx) error {
 	// db.Create(plan)
 	return c.JSON(plan)
 }
+
 
 // updateCategory updates a category by id
 func UpdatePlan(db *gorm.DB, c *fiber.Ctx) error {

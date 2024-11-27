@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/long104/CashWise/config"
@@ -28,12 +29,64 @@ func GetCategory(c *fiber.Ctx) error {
 	return c.JSON(category)
 }
 
+//	func GetCategories(c *fiber.Ctx) error {
+//		id := c.Params("id")
+//		var categories []models.Category
+//		if err := config.DB.Find(&categories, id).Error; err != nil {
+//			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to retrieve categories"})
+//		}
+//		return c.JSON(categories)
+//	}
+// func GetCategories(c *fiber.Ctx) error {
+// 	// Extract the user_id and plan_id from the request parameters or body
+// 	userID := c.Params("user_id")
+// 	planID := c.Params("plan_id")
+//
+// 	var categories []models.Category
+//
+// 	// Query categories where user_id and plan_id match
+// 	if err := config.DB.Where("user_id = ? AND plan_id = ?", userID, planID).Find(&categories).Error; err != nil {
+// 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to retrieve categories"})
+// 	}
+//
+// 	return c.JSON(categories)
+// }
+
 func GetCategories(c *fiber.Ctx) error {
-	var categories []models.Category
-	if err := config.DB.Find(&categories).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to retrieve categories"})
+	// Retrieve query parameters from the request
+	userIDStr := c.Query("user_id")
+	planIDStr := c.Query("plan_id")
+
+	// Validate parameters
+	if userIDStr == "" || planIDStr == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Missing user_id or plan_id"})
 	}
-	return c.JSON(categories)
+
+	// Convert user_id and plan_id to integers
+	userID, err := strconv.Atoi(userIDStr)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid user_id"})
+	}
+
+	planID, err := strconv.Atoi(planIDStr)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid plan_id"})
+	}
+
+	// Query the database for categories that match the user_id and plan_id
+	var categories []models.Category
+	if err := config.DB.Where("user_id = ? AND plan_id = ?", userID, planID).Find(&categories).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to fetch categories"})
+	}
+
+	// If no categories are found, return a 404 error
+	if len(categories) == 0 {
+		// return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "No categories found for the specified user and plan"})
+		return c.JSON(fiber.Map{"error": "No categories found for the specified user and plan"})
+	}
+
+	// Return the filtered categories as a JSON response
+	return c.Status(fiber.StatusOK).JSON(categories)
 }
 
 func UpdateCategory(c *fiber.Ctx) error {
@@ -52,17 +105,42 @@ func UpdateCategory(c *fiber.Ctx) error {
 }
 
 func DeleteCategory(c *fiber.Ctx) error {
-	id := c.Params("id")
+	// Retrieve query parameters from the request
+	userIDStr := c.Query("user_id")
+	planIDStr := c.Query("plan_id")
+	categoryIDStr := c.Query("category_id")
 
-	if err := config.DB.Delete(&models.Transaction{}, "category_id = ?", id).Error; err != nil {
+	// Validate parameters
+	if userIDStr == "" || planIDStr == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Missing user_id or plan_id"})
+	}
+
+	// Convert user_id and plan_id to integers
+	userID, err := strconv.Atoi(userIDStr)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid user_id"})
+	}
+
+	planID, err := strconv.Atoi(planIDStr)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid plan_id"})
+	}
+
+	categoryID, err := strconv.Atoi(categoryIDStr)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid category_id"})
+	}
+
+	// Query the database for categories that match the user_id and plan_id
+	var categories models.Category
+
+	if err := config.DB.Where("user_id = ? AND plan_id = ? AND id = ?", userID, planID, categoryID).Delete(&models.Category{}).Error; err != nil {
 		log.Println("Error delete plan to database:", err) // Log database error
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete category"})
 	}
-	if err := config.DB.Delete(&models.Category{}, id).Error; err != nil {
-		log.Println("Error delete plan to database:", err) // Log database error
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete category"})
-	}
 
+	// If no categories are found, return a 404 error
 
-	return c.SendStatus(fiber.StatusNoContent)
+	// Return the filtered categories as a JSON response
+	return c.Status(fiber.StatusOK).JSON(categories)
 }

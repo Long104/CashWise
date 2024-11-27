@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchDelete, fetchGet, fetchPost } from "@/fetch/client";
-import { fetchDeleteCategory } from "@/api/Category";
+import { fetchDeleteTransaction } from "@/api/Transaction";
 import { Plan } from "@/types";
 
 import useAuthStore from "@/zustand/auth";
@@ -44,21 +44,22 @@ export const useTransaction = () => {
 			}),
 		onSuccess: () => {
 			// Correctly invalidate the query
-			queryClient.invalidateQueries({ queryKey: ["user"] });
+			queryClient.invalidateQueries({ queryKey: ["transaction"] });
 		},
 	});
 
 	const deleteTransactionMutation = useMutation({
 		mutationFn: ({
 			planId,
-			categoryId,
-		}: { planId: string | null; categoryId: number }) =>
-			fetchDeleteCategory(
-				`category?user_id=${userId}&plan_id=${planId}&category_id=${categoryId}`,
+			transactionId,
+		}: { planId: string | null; transactionId: number }) =>
+			fetchDeleteTransaction(
+				// `transaction?user_id=${userId}&plan_id=${planId}&category_id=${categoryId}`,
+				`transaction?plan_id=${planId}&transaction_id=${transactionId}`,
 			), // Your delete API call
 		onSuccess: () => {
 			// After successfully deleting a plan, invalidate the 'plans' query
-			queryClient.invalidateQueries({ queryKey: ["user"] });
+			queryClient.invalidateQueries({ queryKey: ["transaction"] });
 		},
 		onError: (error) => {
 			console.error("Failed to delete plan:", error);

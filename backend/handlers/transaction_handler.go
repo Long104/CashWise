@@ -5,6 +5,7 @@ import (
 	// "log"
 
 	"log"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/long104/CashWise/config"
@@ -57,10 +58,44 @@ func UpdateTransaction(c *fiber.Ctx) error {
 	return c.JSON(transaction)
 }
 
+// func DeleteTransaction(c *fiber.Ctx) error {
+// 	id := c.Params("id")
+// 	if err := config.DB.Delete(&models.Transaction{}, id).Error; err != nil {
+// 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete transaction"})
+// 	}
+// 	return c.SendStatus(fiber.StatusNoContent)
+// }
+
 func DeleteTransaction(c *fiber.Ctx) error {
-	id := c.Params("id")
-	if err := config.DB.Delete(&models.Transaction{}, id).Error; err != nil {
+	// Retrieve query parameters from the request
+	planIDStr := c.Query("plan_id")
+	transactionIDStr := c.Query("transaction_id")
+
+	// Validate parameters
+	if transactionIDStr == "" || planIDStr == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Missing user_id or plan_id"})
+	}
+
+	planID, err := strconv.Atoi(planIDStr)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid plan_id"})
+	}
+
+	transactionID, err := strconv.Atoi(transactionIDStr)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid category_id"})
+	}
+
+	// Query the database for categories that match the user_id and plan_id
+	var transaction models.Transaction
+
+	if err := config.DB.Where("plan_id = ? AND id = ?", planID, transactionID).Delete(transaction).Error; err != nil {
+		log.Println("Error delete plan to database:", err) // Log database error
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete transaction"})
 	}
-	return c.SendStatus(fiber.StatusNoContent)
+
+	// If no categories are found, return a 404 error
+
+	// Return the filtered categories as a JSON response
+	return c.Status(fiber.StatusOK).JSON(transaction)
 }

@@ -11,26 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-	DollarSign,
-	PlusCircle,
-	Trash2,
-	Star,
-	Users,
-	Filter,
-	Share,
-	MoreHorizontal,
-	ChevronDown,
-	X,
-} from "lucide-react";
+import { DollarSign, PlusCircle, Trash2, ChevronDown } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { fetchPost, fetchGet, fetchDelete } from "@/fetch/client";
@@ -117,17 +99,18 @@ export default function DailyExpenses() {
 		error: categoryError,
 	} = categoriesQuery(currentPlanId);
 	console.log("categories", categories);
+
 	const {
 		transactionQuery,
 		createTransactionMutation,
 		deleteTransactionMutation,
 	} = useTransaction();
-
 	const {
 		data: transactions,
 		isPending: transactionIsPending,
 		error: transactionError,
 	} = transactionQuery(currentPlanId);
+
 	const now = new Date();
 	const currentHours = now.getHours();
 	const currentMinutes = now.getMinutes();
@@ -152,7 +135,7 @@ export default function DailyExpenses() {
 		}
 	};
 
-	const [newExpense, setNewExpense] = useState<Expense>({
+	const [newTransaction, setNewTransaction] = useState<Expense>({
 		budget_id: 1,
 		plan_id: currentPlanId ? parseInt(currentPlanId) : 1,
 		description: "",
@@ -163,9 +146,12 @@ export default function DailyExpenses() {
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
-		setNewExpense((prev: any) => ({
+		setNewTransaction((prev) => ({
 			...prev,
-			[name]: value,
+			[name]:
+				name === "amount" || name === "budget_id" || name === "category_id"
+					? Number(value) // Convert to number
+					: value,
 		}));
 	};
 
@@ -173,15 +159,14 @@ export default function DailyExpenses() {
 		event.preventDefault();
 		const padZero = (num: number) => num.toString().padStart(2, "0");
 
-		const fullISODate = `${new Date(newExpense.transaction_date).toISOString().split("T")[0]}T${padZero(currentHours)}:${padZero(currentMinutes)}:${padZero(currentSeconds)}Z`;
+		const fullISODate = `${new Date(newTransaction.transaction_date).toISOString().split("T")[0]}T${padZero(currentHours)}:${padZero(currentMinutes)}:${padZero(currentSeconds)}Z`;
 
 		try {
-			const response = await fetchPost("transaction", {
-				...newExpense,
-				transaction_date: fullISODate,
+			createTransactionMutation.mutate({
+				planId: currentPlanId,
+				newTransaction: { ...newTransaction, transaction_date: fullISODate },
 			});
-
-			setNewExpense({
+			setNewTransaction({
 				budget_id: 1,
 				plan_id: currentPlanId ? parseInt(currentPlanId) : 1,
 				description: "",
@@ -197,9 +182,12 @@ export default function DailyExpenses() {
 		}
 	};
 
-	const handleDelete = async (id: number) => {
+	const handleDeleteTransaction = async (id: number) => {
 		try {
-			await fetchDelete("transaction", id);
+			deleteTransactionMutation.mutate({
+				planId: currentPlanId,
+				transactionId: id,
+			});
 		} catch (error) {
 			console.error("Failed to delete transaction:", error);
 		}
@@ -241,44 +229,39 @@ export default function DailyExpenses() {
 																variant="outline"
 																className="w-full justify-between"
 															>
-																{categories > 0
-																	? categories?.find(
-																			(c: any) =>
-																				c.id === newExpense.category_id,
-																		)?.name || "Select a category"
-																	: "add category"}
+																{categories?.find(
+																	(c: any) =>
+																		c.id === newTransaction.category_id,
+																)?.name || "Select a category"}
 																<ChevronDown className="ml-2 h-4 w-4 opacity-50" />
 															</Button>
 														</DropdownMenuTrigger>
 														<DropdownMenuContent className="w-[--radix-dropdown-trigger-width] min-w-[8rem]">
-															{categories > 0
-																? categories?.map((category: any) => (
-																		<DropdownMenuItem
-																			key={category.id}
-																			onClick={() =>
-																				setNewExpense({
-																					...newExpense,
-																					category_id: category.id,
-																				})
-																			}
-																			className="justify-between"
-																		>
-																			{category.name}
-
-																			<Button
-																				variant="outline"
-																				className="h-4 w-4 opacity-50 hover:opacity-100 bg-secondary"
-																				onClick={(e) => {
-																					e.stopPropagation();
-																					setCategoryToDelete(category.id);
-																					setIsDeleteDialogOpen(true);
-																				}}
-																			>
-																				X
-																			</Button>
-																		</DropdownMenuItem>
-																	))
-																: ""}
+															{categories?.map((category: any) => (
+																<DropdownMenuItem
+																	key={category.id}
+																	onClick={() =>
+																		setNewTransaction({
+																			...newTransaction,
+																			category_id: category.id,
+																		})
+																	}
+																	className="justify-between"
+																>
+																	{category?.name}
+																	<Button
+																		variant="outline"
+																		className="h-4 w-4 opacity-50 hover:opacity-100 bg-secondary"
+																		onClick={(e) => {
+																			e.stopPropagation();
+																			setCategoryToDelete(category.id);
+																			setIsDeleteDialogOpen(true);
+																		}}
+																	>
+																		X
+																	</Button>
+																</DropdownMenuItem>
+															))}
 															<DropdownMenuItem
 																onClick={() => setIsAddingCategory(true)}
 																className="justify-center font-medium"
@@ -300,11 +283,13 @@ export default function DailyExpenses() {
 															className="pl-10"
 															required
 															value={
-																newExpense.amount === 0 ? "" : newExpense.amount
+																newTransaction.amount === 0
+																	? ""
+																	: newTransaction.amount
 															}
 															onChange={(e) =>
-																setNewExpense({
-																	...newExpense,
+																setNewTransaction({
+																	...newTransaction,
 																	// amount: parseFloat(e.target.value),
 																	amount: isNaN(parseFloat(e.target.value))
 																		? 0
@@ -322,7 +307,7 @@ export default function DailyExpenses() {
 														id="description"
 														placeholder="What did you spend on? (optional)"
 														name="description"
-														value={newExpense.description}
+														value={newTransaction.description}
 														onChange={handleChange}
 													/>
 												</div>
@@ -332,7 +317,7 @@ export default function DailyExpenses() {
 														id="transaction_date"
 														name="transaction_date"
 														type="date"
-														value={newExpense.transaction_date}
+														value={newTransaction.transaction_date}
 														onChange={handleChange}
 													/>
 												</div>
@@ -442,7 +427,9 @@ export default function DailyExpenses() {
 																<Button
 																	variant="ghost"
 																	size="icon"
-																	onClick={() => handleDelete(expense.id)}
+																	onClick={() =>
+																		handleDeleteTransaction(expense.id)
+																	}
 																>
 																	<Trash2 className="h-4 w-4 text-red-500" />
 																</Button>
