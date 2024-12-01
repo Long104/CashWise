@@ -25,12 +25,12 @@ import {
 
 import useAuthStore from "@/zustand/auth";
 // This is sample data.
-import { useUser } from "@/hooks/useUser";
+import { usePlan } from "@/hooks/usePlan";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const users = useAuthStore((state) => state.user);
-	const { userQuery } = useUser();
-	const { data: user, isPending, error, refetch } = userQuery;
+	const { plansQuery } = usePlan();
+	const { data: plans, isPending, error, refetch } = plansQuery;
 	const data = {
 		user: {
 			name: users?.name,
@@ -60,10 +60,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				url: "#",
 				icon: NotebookPen,
 				// isActive: true,
-				items:
-					user?.Plans?.map((plan: any) => ({
-						title: plan.name || "Unnamed Plan",
-						url: `/plan/${plan.id}`,
+				items: 
+					plans?.map((plan: any) => ({
+						title: plan?.name || "Unnamed Plan",
+						url: `/plan/${plan?.name}/?id=${plan.id}`,
 					})) || [],
 			},
 			{
@@ -129,20 +129,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	};
 	// useEffect(() => {}, []);
 	return (
-    <>
-		<Sidebar collapsible="icon" {...props}>
-			<SidebarHeader>
-				<TeamSwitcher teams={data.teams} />
-			</SidebarHeader>
-			<SidebarContent>
-				<NavMain items={data.navMain} />
-				<NavProjects projects={data.projects} />
-			</SidebarContent>
-			<SidebarFooter>
-				<NavUser user={data.user} />
-			</SidebarFooter>
-			<SidebarRail />
-		</Sidebar>
-    </>
+		<>
+			<Sidebar collapsible="icon" {...props}>
+				<SidebarHeader>
+					<TeamSwitcher teams={data.teams} />
+				</SidebarHeader>
+				<SidebarContent>
+					<NavMain items={data.navMain} />
+					<NavProjects projects={data.projects} />
+				</SidebarContent>
+				<SidebarFooter>
+					<NavUser user={data.user} />
+				</SidebarFooter>
+				<SidebarRail />
+			</Sidebar>
+		</>
 	);
 }

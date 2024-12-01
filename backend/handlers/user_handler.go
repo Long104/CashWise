@@ -8,7 +8,7 @@ import (
 	"github.com/long104/CashWise/models"
 )
 
-// loginUser handles user login
+// loginUser handles user in
 
 func GetUsers(c *fiber.Ctx) error {
 	var users []models.User
@@ -17,16 +17,15 @@ func GetUsers(c *fiber.Ctx) error {
 }
 
 func GetUser(c *fiber.Ctx) error {
-	id := c.Params("id")
-	var user models.User
-	// config.DB.First(&user, id)
+    id := c.Params("id")
+    var user models.User
 
-	if err := config.DB.Model(&models.User{}).Preload("Plans.Transactions").First(&user, id).Error; err != nil {
-		log.Println("Error get plan to database:", err) // Log database error
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot create transaction"})
-	}
+    if err := config.DB.First(&user, id).Error; err != nil {
+        log.Println("Error fetching user:", err)
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot fetch user"})
+    }
 
-	return c.JSON(user)
+    return c.JSON(user)
 }
 
 // createBook creates a new book

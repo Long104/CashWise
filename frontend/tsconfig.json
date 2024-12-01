@@ -24,10 +24,13 @@
       "@components*": ["./src/components/ui/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/middleware.ts.old", "src/app/api/auth/route.js", "src/app/sign-in/damn", "src/components/ui/profile-dropdown.go", "src/app/testHome/pp", "src/app/page.tsx.old", "src/app/(product)/plan/[...planId]/page.tsx.old", "src/app/(product)/plan/[...planId]/p"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/middleware.ts.old", "src/app/api/auth/route.js", "src/app/sign-in/damn", "src/components/ui/profile-dropdown.go", "src/app/testHome/pp", "src/app/page.tsx.old", "src/app/(product)/plan/[...planId]/page.tsx.old", "src/app/(product)/plan/[...planId]/p", "src/app/(product)/plan/[...planId]/p"],
   "exclude": ["node_modules"]
 }
+<<<<<<< HEAD
 wow
 
 and not wow sometime what
 add pull request
+=======
+>>>>>>> bf14668 (error)

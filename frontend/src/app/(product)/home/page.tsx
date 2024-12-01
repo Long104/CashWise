@@ -25,44 +25,41 @@ import { fetchPost, fetchGet, fetchDelete } from "@/fetch/client";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/auth";
 
-import { useUser } from "@/hooks/useUser";
+import { usePlan } from "@/hooks/usePlan";
+import { useEachPlan } from "@/hooks/useEachPlan";
 
 export default function FinancialPlans() {
-	const { userQuery, deleteUserMutation } = useUser();
-	const { data: user, isPending, error, refetch } = userQuery;
+	const { plansQuery, deletePlanMutation } = usePlan();
+	const { data: plans, isPending, error, refetch } = plansQuery;
+
 
 	const users = useAuthStore((state) => state.user);
 	const router = useRouter();
-	async function goToPlan(planName: string, userId: number) {
+	async function goToPlan(planName: string, planId: number) {
 		try {
 			const formattedPlanName = planName.replace(/ /g, "_");
-			router.push(`/plan/${formattedPlanName}?id=${userId}`);
+			router.push(`/plan/${formattedPlanName}?id=${planId}`);
 		} catch (error) {
 			console.log("cannot go to plan", error);
 		}
 	}
 
 	async function handleDeletePlan(id: number) {
+    deletePlanMutation.mutate(id);
 		try {
-			deleteUserMutation?.mutate(id);
 		} catch (error) {
 			console.log("cannot delete plan", error);
 		}
 	}
-	if (Array.isArray(users) && users.length > 0) {
-		console.log("plans", users);
-	} else {
-		console.log("no plans");
-	}
 
 	return (
-		<div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+		<div className="min-h-screen dark:bg-gray-900">
 			<div className="flex">
 				<main className="flex-1 p-6 overflow-auto">
 					<h1 className="text-3xl font-bold mb-6">Financial Plans Overview</h1>
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-						{Array.isArray(user?.Plans) && user?.Plans.length > 0
-							? user?.Plans?.map((plan: any) => (
+						{Array.isArray(plans) && plans?.length > 0
+							? plans?.map((plan: any) => (
 									<Card
 										key={plan.id}
 										className="hover:shadow-lg transition-shadow"

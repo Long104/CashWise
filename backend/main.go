@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v3"
 	"github.com/joho/godotenv"
@@ -19,8 +20,20 @@ func main() {
 	}
 	config.ConnectDatabase()
 	app := fiber.New()
+
 	app.Use(middleware.CORSMiddleware())
 
+	app.Use("/ws", func(c *fiber.Ctx) error {
+		// IsWebSocketUpgrade returns true if the client
+		// requested upgrade to the WebSocket protocol.
+		if websocket.IsWebSocketUpgrade(c) {
+			c.Locals("allowed", true)
+			return c.Next()
+		}
+		return fiber.ErrUpgradeRequired
+	})
+
+	routes.WsRoutes(app)
 	routes.SetupOAuthRoutes(app)
 	routes.SetupAuthRoutes(app)
 

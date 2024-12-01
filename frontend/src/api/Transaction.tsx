@@ -2,7 +2,8 @@
 import Cookies from "js-cookie";
 // api/plans.ts
 import { fetchGet, fetchPost } from "@/fetch/client";
-import { Plan } from "@/types";
+import { PlanSchema } from "@/types";
+import { z } from "zod";
 
 export const fetchUser = async (id: number | undefined) => {
 	try {
@@ -16,6 +17,7 @@ export const fetchUser = async (id: number | undefined) => {
 	// return await fetchGet("plans");
 };
 
+type Plan = z.infer<typeof PlanSchema>;
 export const createPlan = async (newPlan: Partial<Plan>) => {
 	return await fetchPost("plan", newPlan);
 };

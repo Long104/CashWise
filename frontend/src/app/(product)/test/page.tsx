@@ -1,12 +1,9 @@
-'use client'
-import React from "react";
-import { useUser } from "@/hooks/useUser";
+import React from 'react'
 
 const page = () => {
-	const { userQuery, createUserMutation, deleteUserMutation } = useUser();
-	const { data: user } = userQuery;
-	console.log("User:", user);
-	return <div>page</div>;
-};
+  return (
+    <div>page</div>
+  )
+}
 
-export default page;
+export default page

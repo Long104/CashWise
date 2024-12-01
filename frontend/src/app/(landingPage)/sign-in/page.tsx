@@ -31,8 +31,6 @@ export default function LoginPage() {
 	const handleSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		//DOING: trash code
-		// const { user, login, logout } = useAuth();
 		try {
 			const response = await fetch("http://localhost:8080/login", {
 				method: "POST",
@@ -51,8 +49,6 @@ export default function LoginPage() {
 				const data = await response.json();
 				console.log("Login successful:", data);
 				const token = Cookies.get("jwt");
-				//DOING: trash code
-				// login(String(token));
 				logins(String(token));
 				(event.currentTarget as HTMLFormElement)?.reset();
 				router.push("/home");

@@ -17,24 +17,29 @@ import (
 
 // gorm.Model
 
-func GetPlan(db *gorm.DB, c *fiber.Ctx) error {
-	id := c.Params("id")
+func GetPlanByID(db *gorm.DB, c *fiber.Ctx) error {
+	planId := c.Params("id")
 	var plan models.Plan
-	// db.First(&plan, id)
-	err := db.Model(&models.Plan{}).Preload("Transactions.Category").First(&plan, id).Error
-	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Could not retrieve users")
+
+	if err := db.Preload("Transactions.Category").First(&plan, planId).Error; err != nil {
+	// if err := db.Preload(clause.Associations).First(&plan, planId).Error; err != nil {
+	// if err := db.First(&plan, planId).Error; err != nil {
+		log.Println("Error fetching plan:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot fetch plan"})
 	}
+
 	return c.JSON(plan)
 }
 
 func GetPlans(db *gorm.DB, c *fiber.Ctx) error {
+	userId := c.Params("id")
 	var plans []models.Plan
-	// db.Find(&plans)
-	err := db.Model(&models.Plan{}).Preload("Transactions.Category").Preload("Categories").Find(&plans).Error
-	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Could not retrieve users")
+
+	if err := db.Where("user_id = ?", userId).Find(&plans).Error; err != nil {
+		log.Println("Error fetching plans:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot fetch plans"})
 	}
+
 	return c.JSON(plans)
 }
 

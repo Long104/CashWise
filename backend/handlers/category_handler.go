@@ -15,7 +15,8 @@ func CreateCategory(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse JSON"})
 	}
 	if err := config.DB.Create(&category).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot create category"})
+		// return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot create category"})
+		return c.JSON(fiber.Map{"error": "Cannot create duplicate category"})
 	}
 	return c.Status(fiber.StatusCreated).JSON(category)
 }
@@ -28,29 +29,6 @@ func GetCategory(c *fiber.Ctx) error {
 	}
 	return c.JSON(category)
 }
-
-//	func GetCategories(c *fiber.Ctx) error {
-//		id := c.Params("id")
-//		var categories []models.Category
-//		if err := config.DB.Find(&categories, id).Error; err != nil {
-//			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to retrieve categories"})
-//		}
-//		return c.JSON(categories)
-//	}
-// func GetCategories(c *fiber.Ctx) error {
-// 	// Extract the user_id and plan_id from the request parameters or body
-// 	userID := c.Params("user_id")
-// 	planID := c.Params("plan_id")
-//
-// 	var categories []models.Category
-//
-// 	// Query categories where user_id and plan_id match
-// 	if err := config.DB.Where("user_id = ? AND plan_id = ?", userID, planID).Find(&categories).Error; err != nil {
-// 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to retrieve categories"})
-// 	}
-//
-// 	return c.JSON(categories)
-// }
 
 func GetCategories(c *fiber.Ctx) error {
 	// Retrieve query parameters from the request
@@ -133,6 +111,11 @@ func DeleteCategory(c *fiber.Ctx) error {
 
 	// Query the database for categories that match the user_id and plan_id
 	var categories models.Category
+
+	if err := config.DB.Where("category_id = ?", categoryID).Delete(&models.Transaction{}).Error; err != nil {
+		log.Println("Error deleting transactions:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot delete related transactions"})
+	}
 
 	if err := config.DB.Where("user_id = ? AND plan_id = ? AND id = ?", userID, planID, categoryID).Delete(&models.Category{}).Error; err != nil {
 		log.Println("Error delete plan to database:", err) // Log database error

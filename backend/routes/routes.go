@@ -15,6 +15,7 @@ func SetupRoutes(app *fiber.App) {
 	// transaction
 	app.Post("/transaction", handlers.CreateTransaction)
 	app.Delete("/transaction", handlers.DeleteTransaction)
+  app.Get("/transaction/:planId", handlers.GetPlanTransactions)
 	// app.Delete("/transaction/:id", handlers.DeleteTransaction)
 	// app.Post("/transaction/:id", handlers.CreateTransaction)
 
@@ -26,9 +27,9 @@ func SetupRoutes(app *fiber.App) {
 
 	// plan
 	app.Get("/plan/:id", func(c *fiber.Ctx) error {
-		return handlers.GetPlan(config.DB, c)
+		return handlers.GetPlanByID(config.DB, c)
 	})
-	app.Get("/plans", func(c *fiber.Ctx) error {
+  app.Get("/plans/:id", func(c *fiber.Ctx) error {
 		return handlers.GetPlans(config.DB, c)
 	})
 	app.Post("/plan", func(c *fiber.Ctx) error {

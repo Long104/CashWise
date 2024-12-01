@@ -56,7 +56,7 @@ func ValidateToken(c *fiber.Ctx) error {
 	}
 
 	// Decode and validate the token
-	if result := isValidToken(authHeader); result {
+	if result := IsValidToken(authHeader); result {
 		return c.JSON(fiber.Map{
 			"message": "Authorized",
 			"value":   result,
@@ -70,7 +70,7 @@ func ValidateToken(c *fiber.Ctx) error {
 }
 
 // Mock function to validate token (replace with actual validation logic)
-func isValidToken(token string) bool {
+func IsValidToken(token string) bool {
 	// Remove "Bearer " prefix
 	jwtSecret := []byte(os.Getenv("jwtSecretKey")) // Replace this with your secret key
 	token = strings.TrimPrefix(token, "Bearer ")

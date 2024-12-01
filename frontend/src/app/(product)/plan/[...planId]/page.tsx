@@ -31,22 +31,22 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { useUser } from "@/hooks/useUser";
 import { useCategory } from "@/hooks/useCategory";
-import { useTransaction } from "@/hooks/useTransaction";
+import { useEachPlan } from "@/hooks/useEachPlan";
 import { z } from "zod";
-import { CategorySchema } from "@/types";
-import { TransactionSchema } from "@/types";
+import { TransactionSchema, CategorySchema } from "@/types";
+import { usePlanById } from "@/hooks/usePlan";
+import { useToast } from "@/hooks/use-toast";
 
 export default function DailyExpenses() {
+	const { toast } = useToast();
+	// query
+	// const { data:plan } = usePlanById();
+	//  console.log("plannnn", plan);
 	// type
 	type transaction = z.infer<typeof TransactionSchema>;
-	// params
-	const params = useParams<{ planId: string }>();
-	console.log("params", params);
+	type category = z.infer<typeof CategorySchema>;
 	// const router = useRouter();
 	const searchParams = useSearchParams();
 	const currentPlanId = searchParams.get("id");
@@ -57,19 +57,19 @@ export default function DailyExpenses() {
 		data: categories,
 		isPending: categoryIsPending,
 		error: categoryError,
-	} = categoriesQuery(currentPlanId);
+	} = categoriesQuery();
 	console.log("categories", categories);
 
 	const {
-		transactionQuery,
+		eachPlanQuery,
 		createTransactionMutation,
 		deleteTransactionMutation,
-	} = useTransaction();
+	} = useEachPlan();
 	const {
-		data: transactions,
-		isPending: transactionIsPending,
-		error: transactionError,
-	} = transactionQuery(currentPlanId);
+		data: plan,
+		isPending: planIsPending,
+		error: planError,
+	} = eachPlanQuery();
 
 	const now = new Date();
 	const currentHours = now.getHours();
@@ -84,11 +84,23 @@ export default function DailyExpenses() {
 	const handleAddCategory = async () => {
 		if (newCategory.trim()) {
 			try {
-				createCategoryMutation.mutate({
-					planId: currentPlanId,
+				const data = await createCategoryMutation.mutateAsync({
+					// planId: currentPlanId,
 					newCategory: { name: newCategory },
 				});
+				if (data.error) {
+					toast({
+						title: "Category add failed",
+						description: `${data.error}`,
+					});
+				} else {
+					toast({
+						title: "Category added",
+						description: `${data.name} added successfully`,
+					});
+				}
 				setIsAddingCategory(false);
+				setNewCategory("");
 			} catch (error) {
 				console.error("Failed to add category:", error);
 			}
@@ -164,6 +176,10 @@ export default function DailyExpenses() {
 	const handleDeleteCategory = async (categoryId: number) => {
 		try {
 			deleteCategoryMutation.mutate({ planId: currentPlanId, categoryId });
+			toast({
+				title: "Category deleted",
+				description: `Category deleted successfully`,
+			});
 			setIsDeleteDialogOpen(false);
 			setCategoryToDelete(null);
 		} catch (error) {
@@ -173,7 +189,7 @@ export default function DailyExpenses() {
 
 	return (
 		<>
-			<div className="min-h-screen bg-primary">
+			<div className="min-h-screen ">
 				<main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 					<div className="px-4 py-6 sm:px-0">
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -186,8 +202,6 @@ export default function DailyExpenses() {
 									<CardContent>
 										<div className="space-y-4">
 											<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-												{/*TODO: here */}
-
 												<div className="space-y-2">
 													<Label htmlFor="category">Category</Label>
 
@@ -208,7 +222,7 @@ export default function DailyExpenses() {
 														</DropdownMenuTrigger>
 														<DropdownMenuContent className="w-[--radix-dropdown-trigger-width] min-w-[8rem]">
 															{Array.isArray(categories) &&
-																categories?.map((category: any) => (
+																categories?.map((category: category) => (
 																	<DropdownMenuItem
 																		key={category.id}
 																		onClick={() =>
@@ -311,8 +325,8 @@ export default function DailyExpenses() {
 								</CardHeader>
 								<CardContent>
 									<div className="text-2xl font-bold">
-										{Array.isArray(transactions?.Transactions)
-											? transactions.Transactions.reduce(
+										{Array.isArray(plan?.Transactions)
+											? plan.Transactions.reduce(
 													(sum: number, transaction: any) => {
 														const amount = parseFloat(transaction.amount) || 0; // Default to 0 if not a valid number
 														return sum + amount;
@@ -327,7 +341,7 @@ export default function DailyExpenses() {
 									<div className="mt-4 space-y-2">
 										{Array.isArray(categories) &&
 											categories?.map((category: any) => {
-												const categoryTotal = (transactions?.Transactions ?? [])
+												const categoryTotal = (plan?.Transactions ?? [])
 													.filter(
 														(transaction: any) =>
 															transaction.category_id === category.id,
@@ -368,47 +382,45 @@ export default function DailyExpenses() {
 									<TabsContent value="all">
 										<ScrollArea className="h-[300px]">
 											<div className="space-y-4">
-												{(transactions?.Transactions ?? []).map(
-													(expense: any) => (
-														<div
-															key={expense.id}
-															className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow"
-														>
-															<div className="flex items-center space-x-4">
-																<div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
-																	<DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-300" />
-																</div>
-																<div>
-																	<p className="font-medium">
-																		{expense?.category?.name}
-																	</p>
-																	<p className="text-sm text-gray-500 dark:text-gray-400">
-																		{expense.transaction_date}
-																	</p>
-																</div>
+												{(plan?.Transactions ?? []).map((expense: any) => (
+													<div
+														key={expense.id}
+														className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow"
+													>
+														<div className="flex items-center space-x-4">
+															<div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
+																<DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-300" />
 															</div>
-															<div className="flex items-center space-x-4">
-																<div className="text-right">
-																	<p className="font-medium">
-																		{parseFloat(expense.amount || 0).toFixed(2)}
-																	</p>
-																	<p className="text-sm text-gray-500 dark:text-gray-400">
-																		{expense.description}
-																	</p>
-																</div>
-																<Button
-																	variant="ghost"
-																	size="icon"
-																	onClick={() =>
-																		handleDeleteTransaction(expense.id)
-																	}
-																>
-																	<Trash2 className="h-4 w-4 text-red-500" />
-																</Button>
+															<div>
+																<p className="font-medium">
+																	{expense?.category?.name}
+																</p>
+																<p className="text-sm text-gray-500 dark:text-gray-400">
+																	{expense.transaction_date}
+																</p>
 															</div>
 														</div>
-													),
-												)}
+														<div className="flex items-center space-x-4">
+															<div className="text-right">
+																<p className="font-medium">
+																	{parseFloat(expense.amount || 0).toFixed(2)}
+																</p>
+																<p className="text-sm text-gray-500 dark:text-gray-400">
+																	{expense.description}
+																</p>
+															</div>
+															<Button
+																variant="ghost"
+																size="icon"
+																onClick={() =>
+																	handleDeleteTransaction(expense.id)
+																}
+															>
+																<Trash2 className="h-4 w-4 text-red-500" />
+															</Button>
+														</div>
+													</div>
+												))}
 											</div>
 										</ScrollArea>
 									</TabsContent>

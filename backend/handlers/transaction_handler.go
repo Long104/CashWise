@@ -37,10 +37,22 @@ func CreateTransaction(c *fiber.Ctx) error {
 func GetTransaction(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var transaction models.Transaction
-	if err := config.DB.First(&transaction, id).Error; err != nil {
+	if err := config.DB.Preload("Category").First(&transaction, id).Error; err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Transaction not found"})
 	}
 	return c.JSON(transaction)
+}
+
+func GetPlanTransactions(c *fiber.Ctx) error {
+	planId := c.Params("planId")
+	var transactions []models.Transaction
+
+	if err := config.DB.Where("plan_id = ?", planId).Find(&transactions).Error; err != nil {
+		log.Println("Error fetching transactions:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot fetch transactions"})
+	}
+
+	return c.JSON(transactions)
 }
 
 func UpdateTransaction(c *fiber.Ctx) error {
