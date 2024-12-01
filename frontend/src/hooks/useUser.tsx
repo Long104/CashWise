@@ -1,7 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchUser, createPlan } from "@/api/User";
 import { fetchDelete } from "@/fetch/client";
-import { Plan } from "@/types";
+import { PlanSchema } from "@/types";
+import { z } from "zod";
 
 import useAuthStore from "@/zustand/auth";
 
@@ -10,19 +11,6 @@ export const useUser = () => {
 	const users = useAuthStore((state) => state.user);
 	const userId = users?.user_id;
 
-	// if (!userId) {
-	// 	return {
-	// 		userQuery: {
-	// 			data: null,
-	// 			isPending: false,
-	// 			error: null,
-	// 			refetch: () => Promise.resolve(),
-	// 		},
-	// 		createUserMutation: null,
-	// 		deleteUserMutation: null,
-	// 	};
-	// }
-	// Fetch all plans
 	const userQuery = useQuery({
 		queryKey: ["user"],
 		queryFn: async () => {
@@ -33,10 +21,11 @@ export const useUser = () => {
 			// console.log("Fetch Plans Result:", result);
 			return result;
 		},
-    enabled: !!userId,
+		enabled: !!userId,
 		staleTime: 1000 * 60 * 5, // 5 minutes
 	});
 
+	type Plan = z.infer<typeof PlanSchema>;
 	// Create a new plan
 	const createUserMutation = useMutation({
 		mutationFn: (newPlan: Partial<Plan>) => createPlan(newPlan),

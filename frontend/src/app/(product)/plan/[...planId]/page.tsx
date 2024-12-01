@@ -37,59 +37,19 @@ import { useSearchParams } from "next/navigation";
 import { useUser } from "@/hooks/useUser";
 import { useCategory } from "@/hooks/useCategory";
 import { useTransaction } from "@/hooks/useTransaction";
-type Expense = {
-	budget_id: number;
-	plan_id: number;
-	description: string;
-	amount: number | string;
-	category_id: number;
-	transaction_date: string;
-};
-
-type Transaction = {
-	id: number;
-	name: string; // Assuming every transaction needs a name
-	transaction_date: string;
-	category: {
-		name: string;
-	};
-	budget_id?: number; // Optional if not always present
-	plan_id?: number; // Optional if not always present
-	description?: string;
-	amount?: number | string;
-	category_id?: number;
-};
-
-type Plan = {
-	name: string;
-	id: number;
-	created_at: string;
-	description: string;
-	duration: number;
-	initial_budget: number;
-	plan_type: string;
-	user_id: number;
-	visibility: string;
-	Transactions: Transaction[];
-	budget?: any[];
-	auto_save?: boolean;
-};
+import { z } from "zod";
+import { CategorySchema } from "@/types";
+import { TransactionSchema } from "@/types";
 
 export default function DailyExpenses() {
+	// type
+	type transaction = z.infer<typeof TransactionSchema>;
 	// params
 	const params = useParams<{ planId: string }>();
 	console.log("params", params);
 	// const router = useRouter();
 	const searchParams = useSearchParams();
 	const currentPlanId = searchParams.get("id");
-	const { userQuery, deleteUserMutation } = useUser();
-	const {
-		data: user,
-		isPending: userIsPending,
-		error: userError,
-		refetch: userRefetch,
-	} = userQuery;
-	console.log("userquery", user);
 
 	const { categoriesQuery, createCategoryMutation, deleteCategoryMutation } =
 		useCategory();
@@ -135,7 +95,7 @@ export default function DailyExpenses() {
 		}
 	};
 
-	const [newTransaction, setNewTransaction] = useState<Expense>({
+	const [newTransaction, setNewTransaction] = useState<transaction>({
 		budget_id: 1,
 		plan_id: currentPlanId ? parseInt(currentPlanId) : 1,
 		description: "",
@@ -162,9 +122,14 @@ export default function DailyExpenses() {
 		const fullISODate = `${new Date(newTransaction.transaction_date).toISOString().split("T")[0]}T${padZero(currentHours)}:${padZero(currentMinutes)}:${padZero(currentSeconds)}Z`;
 
 		try {
+			const transaction = TransactionSchema.parse({
+				...newTransaction,
+				transaction_date: fullISODate,
+			});
 			createTransactionMutation.mutate({
 				planId: currentPlanId,
-				newTransaction: { ...newTransaction, transaction_date: fullISODate },
+				// newTransaction: { ...newTransaction, transaction_date: fullISODate },
+				newTransaction: transaction,
 			});
 			setNewTransaction({
 				budget_id: 1,
@@ -178,6 +143,9 @@ export default function DailyExpenses() {
 				event.target.reset();
 			}
 		} catch (error) {
+			if (error instanceof z.ZodError) {
+				console.error("Validation failed:", error.errors); // Detailed error messages
+			}
 			console.error("Failed to add transaction:", error);
 		}
 	};
@@ -229,39 +197,42 @@ export default function DailyExpenses() {
 																variant="outline"
 																className="w-full justify-between"
 															>
-																{categories?.find(
-																	(c: any) =>
-																		c.id === newTransaction.category_id,
-																)?.name || "Select a category"}
+																{(Array.isArray(categories) &&
+																	categories.find(
+																		(c: any) =>
+																			c.id === newTransaction.category_id,
+																	)?.name) ||
+																	"Select a category"}
 																<ChevronDown className="ml-2 h-4 w-4 opacity-50" />
 															</Button>
 														</DropdownMenuTrigger>
 														<DropdownMenuContent className="w-[--radix-dropdown-trigger-width] min-w-[8rem]">
-															{categories?.map((category: any) => (
-																<DropdownMenuItem
-																	key={category.id}
-																	onClick={() =>
-																		setNewTransaction({
-																			...newTransaction,
-																			category_id: category.id,
-																		})
-																	}
-																	className="justify-between"
-																>
-																	{category?.name}
-																	<Button
-																		variant="outline"
-																		className="h-4 w-4 opacity-50 hover:opacity-100 bg-secondary"
-																		onClick={(e) => {
-																			e.stopPropagation();
-																			setCategoryToDelete(category.id);
-																			setIsDeleteDialogOpen(true);
-																		}}
+															{Array.isArray(categories) &&
+																categories?.map((category: any) => (
+																	<DropdownMenuItem
+																		key={category.id}
+																		onClick={() =>
+																			setNewTransaction({
+																				...newTransaction,
+																				category_id: category.id,
+																			})
+																		}
+																		className="justify-between"
 																	>
-																		X
-																	</Button>
-																</DropdownMenuItem>
-															))}
+																		{category?.name}
+																		<Button
+																			variant="outline"
+																			className="h-4 w-4 opacity-50 hover:opacity-100 bg-secondary"
+																			onClick={(e) => {
+																				e.stopPropagation();
+																				setCategoryToDelete(category.id);
+																				setIsDeleteDialogOpen(true);
+																			}}
+																		>
+																			X
+																		</Button>
+																	</DropdownMenuItem>
+																))}
 															<DropdownMenuItem
 																onClick={() => setIsAddingCategory(true)}
 																className="justify-center font-medium"
@@ -354,28 +325,29 @@ export default function DailyExpenses() {
 										Total Expenses
 									</p>
 									<div className="mt-4 space-y-2">
-										{categories?.map((category: any) => {
-											const categoryTotal = (transactions?.Transactions ?? [])
-												.filter(
-													(transaction: any) =>
-														transaction.category_id === category.id,
-												)
-												.reduce((sum: number, transaction: any) => {
-													const amount = parseFloat(transaction.amount) || 0;
-													return sum + amount;
-												}, 0);
-											return (
-												<div
-													key={category.id}
-													className="flex justify-between items-center"
-												>
-													<span className="text-sm">{category.name}</span>
-													<span className="text-sm font-medium">
-														${categoryTotal?.toFixed(2) ?? 0}
-													</span>
-												</div>
-											);
-										})}
+										{Array.isArray(categories) &&
+											categories?.map((category: any) => {
+												const categoryTotal = (transactions?.Transactions ?? [])
+													.filter(
+														(transaction: any) =>
+															transaction.category_id === category.id,
+													)
+													.reduce((sum: number, transaction: any) => {
+														const amount = parseFloat(transaction.amount) || 0;
+														return sum + amount;
+													}, 0);
+												return (
+													<div
+														key={category.id}
+														className="flex justify-between items-center"
+													>
+														<span className="text-sm">{category.name}</span>
+														<span className="text-sm font-medium">
+															${categoryTotal?.toFixed(2) ?? 0}
+														</span>
+													</div>
+												);
+											})}
 									</div>
 								</CardContent>
 							</Card>
@@ -452,7 +424,12 @@ export default function DailyExpenses() {
 					</div>
 				</main>
 
-				<Dialog open={isAddingCategory} onOpenChange={setIsAddingCategory}>
+				<Dialog
+					open={isAddingCategory}
+					onOpenChange={setIsAddingCategory}
+					aria-labelledby="add-category-title"
+					aria-describedby="add-category-description"
+				>
 					<DialogContent className="sm:max-w-[425px]">
 						<DialogHeader>
 							<DialogTitle>Add New Category</DialogTitle>
@@ -490,7 +467,12 @@ export default function DailyExpenses() {
 					</DialogContent>
 				</Dialog>
 
-				<Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+				<Dialog
+					open={isDeleteDialogOpen}
+					onOpenChange={setIsDeleteDialogOpen}
+					aria-labelledby="delete-category-title"
+					aria-describedby="delete-category-description"
+				>
 					<DialogContent>
 						<DialogHeader>
 							<DialogTitle>Delete Category</DialogTitle>

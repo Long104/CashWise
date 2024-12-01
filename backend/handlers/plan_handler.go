@@ -55,7 +55,6 @@ func CreatePlan(db *gorm.DB, c *fiber.Ctx) error {
 	return c.JSON(plan)
 }
 
-
 // updateCategory updates a category by id
 func UpdatePlan(db *gorm.DB, c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -87,6 +86,11 @@ func DeletePlan(db *gorm.DB, c *fiber.Ctx) error {
 	if err := db.Where("plan_id = ?", id).Delete(&models.Budget{}).Error; err != nil {
 		log.Println("Error deleting budgets:", err)
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Could not delete budgets"})
+	}
+
+	if err := db.Where("plan_id = ?", id).Delete(&models.Category{}).Error; err != nil {
+		log.Println("Error deleting categorys:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Could not delete category"})
 	}
 
 	if err := db.Unscoped().Delete(&models.Plan{}, id).Error; err != nil {

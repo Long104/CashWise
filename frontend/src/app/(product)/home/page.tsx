@@ -26,13 +26,6 @@ import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/auth";
 
 import { useUser } from "@/hooks/useUser";
-type Plan = {
-	id: number;
-	name: string;
-	description: string;
-	details: string;
-	tip: string;
-};
 
 export default function FinancialPlans() {
 	const { userQuery, deleteUserMutation } = useUser();

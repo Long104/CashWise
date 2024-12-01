@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchDelete, fetchGet, fetchPost } from "@/fetch/client";
 import { fetchDeleteCategory } from "@/api/Category";
-import { Plan } from "@/types";
+import {CategorySchema} from "@/types";
 
 import useAuthStore from "@/zustand/auth";
 export const useCategory = () => {

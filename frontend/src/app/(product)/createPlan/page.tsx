@@ -27,6 +27,8 @@ import useAuthStore from "@/zustand/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePlan } from "@/hooks/usePlan";
+import { z } from "zod";
+import { PlanSchema } from "@/types";
 
 export default function CreatePlan() {
 	const user = useAuthStore((state) => state.user);
@@ -40,21 +42,12 @@ export default function CreatePlan() {
 	const [autoSave, setAutoSave] = useState(true);
 	const { createPlanMutation } = usePlan();
 
-	interface Plan {
-		name: string;
-		user_id: number | undefined; // Since `user` might be undefined
-		description: string;
-		plan_type: string;
-		visibility: string;
-		duration: string;
-		initial_budget: number;
-		auto_save?: boolean;
-	}
+	type Plan = z.infer<typeof PlanSchema>;
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		// Here you would typically send the data to your backend
-		const planData: Plan = {
+		const planData: Partial<Plan> = {
 			name: planName,
 			user_id: user?.user_id,
 			description: planDescription,
@@ -69,7 +62,8 @@ export default function CreatePlan() {
 
 		try {
 			// const res = await fetchPost("plan", planData);
-			const res = await createPlanMutation.mutateAsync(planData);
+			const data = PlanSchema.parse(planData);
+			const res = await createPlanMutation.mutateAsync(data);
 			setPlanName("");
 			setPlanDescription("");
 			setPlanType("personal");

@@ -1,13 +1,15 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchDelete, fetchGet, fetchPost } from "@/fetch/client";
 import { fetchDeleteTransaction } from "@/api/Transaction";
-import { Plan } from "@/types";
+import { TransactionSchema } from "@/types";
+import { z } from "zod";
 
 import useAuthStore from "@/zustand/auth";
 export const useTransaction = () => {
 	const queryClient = useQueryClient();
 	const users = useAuthStore((state) => state.user);
 	const userId = users?.user_id;
+	type transaction = z.infer<typeof TransactionSchema>;
 
 	const transactionQuery = (planId: string | null) =>
 		useQuery({
@@ -35,7 +37,7 @@ export const useTransaction = () => {
 		mutationFn: async ({
 			planId,
 			newTransaction,
-		}: { planId: string | null; newTransaction: Partial<any> }) =>
+		}: { planId: string | null; newTransaction: Partial<transaction> }) =>
 			// await fetchPost(`category?user_id=${userId}&plan_id=${planId}`, {
 			await fetchPost(`transaction`, {
 				...newTransaction, // Spread the newCategory data

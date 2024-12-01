@@ -1,7 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchUser, createPlan } from "@/api/User";
 import { fetchDelete } from "@/fetch/client";
-import { Plan } from "@/types";
+import { PlanSchema } from "@/types";
+import { z } from "zod";
 
 import useAuthStore from "@/zustand/auth";
 
@@ -9,6 +10,7 @@ export const usePlan = () => {
 	const queryClient = useQueryClient();
 	const users = useAuthStore((state) => state.user);
 	const userId = users?.user_id;
+	type Plan = z.infer<typeof PlanSchema>;
 
 	// const planQuery = useQuery({
 	// 	queryKey: ["user"],
@@ -26,21 +28,10 @@ export const usePlan = () => {
 
 	// Create a new plan
 	const createPlanMutation = useMutation({
-		mutationFn: (
-			newPlan: Partial<{
-				user_id: number;
-				name: string;
-				plan_type: string;
-				visibility: string;
-				duration: string;
-				description?: string;
-				auto_save: boolean;
-				initial_budget: number;
-			}>,
-		) => createPlan(newPlan),
+		mutationFn: (newPlan: Partial<Plan>) => createPlan(newPlan),
 		onSuccess: (data) => {
 			// Correctly invalidate the query
-      console.log("mutation data", data);
+			console.log("mutation data", data);
 			queryClient.invalidateQueries({ queryKey: ["user"] });
 		},
 		onError: (error) => {
