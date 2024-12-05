@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -9,31 +9,18 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-	DollarSign,
-	ChevronRight,
-	Info,
-	Star,
-	Users,
-	Filter,
-	Share,
-	MoreHorizontal,
-} from "lucide-react";
-import { fetchPost, fetchGet, fetchDelete } from "@/fetch/client";
+import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import useAuthStore from "@/zustand/auth";
 
 import { usePlan } from "@/hooks/usePlan";
-import { useEachPlan } from "@/hooks/useEachPlan";
+import { z } from "zod";
+import { PlanSchema } from "@/types";
 
 export default function FinancialPlans() {
+	type Plan = z.infer<typeof PlanSchema>;
 	const { plansQuery, deletePlanMutation } = usePlan();
-	const { data: plans, isPending, error, refetch } = plansQuery;
+	const { data: plans } = plansQuery;
 
-
-	const users = useAuthStore((state) => state.user);
 	const router = useRouter();
 	async function goToPlan(planName: string, planId: number) {
 		try {
@@ -45,7 +32,7 @@ export default function FinancialPlans() {
 	}
 
 	async function handleDeletePlan(id: number) {
-    deletePlanMutation.mutate(id);
+		deletePlanMutation.mutate(id);
 		try {
 		} catch (error) {
 			console.log("cannot delete plan", error);
@@ -59,7 +46,7 @@ export default function FinancialPlans() {
 					<h1 className="text-3xl font-bold mb-6">Financial Plans Overview</h1>
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 						{Array.isArray(plans) && plans?.length > 0
-							? plans?.map((plan: any) => (
+							? plans?.map((plan: Plan) => (
 									<Card
 										key={plan.id}
 										className="hover:shadow-lg transition-shadow"
@@ -71,7 +58,7 @@ export default function FinancialPlans() {
 												</div>
 												<Button
 													variant="destructive"
-													onClick={() => handleDeletePlan(plan?.id)}
+													onClick={() => handleDeletePlan(plan.id as number)}
 												>
 													X
 												</Button>
@@ -83,7 +70,7 @@ export default function FinancialPlans() {
 												variant="outline"
 												className="w-full"
 												onClick={() => {
-													goToPlan(plan.name, plan.id);
+													goToPlan(plan.name, plan.id as number);
 												}}
 											>
 												View Details <ChevronRight className="ml-2 h-4 w-4" />

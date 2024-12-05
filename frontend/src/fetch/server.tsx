@@ -1,14 +1,12 @@
 // app/page.tsx
 import { cookies } from "next/headers";
 
-import Cookies from "js-cookie";
-
 export async function fetchGet(url: string) {
 	const cookieStore = await cookies();
 	const jwt = cookieStore.get("jwt");
 	// const jwtToken = Cookies.get("jwt"); // Get JWT from cookies
 	try {
-		const res = await fetch(`http://localhost:8080/${url}`, {
+		const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/${url}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",

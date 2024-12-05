@@ -1,12 +1,10 @@
 "use client";
-import { main } from "framer-motion/client";
 import React from "react";
 import {
 	BarChart,
 	Bar,
 	XAxis,
 	YAxis,
-	Tooltip,
 	Legend,
 	ResponsiveContainer,
 } from "recharts";

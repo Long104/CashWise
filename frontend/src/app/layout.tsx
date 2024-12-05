@@ -1,29 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/app/globals.css";
-import { Navbar } from "@example/navbar";
 import { AuthProvider } from "@/context/auth";
-import { UserProvider } from "@/context/user";
-
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import {
-	SidebarInset,
-	SidebarProvider,
-	SidebarTrigger,
-} from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/mode-toggle";
-import { headers } from "next/headers";
 import { jwtDecode } from "jwt-decode";
 
 const geistSans = localFont({
@@ -47,24 +27,21 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const cookieStore = await cookies();
-	const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
-	const headersList = await headers();
+	// const cookieStore = await cookies();
+	// const headersList = await headers();
 	// read the custom x-url header
-	const header_url = headersList.get("x-url") || "";
-	const origin_url = headersList.get("x-origin");
-	const domain = headersList.get("host") || "";
-	const fullUrl = headersList.get("referer") || "";
+	// const header_url = headersList.get("x-url") || ""; const origin_url = headersList.get("x-origin"); const domain = headersList.get("host") || "";
+	// const fullUrl = headersList.get("referer") || "";
 
-	const pathname = headersList.get("x-pathname");
-	const eachPath = pathname?.split("/") ?? "";
+	// const pathname = headersList.get("x-pathname");
+	// const eachPath = pathname?.split("/") ?? "";
 
-	const jwtToken = cookieStore.get("jwt");
-	let user_token;
-	if (jwtToken) {
-		user_token = jwtDecode<{ user_id: number | undefined }>(jwtToken?.value); // Define the expected structure
-	} else {
-		console.log("no jwt token");
+	// const jwtToken = cookieStore.get("jwt");
+	// let user_token;
+	// if (jwtToken) {
+	// 	user_token = jwtDecode<{ user_id: number | undefined }>(jwtToken?.value); // Define the expected structure
+	// } else {
+	// 	console.log("no jwt token");
 		// return (
 		// 	<html lang="en">
 		// 		<body>
@@ -72,7 +49,7 @@ export default async function RootLayout({
 		// 		</body>
 		// 	</html>
 		// );
-	}
+	// }
 
 	return (
 		<html lang="en" suppressHydrationWarning>

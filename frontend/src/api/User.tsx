@@ -1,6 +1,6 @@
 "use client";
 // api/plans.ts
-import { fetchGet, fetchPost } from "@/fetch/client";
+import { fetchGet } from "@/fetch/client";
 
 export const fetchUser = async (id:number | undefined) => {
 	try {

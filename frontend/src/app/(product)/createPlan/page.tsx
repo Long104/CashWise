@@ -21,10 +21,8 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { CalendarDays, CreditCard, Lock, Users } from "lucide-react";
-import { fetchPost } from "@/fetch/client";
+import { Lock, Users } from "lucide-react";
 import useAuthStore from "@/zustand/auth";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePlan } from "@/hooks/usePlan";
 import { z } from "zod";

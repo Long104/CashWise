@@ -44,7 +44,7 @@ export default function Component() {
 		// console.log(email,password,name)
 
 		try {
-			const response = await fetch("http://localhost:8080/signup", {
+			const response = await fetch(process.env.NEXT_PUBLIC_BACKEND+"/signup", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

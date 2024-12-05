@@ -1,9 +1,14 @@
 import Cookies from "js-cookie";
+import { CategorySchema } from "../types";
+import { z } from "zod";
 
-export async function fetchDeleteCategory(url: string): Promise<any> {
+type Category = z.infer<typeof CategorySchema>;
+export async function fetchDeleteCategory(
+	url: string,
+): Promise<Partial<Category> & { error?: string }> {
 	const jwt = Cookies.get("jwt");
 	try {
-		const res = await fetch(`http://localhost:8080/${url}`, {
+		const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/${url}`, {
 			method: "DELETE",
 			headers: {
 				Authorization: `Bearer ${jwt}`,

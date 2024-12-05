@@ -74,7 +74,7 @@ export default function Component() {
 	);
 }
 
-function PlanCard({ title, description, icon }: any) {
+function PlanCard({ title, description, icon }: { title: string; description: string; icon: React.ReactNode }) {
 	return (
 		<Card className="flex flex-col justify-between">
 			<CardHeader>

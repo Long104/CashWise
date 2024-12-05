@@ -5,7 +5,7 @@ export async function fetchGet(url: string): Promise<any> {
 	const jwt = Cookies.get("jwt");
 	// const jwtToken = Cookies.get("jwt"); // Get JWT from cookies
 	try {
-		const res = await fetch(`http://localhost:8080/${url}`, {
+		const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/${url}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -28,7 +28,7 @@ export async function fetchPost(url: string, data: any): Promise<any> {
 	const jwt = Cookies.get("jwt");
 	// const jwtToken = Cookies.get("jwt"); // Get JWT from cookies
 	try {
-		const res = await fetch(`http://localhost:8080/${url}`, {
+		const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/${url}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -55,7 +55,7 @@ export async function fetchUpdate(
 ): Promise<any> {
 	const jwt = Cookies.get("jwt");
 	try {
-		const res = await fetch(`http://localhost:8080/${url}/${id}`, {
+		const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/${url}/${id}`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
@@ -81,7 +81,7 @@ export async function fetchDelete(
 ): Promise<any> {
 	const jwt = Cookies.get("jwt");
 	try {
-		const res = await fetch(`http://localhost:8080/${url}/${id}`, {
+		const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/${url}/${id}`, {
 			method: "DELETE",
 			headers: {
 				Authorization: `Bearer ${jwt}`,

@@ -24,8 +24,6 @@ export const usePlan = () => {
 	const users = useAuthStore((state) => state.user);
 	const userId = users?.user_id;
 	type Plan = z.infer<typeof PlanSchema>;
-	const searchParams = useSearchParams();
-	const planId = searchParams.get("id");
 
 	// const planQuery = useQuery({
 	// 	queryKey: ["plans", planId],
@@ -75,9 +73,9 @@ export const usePlan = () => {
 
 	const deletePlanMutation = useMutation({
 		mutationFn: (id: number) => fetchDelete(`plan`, id), // Your delete API call
-		onSuccess: (data) => {
+		onSuccess: () => {
 			queryClient.removeQueries({ queryKey: ["plans"] });
-			queryClient.invalidateQueries({ queryKey: ["plans"] });
+			queryClient.invalidateQueries({ queryKey: ["plans", userId] });
 		},
 		onError: (error) => {
 			console.error("Failed to delete plan:", error);

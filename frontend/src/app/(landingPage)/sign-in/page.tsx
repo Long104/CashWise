@@ -19,7 +19,6 @@ import Cookies from "js-cookie";
 
 import useAuthStore from "@/zustand/auth";
 
-import { useAuth } from "@/context/auth";
 export default function LoginPage() {
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
@@ -32,7 +31,7 @@ export default function LoginPage() {
 		event.preventDefault();
 
 		try {
-			const response = await fetch("http://localhost:8080/login", {
+			const response = await fetch(process.env.NEXT_PUBLIC_BACKEND + "/login", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -61,6 +60,8 @@ export default function LoginPage() {
 			console.error("Error:", error);
 		}
 	};
+	const google_login = process.env.NEXT_PUBLIC_BACKEND + `/google_login`;
+	const github_login = process.env.NEXT_PUBLIC_BACKEND + `/github_login`;
 
 	return (
 		<div className="flex items-center justify-center min-h-screen bg-primary">
@@ -78,7 +79,8 @@ export default function LoginPage() {
 						{/* <Link href="http://localhost:8080/google_login"> */}
 						{/* <Link href="/dashboard" replace={true}> */}
 						<Link
-							href="http://localhost:8080/google_login"
+							// href="http://localhost:8080/google_login"
+							href={google_login}
 							passHref
 							legacyBehavior
 						>
@@ -127,7 +129,8 @@ export default function LoginPage() {
 						</Link>
 
 						<Link
-							href="http://localhost:8080/github_login"
+							// href="http://localhost:8080/github_login"
+							href={github_login}
 							passHref
 							legacyBehavior
 						>
@@ -183,7 +186,7 @@ export default function LoginPage() {
 				</CardContent>
 				<CardFooter className="flex flex-col">
 					<p className="mt-2 text-xs text-center text-gray-700">
-						Don't have an account?{" "}
+						Don&apos;t have an account?{" "}
 						<Link href="/sign-up" className="text-blue-600 hover:underline">
 							Sign up
 						</Link>

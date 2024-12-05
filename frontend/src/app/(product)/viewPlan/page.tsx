@@ -10,7 +10,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	BarChart,
 	Bar,
@@ -24,8 +23,6 @@ import {
 	ArrowUpIcon,
 	ArrowDownIcon,
 	DollarSign,
-	CreditCard,
-	Wallet,
 	PiggyBank,
 	ArrowRight,
 } from "lucide-react";

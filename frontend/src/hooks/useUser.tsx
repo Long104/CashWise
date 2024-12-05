@@ -1,11 +1,9 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { fetchUser } from "@/api/User";
-import { fetchDelete } from "@/fetch/client";
 
 import useAuthStore from "@/zustand/auth";
 
 export const useUser = () => {
-	const queryClient = useQueryClient();
 	const users = useAuthStore((state) => state.user);
 	const userId = users?.user_id;
 

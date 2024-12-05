@@ -1,10 +1,8 @@
-import Image from "next/image";
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { ChartWeek } from "@/components/example/chart-week";
 import { ChartMonth } from "@example/chart-month";
 import { HeroScrollDemo } from "@example/container-scroll-animation-demo";
-import { motion } from "framer-motion";
 
 export function TimelineDemo() {
 	const data = [

@@ -3,11 +3,9 @@ import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
 	BarChart3,
 	CreditCard,
@@ -15,7 +13,6 @@ import {
 	Lock,
 	PieChart,
 	Smartphone,
-	Users,
 	Wallet,
 } from "lucide-react";
 import Link from "next/link";
@@ -85,7 +82,7 @@ export default function ProfilePage() {
 						<TestimonialCard
 							name="Michael Chen"
 							role="Recent Graduate"
-							content="I've finally got my student loans under control thanks to MoneyWise's budgeting tools."
+							content="I&apos;ve finally got my student loans under control thanks to MoneyWise&apos;s budgeting tools."
 						/>
 					</div>
 				</div>

@@ -42,10 +42,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 	const router = useRouter();
 	const logout = async () => {
 		try {
-			const response = await fetch("http://localhost:8080/logout", {
-				method: "POST",
-				credentials: "include", // Include cookies in the request
-			});
+			const response = await fetch(
+				process.env.NEXT_PUBILC_BACKEND + "/logout",
+				{
+					method: "POST",
+					credentials: "include", // Include cookies in the request
+				},
+			);
 
 			if (response.ok) {
 				// Optionally, clear JWT cookie here as well

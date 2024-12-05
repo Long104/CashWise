@@ -1,13 +1,12 @@
 'use client'
 // src/components/useAuth.tsx
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {jwtDecode} from "jwt-decode";
 import Cookies from "js-cookie";
 
 export function useAuth() {
     const router = useRouter();
-    const [jwtToken, setJwtToken] = useState<string | null>(null);
 
     useEffect(() => {
         const jwtToken = Cookies.get("jwt"); // Get JWT from cookies

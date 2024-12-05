@@ -15,8 +15,7 @@ import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
 import { NavUser } from "@/components/nav-user";
 import { TeamSwitcher } from "@/components/team-switcher";
-import {
-	Sidebar,
+import { Sidebar,
 	SidebarContent,
 	SidebarFooter,
 	SidebarHeader,
@@ -30,7 +29,7 @@ import { usePlan } from "@/hooks/usePlan";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const users = useAuthStore((state) => state.user);
 	const { plansQuery } = usePlan();
-	const { data: plans, isPending, error, refetch } = plansQuery;
+	const { data: plans } = plansQuery;
 	const data = {
 		user: {
 			name: users?.name,

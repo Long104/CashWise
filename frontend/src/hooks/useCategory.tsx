@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchDelete, fetchGet, fetchPost } from "@/fetch/client";
+import {  fetchGet, fetchPost } from "@/fetch/client";
 import { fetchDeleteCategory } from "@/api/Category";
-import { CategorySchema } from "@/types";
 import { useSearchParams } from "next/navigation";
 
 import useAuthStore from "@/zustand/auth";
@@ -67,7 +66,7 @@ export const useCategory = () => {
 			fetchDeleteCategory(
 				`category?user_id=${userId}&plan_id=${planId}&category_id=${categoryId}`,
 			), // Your delete API call
-		onSuccess: (data) => {
+		onSuccess: () => {
 			queryClient.removeQueries({ queryKey: ["categories", planId] });
 			// queryClient.invalidateQueries({ queryKey: ["categories"], exact: true });
 		},

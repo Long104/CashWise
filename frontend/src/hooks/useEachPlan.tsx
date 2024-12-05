@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchDelete, fetchGet, fetchPost } from "@/fetch/client";
+import {  fetchGet, fetchPost } from "@/fetch/client";
 import { fetchDeleteTransaction } from "@/api/Transaction";
 import { TransactionSchema } from "@/types";
 import { z } from "zod";
@@ -43,7 +43,7 @@ export const useEachPlan = () => {
 			});
 			console.log("this is new transaction", newTransaction);
 		},
-		onSuccess: (data) => {
+		onSuccess: () => {
 			// Correctly invalidate the query
 			// queryClient.setQueryData(["plans", planId], (oldData: any) => {
 			// 	if (oldData) {
@@ -65,7 +65,7 @@ export const useEachPlan = () => {
 				// `transaction?user_id=${userId}&plan_id=${planId}&category_id=${categoryId}`,
 				`transaction?plan_id=${planId}&transaction_id=${transactionId}`,
 			), // Your delete API call
-		onSuccess: (data) => {
+		onSuccess: () => {
 			// After successfully deleting a plan, invalidate the 'plans' query
 
 			queryClient.removeQueries({ queryKey: ["plans", planId] });

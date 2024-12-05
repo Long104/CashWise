@@ -28,7 +28,6 @@ import {
 import useAuthStore from "@/zustand/auth";
 
 import { useRouter } from "next/navigation";
-import { fetchGet, fetchPost, fetchDelete } from "@/fetch/client";
 export function NavUser({
 	user,
 }: {

@@ -6,6 +6,7 @@ import (
 
 	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
+	// "github.com/long104/CashWise/middleware"
 )
 
 type WebSocketHub struct {
@@ -19,9 +20,18 @@ var hub = WebSocketHub{
 	broadcast: make(chan []byte),
 }
 
-
 func WsRoutes(app *fiber.App) {
 	app.Get("/ws/:id", websocket.New(func(c *websocket.Conn) {
+		// token := c.Query("token")
+		// if result := middleware.IsValidToken(token); !result {
+		// 	log.Println("inValid token")
+		// }
+
+		log.Println(c.Locals("allowed"))  // true
+		log.Println(c.Params("id"))       // 123
+		log.Println(c.Query("v"))         // 1.0
+		log.Println(c.Cookies("session")) // ""
+
 		hub.lock.Lock()
 		hub.clients[c] = true
 		hub.lock.Unlock()
@@ -64,4 +74,3 @@ func WsRoutes(app *fiber.App) {
 		}
 	}()
 }
-

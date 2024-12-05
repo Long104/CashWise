@@ -36,10 +36,13 @@ export function ProfileDropdown({ classProfile }: { classProfile?: string }) {
 	const router = useRouter();
 	const handleLogout = async () => {
 		try {
-			const response = await fetch("http://localhost:8080/logout", {
-				method: "POST",
-				credentials: "include", // Include cookies in the request
-			});
+			const response = await fetch(
+				process.env.NEXT_PUBLIC_BACKEND + "/logout",
+				{
+					method: "POST",
+					credentials: "include", // Include cookies in the request
+				},
+			);
 
 			if (response.ok) {
 				// Optionally, clear JWT cookie here as well

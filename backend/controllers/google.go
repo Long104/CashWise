@@ -137,5 +137,5 @@ func GoogleCallback(c *fiber.Ctx) error {
 	})
 
 	// return c.SendString(string(userData))
-	return c.Redirect("http://localhost:3000/dashboard")
+	return c.Redirect("http://localhost:3000/home")
 }

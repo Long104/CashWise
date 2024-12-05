@@ -26,13 +26,18 @@ const useAuthStore = create(
 			user: null,
 			jwt: null,
 			login: (token: string) => {
+				const currentState = get(); // Access current state
+				if (currentState.jwt) {
+					console.log("User is already logged in");
+					return;
+				}
 				Cookies.set("jwt", token);
 				try {
 					const decodedUser = jwtDecode<User>(token);
 					set({ user: decodedUser, jwt: token });
 				} catch (error) {
 					console.error("Error decoding JWT:", error);
-					useAuthStore.getState().logout(); // Automatically logout on invalid token
+					useAuthStore.getState().logout();
 				}
 			},
 			logout: () => {

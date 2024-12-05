@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "@/app/globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/example/navbar";
-
-import { jwtDecode } from "jwt-decode";
-import { cookies } from "next/headers";
-import { AuthProvider } from "@/context/auth";
-import { UserProvider } from "@/context/user";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
