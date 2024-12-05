@@ -15,18 +15,14 @@ export async function middleware(req: NextRequest) {
 
 	const handleLogout = async () => {
 		try {
-			await fetch(process.env.NEXT_PUBLIC_BACKEND + "/logout", {
+			await fetch(process.env.NEXT_PUBIC_BACKEND + "/logout", {
 				method: "POST",
 				credentials: "include",
 			});
-			return NextResponse.redirect(
-				process.env.NEXT_PUBLIC_BASE_URL + "/sign-in",
-			);
+			return NextResponse.redirect(new URL("/sign-in", req.url));
 		} catch (error) {
 			console.error("Logout error:", error);
-			return NextResponse.redirect(
-				process.env.NEXT_PUBLIC_BASE_URL + "/sign-in",
-			); // Redirect on error
+			return NextResponse.redirect(new URL("/sign-in", req.url));
 		}
 	};
 
@@ -76,9 +72,10 @@ export async function middleware(req: NextRequest) {
 		// If there's no token and the route isn't /home, redirect to sign-in
 		if (!redirectToHome.includes(path)) {
 			console.error("JWT token is not available.");
-			return NextResponse.redirect(
-				process.env.NEXT_PUBLIC_BASE_URL + "sign-in",
-			);
+			// return NextResponse.redirect(
+			// 	process.env.NEXT_PUBLIC_BASE_URL + "/sign-in",
+			// );
+			return NextResponse.redirect(new URL("/sign-in", req.url));
 		}
 	}
 

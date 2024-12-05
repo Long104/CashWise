@@ -44,15 +44,18 @@ export default function Component() {
 		// console.log(email,password,name)
 
 		try {
-			const response = await fetch(process.env.NEXT_PUBLIC_BACKEND+"/signup", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				// body: JSON.stringify({ email, password }),
+			const response = await fetch(
+				process.env.NEXT_PUBLIC_BACKEND + "/signup",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					// body: JSON.stringify({ email, password }),
 
-				body: JSON.stringify({ name, email, password }),
-			});
+					body: JSON.stringify({ name, email, password }),
+				},
+			);
 
 			if (response.ok) {
 				const data = await response.json();
