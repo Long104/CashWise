@@ -11,7 +11,7 @@ import (
 	// "github.com/golang-jwt/jwt/v4"
 	// "golang.org/x/crypto/bcrypt"
 
-	"github.com/long104/CashWise/models"
+	"github.com/long104/SenZen/models"
 	"gorm.io/gorm"
 )
 
@@ -22,8 +22,8 @@ func GetPlanByID(db *gorm.DB, c *fiber.Ctx) error {
 	var plan models.Plan
 
 	if err := db.Preload("Transactions.Category").First(&plan, planId).Error; err != nil {
-	// if err := db.Preload(clause.Associations).First(&plan, planId).Error; err != nil {
-	// if err := db.First(&plan, planId).Error; err != nil {
+		// if err := db.Preload(clause.Associations).First(&plan, planId).Error; err != nil {
+		// if err := db.First(&plan, planId).Error; err != nil {
 		log.Println("Error fetching plan:", err)
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot fetch plan"})
 	}

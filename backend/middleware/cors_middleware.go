@@ -13,11 +13,12 @@ func CORSMiddleware() fiber.Handler {
 	// 	frontendOrigin = "http://localhost:3000" // Default for development
 	// }
 	return cors.New(cors.Config{
-		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH",
-		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
-		// AllowOrigins:     "http://localhost:3000", // Set to your frontend origin
-    // AllowOrigins: frontendOrigin,
-		AllowOrigins:     "http://cashwise.com", // Set to your frontend origin
-		AllowCredentials: true,                    // Allows cookies and credentials to be sent
+		AllowMethods: "GET,POST,HEAD,PUT,DELETE,PATCH",
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
+		// AllowOrigins: "http://localhost:3000", // Set to your frontend origin
+		AllowOrigins: "https://senzen-frontend.vercel.app",
+		// AllowOrigins: frontendOrigin,
+		// AllowOrigins:     "http://cashwise.com", // Set to your frontend origin
+		AllowCredentials: true, // Allows cookies and credentials to be sent
 	})
 }

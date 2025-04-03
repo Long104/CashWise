@@ -7,8 +7,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/long104/CashWise/config"
-	"github.com/long104/CashWise/models"
+	"github.com/long104/SenZen/config"
+	"github.com/long104/SenZen/models"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -71,9 +71,9 @@ func LoginUser(c *fiber.Ctx) error {
 
 	// Set cookie
 	c.Cookie(&fiber.Cookie{
-		Name:    "jwt",
-		Value:   t,
-		Path:    "/",
+		Name:  "jwt",
+		Value: t,
+		Path:  "/",
 		// Domain:  "cashwise.com",
 		Expires: time.Now().Add(time.Hour * 72),
 		// HTTPOnly: true,

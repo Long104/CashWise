@@ -1,5 +1,4 @@
 package controllers
-
 import (
 	"context"
 	"encoding/json"
@@ -12,8 +11,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/long104/CashWise/config"
-	"github.com/long104/CashWise/models"
+	"github.com/long104/SenZen/config"
+	"github.com/long104/SenZen/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -36,8 +35,7 @@ func GithubCallback(c *fiber.Ctx) error {
 			Colorful:      true,        // Enable color
 		},
 	)
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Bangkok", os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"))
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{Logger: newLogger})
+	db, err := gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{Logger: newLogger})
 	if err != nil {
 		panic("failed to connect to database")
 	}
@@ -128,9 +126,10 @@ func GithubCallback(c *fiber.Ctx) error {
 		Name:    "jwt",
 		Value:   t,
 		Path:    "/",
-		Domain:  "cashwise.com",
+		// Domain:  "cashwise.com",
+		Domain:  "https://senzen-frontend.vercel.app",
 		Expires: time.Now().Add(time.Hour * 72),
-		Secure:  false,
+		// Secure:  false,
 		// HTTPOnly: true,
 		HTTPOnly: false,
 		SameSite: "Lax",

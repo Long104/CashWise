@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/long104/CashWise/config"
-	"github.com/long104/CashWise/models"
+	"github.com/long104/SenZen/config"
+	"github.com/long104/SenZen/models"
 )
 
 func CreateBudget(c *fiber.Ctx) error {

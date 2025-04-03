@@ -12,8 +12,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/long104/CashWise/config"
-	"github.com/long104/CashWise/models"
+	"github.com/long104/SenZen/config"
+	"github.com/long104/SenZen/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -36,8 +36,7 @@ func GoogleCallback(c *fiber.Ctx) error {
 			Colorful:      true,        // Enable color
 		},
 	)
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Bangkok", os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"))
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{Logger: newLogger})
+	db, err := gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{Logger: newLogger})
 	if err != nil {
 		panic("failed to connect to database")
 	}
@@ -46,7 +45,6 @@ func GoogleCallback(c *fiber.Ctx) error {
 	if state != "randomstate" {
 		return c.SendString("States don't Match!!")
 	}
-
 	code := c.Query("code")
 
 	googlecon := config.GoogleConfig()
@@ -101,15 +99,30 @@ func GoogleCallback(c *fiber.Ctx) error {
 	}
 
 	// Create a new user
-	db.Create(&models.User{Name: userName, Email: userEmail})
+  result := db.Create(&models.User{Name: userName, Email: userEmail})
+  if result.Error != nil {
+    return c.JSON(map[string]any{
+      "Status": http.StatusInternalServerError,
+      "Error": result.Error,
+    })
+  }
+
+   
+  
+
 
 	var userDatabase models.User
 
 	res := db.Where("email = ?", userEmail).First(&userDatabase)
 
 	if res.RowsAffected == 0 {
-		db.Create(&models.User{Name: userName, Email: userEmail})
-	}
+    result :=	db.Create(&models.User{Name: userName, Email: userEmail})
+  if result.Error != nil {
+    return c.JSON(map[string]any{
+      "Status": http.StatusInternalServerError,
+      "Error": result.Error,
+    })
+	}  }
 
 	appToken := jwt.New(jwt.SigningMethodHS256)
 	claims := appToken.Claims.(jwt.MapClaims)
@@ -119,24 +132,29 @@ func GoogleCallback(c *fiber.Ctx) error {
 	claims["role"] = "admin"
 	claims["name"] = userName
 	claims["email"] = userEmail
-
-	// claims["role"] = "memeber"
+// claims["role"] = "memeber"
 
 	t, err := appToken.SignedString([]byte(os.Getenv("jwtSecretKey")))
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
+
 	// Set cookie
 	c.Cookie(&fiber.Cookie{
 		Name:    "jwt",
 		Value:   t,
+		// Path:  "/",
 		Expires: time.Now().Add(time.Hour * 72),
 		// HTTPOnly: true,
-		HTTPOnly: false,
+    // Domain: "https://senzen-frontend.vercel.app",
+		Secure:  false,
+		SameSite: "Lax",
 	})
 
 	// return c.SendString(string(userData))
 	// return c.Redirect("http://localhost:3000/home")
+
+  fmt.Print("ip is ",c.IP())
 	return c.Redirect(os.Getenv("FRONTEND_URL") + "/home")
 }

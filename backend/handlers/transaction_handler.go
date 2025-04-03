@@ -8,8 +8,8 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/long104/CashWise/config"
-	"github.com/long104/CashWise/models"
+	"github.com/long104/SenZen/config"
+	"github.com/long104/SenZen/models"
 )
 
 // gorm.Model

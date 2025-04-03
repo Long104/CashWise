@@ -4,28 +4,27 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/long104/CashWise/config"
-	"github.com/long104/CashWise/models"
+	"github.com/long104/SenZen/config"
+	"github.com/long104/SenZen/models"
 )
 
 // loginUser handles user in
 
-func GetUsers(c *fiber.Ctx) error {
-	var users []models.User
+func GetUsers(c *fiber.Ctx) error { var users []models.User
 	config.DB.Find(&users)
 	return c.JSON(users)
 }
 
 func GetUser(c *fiber.Ctx) error {
-    id := c.Params("id")
-    var user models.User
+	id := c.Params("id")
+	var user models.User
 
-    if err := config.DB.First(&user, id).Error; err != nil {
-        log.Println("Error fetching user:", err)
-        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot fetch user"})
-    }
+	if err := config.DB.First(&user, id).Error; err != nil {
+		log.Println("Error fetching user:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot fetch user"})
+	}
 
-    return c.JSON(user)
+	return c.JSON(user)
 }
 
 // createBook creates a new book
