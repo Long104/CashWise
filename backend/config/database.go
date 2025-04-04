@@ -19,10 +19,10 @@ var DB *gorm.DB
 func ConnectDatabase() {
 
 	// Set up the DSN and GORM logger
-	dsn := fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Bangkok",
-		os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"),
-	)
+	// dsn := fmt.Sprintf(
+	// 	"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Bangkok",
+	// 	os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"),
+	// )
 
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags),
@@ -36,7 +36,8 @@ func ConnectDatabase() {
  var err error
 
 	// Connect to the database
-  DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{Logger: newLogger})
+  // DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{Logger: newLogger})
+  DB, err = gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{Logger: newLogger})
 	if err != nil {
 		log.Fatalf("failed to connect to database: %v", err)
 	}

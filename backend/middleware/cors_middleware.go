@@ -1,8 +1,7 @@
 package middleware
 
 import (
-	// "os"
-
+	"fmt"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -14,6 +13,7 @@ func CORSMiddleware() fiber.Handler {
 	// if frontendOrigin == "" {
 	// 	frontendOrigin = "http://localhost:3000" // Default for development
 	// }
+  fmt.Print(os.Getenv("FRONTEND_URL"))
 	return cors.New(cors.Config{
 		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH",
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",

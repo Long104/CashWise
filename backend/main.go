@@ -51,6 +51,7 @@ func main() {
 	app.Get("api/validate-token", middleware.ValidateToken)
 
 	routes.SetupRoutes(app)
+  
 
 	// setupRoutes(app)
 
