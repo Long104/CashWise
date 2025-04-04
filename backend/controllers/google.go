@@ -99,30 +99,27 @@ func GoogleCallback(c *fiber.Ctx) error {
 	}
 
 	// Create a new user
-  result := db.Create(&models.User{Name: userName, Email: userEmail})
-  if result.Error != nil {
-    return c.JSON(map[string]any{
-      "Status": http.StatusInternalServerError,
-      "Error": result.Error,
-    })
-  }
-
-   
-  
-
+	result := db.Create(&models.User{Name: userName, Email: userEmail})
+	if result.Error != nil {
+		return c.JSON(map[string]any{
+			"Status": http.StatusInternalServerError,
+			"Error":  result.Error,
+		})
+	}
 
 	var userDatabase models.User
 
 	res := db.Where("email = ?", userEmail).First(&userDatabase)
 
 	if res.RowsAffected == 0 {
-    result :=	db.Create(&models.User{Name: userName, Email: userEmail})
-  if result.Error != nil {
-    return c.JSON(map[string]any{
-      "Status": http.StatusInternalServerError,
-      "Error": result.Error,
-    })
-	}  }
+		result := db.Create(&models.User{Name: userName, Email: userEmail})
+		if result.Error != nil {
+			return c.JSON(map[string]any{
+				"Status": http.StatusInternalServerError,
+				"Error":  result.Error,
+			})
+		}
+	}
 
 	appToken := jwt.New(jwt.SigningMethodHS256)
 	claims := appToken.Claims.(jwt.MapClaims)
@@ -132,29 +129,32 @@ func GoogleCallback(c *fiber.Ctx) error {
 	claims["role"] = "admin"
 	claims["name"] = userName
 	claims["email"] = userEmail
-// claims["role"] = "memeber"
+	// claims["role"] = "memeber"
 
 	t, err := appToken.SignedString([]byte(os.Getenv("jwtSecretKey")))
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
-
 	// Set cookie
 	c.Cookie(&fiber.Cookie{
 		Name:    "jwt",
 		Value:   t,
-		// Path:  "/",
+		Path:    "/",
 		Expires: time.Now().Add(time.Hour * 72),
 		// HTTPOnly: true,
-    // Domain: "https://senzen-frontend.vercel.app",
-		Secure:  false,
-		SameSite: "Lax",
+		// Secure:  false,
+		// Domain: "https://senzen-frontend.vercel.app",
+		HTTPOnly: true,
+		Secure:   true,
+		SameSite: "None",
+		// SameSite: "Lax",
 	})
 
 	// return c.SendString(string(userData))
 	// return c.Redirect("http://localhost:3000/home")
 
-  fmt.Print("ip is ",c.IP())
+	fmt.Print("ip is dddddddddddddddddddddddddddddd", c.IP())
+	log.Print("ip is dddddddddddddddddddddddddddddd", c.IP())
 	return c.Redirect(os.Getenv("FRONTEND_URL") + "/home")
 }
