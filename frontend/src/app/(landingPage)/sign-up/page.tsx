@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 export default function Component() {
 	const router = useRouter();
 	const [passwordMatch, setPasswordMatch] = useState(true);

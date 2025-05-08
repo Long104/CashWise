@@ -15,7 +15,8 @@ import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
 import { NavUser } from "@/components/nav-user";
 import { TeamSwitcher } from "@/components/team-switcher";
-import { Sidebar,
+import {
+	Sidebar,
 	SidebarContent,
 	SidebarFooter,
 	SidebarHeader,
@@ -42,16 +43,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				logo: Building2,
 				plan: "Company",
 			},
-			{
-				name: "Pricing",
-				logo: Package,
-				plan: "pricing",
-			},
-			{
-				name: "About Us",
-				logo: GalleryVerticalEnd,
-				plan: "About us",
-			},
+			// 	{
+			// 		name: "Pricing",
+			// 		logo: Package,
+			// 		plan: "pricing",
+			// 	},
+			// 	{
+			// 		name: "About Us",
+			// 		logo: GalleryVerticalEnd,
+			// 		plan: "About us",
+			// 	},
 		],
 		navMain: [
 			{
@@ -59,54 +60,54 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				url: "#",
 				icon: NotebookPen,
 				// isActive: true,
-				items: 
+				items:
 					plans?.map((plan: any) => ({
 						title: plan?.name || "Unnamed Plan",
 						url: `/plan/${plan?.name}/?id=${plan.id}`,
 					})) || [],
 			},
-			{
-				title: "News&Forums",
-				url: "#",
-				icon: Newspaper,
-				items: [
-					{
-						title: "Money",
-						url: "#",
-					},
-					{
-						title: "Saving",
-						url: "#",
-					},
-					{
-						title: "Story",
-						url: "#",
-					},
-				],
-			},
-			{
-				title: "Settings",
-				url: "#",
-				icon: Settings2,
-				items: [
-					{
-						title: "General",
-						url: "#",
-					},
-					{
-						title: "Team",
-						url: "#",
-					},
-					{
-						title: "Billing",
-						url: "#",
-					},
-					{
-						title: "Limits",
-						url: "#",
-					},
-				],
-			},
+			// {
+			// 	title: "News&Forums",
+			// 	url: "#",
+			// 	icon: Newspaper,
+			// 	items: [
+			// 		{
+			// 			title: "Money",
+			// 			url: "#",
+			// 		},
+			// 		{
+			// 			title: "Saving",
+			// 			url: "#",
+			// 		},
+			// 		{
+			// 			title: "Story",
+			// 			url: "#",
+			// 		},
+			// 	],
+			// },
+			// {
+			// 	title: "Settings",
+			// 	url: "#",
+			// 	icon: Settings2,
+			// 	items: [
+			// 		{
+			// 			title: "General",
+			// 			url: "#",
+			// 		},
+			// 		{
+			// 			title: "Team",
+			// 			url: "#",
+			// 		},
+			// 		{
+			// 			title: "Billing",
+			// 			url: "#",
+			// 		},
+			// 		{
+			// 			title: "Limits",
+			// 			url: "#",
+			// 		},
+			// 	],
+			// },
 		],
 		projects: [
 			{
@@ -119,11 +120,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				url: "#plan",
 				icon: Newspaper,
 			},
-			{
-				name: "News",
-				url: "#news",
-				icon: Newspaper,
-			},
+			// {
+			// 	name: "News",
+			// 	url: "#news",
+			// 	icon: Newspaper,
+			// },
 		],
 	};
 	// useEffect(() => {}, []);

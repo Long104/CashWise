@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -15,11 +15,13 @@ import { useRouter } from "next/navigation";
 import { usePlan } from "@/hooks/usePlan";
 import { z } from "zod";
 import { PlanSchema } from "@/types";
+import useAuthStore from "@/zustand/auth";
 
 export default function FinancialPlans() {
 	type Plan = z.infer<typeof PlanSchema>;
 	const { plansQuery, deletePlanMutation } = usePlan();
 	const { data: plans } = plansQuery;
+	const logins = useAuthStore((state) => state.login);
 
 	const router = useRouter();
 	async function goToPlan(planName: string, planId: number) {
@@ -39,6 +41,20 @@ export default function FinancialPlans() {
 		}
 	}
 
+	useEffect(() => {
+		const token = document.cookie?.split("jwt=")[1];
+		// .find((row) => row.startsWith("jwt="))
+		// ?.split("=")[1];
+
+		console.log("login work", token);
+		if (token) {
+			// localStorage.setItem("token", token);
+			// logins(String(token));
+			logins(String(token));
+		}
+	}, []);
+
+	console.log();
 	return (
 		<div className="min-h-screen dark:bg-gray-900">
 			<div className="flex">

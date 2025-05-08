@@ -43,8 +43,16 @@ export function NavUser({
 
 	const router = useRouter();
 
-	const handleLogout = () => {
-		logout(); // Clear user state and cookies
+	const handleLogout = async () => {
+		// logout(); // Clear user state and cookies
+		const response = await fetch(process.env.NEXT_PUBLIC_BACKEND + "/logout", {
+			method: "POST",
+			credentials: "include", // Include cookies in the request
+		});
+		const data = await response.json();
+		console.log(data.message);
+		document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		localStorage.clear();
 		router.push("/sign-in"); // Redirect to sign-in page
 	};
 
@@ -86,32 +94,32 @@ export function NavUser({
 								</div>
 							</div>
 						</DropdownMenuLabel>
-						<DropdownMenuSeparator />
-						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<Sparkles />
-								Upgrade to Pro
-							</DropdownMenuItem>
-						</DropdownMenuGroup>
-						<DropdownMenuSeparator />
-						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<BadgeCheck />
-								Account
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<CreditCard />
-								Billing
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<Bell />
-								Notifications
-							</DropdownMenuItem>
-						</DropdownMenuGroup>
+						{/* <DropdownMenuSeparator /> */}
+						{/* <DropdownMenuGroup> */}
+						{/* 	<DropdownMenuItem> */}
+						{/* 		<Sparkles /> */}
+						{/* 		Upgrade to Pro */}
+						{/* 	</DropdownMenuItem> */}
+						{/* </DropdownMenuGroup> */}
+						{/* <DropdownMenuSeparator /> */}
+						{/* <DropdownMenuGroup> */}
+						{/* 	<DropdownMenuItem> */}
+						{/* 		<BadgeCheck /> */}
+						{/* 		Account */}
+						{/* 	</DropdownMenuItem> */}
+						{/* 	<DropdownMenuItem> */}
+						{/* 		<CreditCard /> */}
+						{/* 		Billing */}
+						{/* 	</DropdownMenuItem> */}
+						{/* 	<DropdownMenuItem> */}
+						{/* 		<Bell /> */}
+						{/* 		Notifications */}
+						{/* 	</DropdownMenuItem> */}
+						{/* </DropdownMenuGroup> */}
 						<DropdownMenuSeparator />
 						<DropdownMenuItem onClick={handleLogout}>
-								<LogOut />
-								Log out
+							<LogOut />
+							Log out
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

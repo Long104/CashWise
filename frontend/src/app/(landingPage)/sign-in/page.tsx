@@ -13,9 +13,10 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Github } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 import useAuthStore from "@/zustand/auth";
 
@@ -58,6 +59,7 @@ export default function LoginPage() {
 					return;
 				}
 				logins(String(token));
+				console.log("login");
 				// (event.currentTarget as HTMLFormElement)?.reset();
 				router.push("/home");
 				// router.refresh();
@@ -73,6 +75,7 @@ export default function LoginPage() {
 	};
 	// const google_login = process.env.NEXT_PUBLIC_BACKEND + `/google_login`;
 	// const github_login = process.env.NEXT_PUBLIC_BACKEND + `/github_login`;
+	// Inside the redirected-to page/component
 
 	return (
 		<div className="flex items-center justify-center min-h-screen bg-primary">

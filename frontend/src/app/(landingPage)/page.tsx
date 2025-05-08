@@ -10,8 +10,8 @@ export default function Home() {
 			{/* <div className="[&_*]:overscroll-none"> */}
 			<SpotlightPreview />
 			<TimelineDemo />
-			<Try2 />
-			<InfiniteMovingCardsDemo />
+			{/* <Try2 /> */}
+			{/* <InfiniteMovingCardsDemo /> */}
 			<Try />
 			<Footer />
 			{/* </div> */}

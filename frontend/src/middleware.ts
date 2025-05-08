@@ -1,9 +1,12 @@
+// 'use client'
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtDecode } from "jwt-decode";
+// import useAuthStore from "@/zustand/auth";
 
 export async function middleware(req: NextRequest) {
 	const token = req.cookies.get("jwt");
+  // const login = useAuthStore((state) => state.login)
 
 	const handleLogout = async () => {
 		try {
@@ -34,12 +37,14 @@ export async function middleware(req: NextRequest) {
 
 			const redirectToHome = ["", "/sign-in", "/sign-up"]; // Adjust for root path ""
 
+			const decoded = jwtDecode<{ exp: number }>(token.value); // Decode the token
+
 			if (redirectToHome.includes(path) && token) {
 				// return NextResponse.redirect("http://localhost:3000/home");
+        // login(String(token))
 				return NextResponse.redirect(new URL("/home", req.url));
 			}
 
-			const decoded = jwtDecode<{ exp: number }>(token.value); // Decode the token
 			const exp = decoded.exp * 1000; // Convert to milliseconds
 			const currentTime = Date.now();
 
