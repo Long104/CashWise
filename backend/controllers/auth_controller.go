@@ -12,6 +12,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+
 func CreateUser(c *fiber.Ctx) error {
 	user := new(models.User)
 	if err := c.BodyParser(user); err != nil {
@@ -74,7 +75,7 @@ func LoginUser(c *fiber.Ctx) error {
 		Name:  "jwt",
 		Value: t,
 		Path:  "/",
-		// Domain:  "cashwise.com",
+		Domain:  ".pantorn.me",
 		Expires: time.Now().Add(time.Hour * 72),
 		// HTTPOnly: true,
 		// Secure:   false,
@@ -86,8 +87,21 @@ func LoginUser(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{"token": t, "message": "success"})
 }
 
+// func LogoutUser(c *fiber.Ctx) error {
+// 	// Clear the JWT cookie
+// 	c.ClearCookie("jwt")
+// 	return c.JSON(fiber.Map{"message": "Successfully logged out"})
+// }
+
 func LogoutUser(c *fiber.Ctx) error {
-	// Clear the JWT cookie
-	c.ClearCookie("jwt")
-	return c.JSON(fiber.Map{"message": "Successfully logged out"})
+    c.Cookie(&fiber.Cookie{
+        Name:     "jwt",
+        Value:    "",
+        Path:     "/",             // Ensure this matches the original path
+        Domain:   ".pantorn.me",   // Ensure this matches the original domain
+        Expires:  time.Now().Add(-1 * time.Hour), // Set expiration in the past
+        HTTPOnly: true,
+        Secure:   true,
+    })
+    return c.JSON(fiber.Map{"message": "Successfully logged out"})
 }

@@ -99,26 +99,28 @@ func GoogleCallback(c *fiber.Ctx) error {
 	}
 
 	// Create a new user
-	result := db.Create(&models.User{Name: userName, Email: userEmail})
-	if result.Error != nil {
-		return c.JSON(map[string]any{
-			"Status": http.StatusInternalServerError,
-			"Error":  result.Error,
-		})
-	}
+	db.Create(&models.User{Name: userName, Email: userEmail})
+	// result := db.Create(&models.User{Name: userName, Email: userEmail})
+	// if result.Error != nil {
+	// 	return c.JSON(map[string]any{
+	// 		"Status": http.StatusInternalServerError,
+	// 		"Error":  result.Error,
+	// 	})
+	// }
 
 	var userDatabase models.User
 
 	res := db.Where("email = ?", userEmail).First(&userDatabase)
 
 	if res.RowsAffected == 0 {
-		result := db.Create(&models.User{Name: userName, Email: userEmail})
-		if result.Error != nil {
-			return c.JSON(map[string]any{
-				"Status": http.StatusInternalServerError,
-				"Error":  result.Error,
-			})
-		}
+		// result := db.Create(&models.User{Name: userName, Email: userEmail})
+		db.Create(&models.User{Name: userName, Email: userEmail})
+		// if result.Error != nil {
+		// 	return c.JSON(map[string]any{
+		// 		"Status": http.StatusInternalServerError,
+		// 		"Error":  result.Error,
+		// 	})
+		// }
 	}
 
 	appToken := jwt.New(jwt.SigningMethodHS256)
@@ -138,23 +140,50 @@ func GoogleCallback(c *fiber.Ctx) error {
 
 	// Set cookie
 	c.Cookie(&fiber.Cookie{
-		Name:    "jwt",
-		Value:   t,
-		Path:    "/",
-		Expires: time.Now().Add(time.Hour * 72),
-		// HTTPOnly: true,
-		// Secure:  false,
-		// Domain: "https://senzen-frontend.vercel.app",
-		HTTPOnly: true,
-		Secure:   true,
-		SameSite: "None",
+		// Name:    "jwt",
+		// Value:   t,
+		// Path:    "/",
+		// Expires: time.Now().Add(time.Hour * 72),
+		// HTTPOnly: false,
 		// SameSite: "Lax",
+
+		Name:     "jwt",
+		Value:    t,
+		Path:     "/",
+		Expires:  time.Now().Add(time.Hour * 72),
+		HTTPOnly: false,
+		SameSite: "Lax",
+		// HTTPOnly: true,
+		// Secure:   true,   // required for cross-site cookies over HTTPS
+		// SameSite: "None", // allow sending cookies cross-site
+		Domain:   ".pantorn.me",
 	})
 
 	// return c.SendString(string(userData))
 	// return c.Redirect("http://localhost:3000/home")
 
 	fmt.Print("ip is dddddddddddddddddddddddddddddd", c.IP())
-	log.Print("ip is dddddddddddddddddddddddddddddd", c.IP())
+	// log.Print("ip is dddddddddddddddddddddddddddddd", c.IP())
+	// return c.JSON(fiber.Map{
+	// 	"message": "Cookie set",
+	// 	"token":   t,
+	// })
+
 	return c.Redirect(os.Getenv("FRONTEND_URL") + "/home")
+	// return c.Redirect(os.Getenv("FRONTEND_URL") + "/sign-in")
+// return c.Type("html").SendString(`
+// 	<!DOCTYPE html>
+// 	<html lang="en">
+// 	<head>
+// 		<meta charset="UTF-8">
+// 		<title>Redirecting...</title>
+// 	</head>
+// 	<body>
+// 		<p>Redirecting to frontend...</p>
+// 		<script>
+// 			window.location.href = "https://frontend.pantorn.me/home";
+// 		</script>
+// 	</body>
+// 	</html>
+// `)
 }

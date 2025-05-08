@@ -1,4 +1,5 @@
 package controllers
+
 import (
 	"context"
 	"encoding/json"
@@ -123,20 +124,31 @@ func GithubCallback(c *fiber.Ctx) error {
 
 	// Set cookie
 	c.Cookie(&fiber.Cookie{
-		Name:    "jwt",
-		Value:   t,
-		Path:    "/",
-		// Domain:  "cashwise.com",
-		Domain:  "https://senzen-frontend.vercel.app",
-		Expires: time.Now().Add(time.Hour * 72),
-		// Secure:  false,
-		// HTTPOnly: true,
+		// Name:    "jwt",
+		// Value:   t,
+		// Path:    "/",
+		// // Domain:  "cashwise.com",
+		// Domain:  "https://senzen-frontend.vercel.app",
+		// Expires: time.Now().Add(time.Hour * 72),
+		// // Secure:  false,
+		// // HTTPOnly: true,
+		// HTTPOnly: false,
+		// SameSite: "Lax",
+
+		Name:     "jwt",
+		Value:    t,
+		Path:     "/",
+		Expires:  time.Now().Add(time.Hour * 72),
 		HTTPOnly: false,
 		SameSite: "Lax",
+		// HTTPOnly: true,
+		// Secure:   true,   // required for cross-site cookies over HTTPS
+		// SameSite: "None", // allow sending cookies cross-site
+		Domain: ".pantorn.me",
 	})
 
 	// return c.SendString(string(userData))
 	// return c.Redirect("http://localhost:3000/")
 	// return c.Redirect("http://localhost:3000/home")
-	return c.Redirect(os.Getenv("FRONEND_URL") + "/home")
+	return c.Redirect(os.Getenv("FRONTEND_URL") + "/home")
 }

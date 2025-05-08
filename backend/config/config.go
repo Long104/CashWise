@@ -15,11 +15,11 @@ type Config struct {
 }
 
 var AppConfig Config
-
 func GoogleConfig() oauth2.Config {
 	AppConfig.GoogleLoginConfig = oauth2.Config{
 		// RedirectURL: "http://localhost:8080/google_callback",
-		RedirectURL:  "https://senzen-backend.vercel.app/google_callback",
+		// RedirectURL:  "https://senzen-backend.vercel.app/google_callback",
+		RedirectURL:  "https://backend.pantorn.me/google_callback",
 		ClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
 		ClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
 		Scopes: []string{
@@ -35,7 +35,8 @@ func GoogleConfig() oauth2.Config {
 func GithubConfig() oauth2.Config {
 	AppConfig.GitHubLoginConfig = oauth2.Config{
 		// RedirectURL: "http://localhost:8080/github_callback",
-		RedirectURL: "https://senzen-backend.vercel.app/google_callback",
+		// RedirectURL: "https://senzen-backend.vercel.app/google_callback",
+		RedirectURL: "https://backend.pantorn.me/github_callback",
 		ClientID:    os.Getenv("GITHUB_CLIENT_ID"),
 		// RedirectURL: fmt.Sprintf(
 		// "https://github.com/login/oauth/authorize?scope=user:repo&client_id=%s&redirect_uri=%s", os.Getenv("GITHUB_CLIENT_ID"), "http://localhost:8080/github_callback"),
