@@ -2,8 +2,7 @@
 
 **Your intelligent companion for effortless money management.**
 
-![Cash Wise Banner](https://your-image-url.com/banner.png) <!-- Replace with your actual banner image URL -->
-
+![CashWise Banner](https://github.com/user-attachments/assets/371182ba-1f0a-40ab-b123-ef8cdb66d39d)
 ---
 
 ## 🚀 Overview
@@ -45,11 +44,8 @@
 
 ## 📸 Screenshots
 
-![Dashboard Screenshot](https://your-image-url.com/dashboard.png) <!-- Replace with your actual screenshot URL -->
-*Dashboard displaying budget overview and recent transactions.*
-
-![Expense Entry Screenshot](https://your-image-url.com/expense-entry.png) <!-- Replace with your actual screenshot URL -->
-*Form to add a new expense with category selection.*
+![Dashboard Screenshot](https://i.imgur.com/M49vyaj.png) <!-- Replace with your actual screenshot URL -->
+*Dashboard displaying budget overview.*
 
 ---
 
@@ -65,7 +61,27 @@
 ### Steps
 
 1. **Clone the repository:**
-
+ 
    ```bash
    git clone https://github.com/Long104/CashWise.git
    cd CashWise
+   ```
+   
+2. **Set up environment variables:**
+   
+   Create a .env file in both the frontend and backend directories with the necessary configurations.
+
+3. **Start the backend server:**
+
+   ```bash
+   cd backend
+   go run main.go
+   ```
+4. **Start the frontend application:**
+
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+5. **Access the application:**
+   - Open your browser and navigate to http://localhost:3000.
