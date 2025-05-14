@@ -62,9 +62,9 @@ export const usePlan = () => {
 				}
 				return [data];
 			});
-			queryClient.invalidateQueries({
-				queryKey: ["plans"],
-			});
+			// queryClient.invalidateQueries({
+			// 	queryKey: ["plans"],
+			// });
 		},
 		onError: (error) => {
 			console.log("this is error", error);
@@ -75,7 +75,7 @@ export const usePlan = () => {
 		mutationFn: (id: number) => fetchDelete(`plan`, id), // Your delete API call
 		onSuccess: () => {
 			queryClient.removeQueries({ queryKey: ["plans"] });
-			queryClient.invalidateQueries({ queryKey: ["plans", userId] });
+			// queryClient.invalidateQueries({ queryKey: ["plans", userId] });
 		},
 		onError: (error) => {
 			console.error("Failed to delete plan:", error);

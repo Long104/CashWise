@@ -111,108 +111,108 @@ export default function CreatePlan() {
 								/>
 							</div>
 
-							<RadioGroup
-								value={planType}
-								onValueChange={setPlanType}
-								className="flex flex-col space-y-1 "
-								defaultValue="comfortable"
-							>
-								<Label>Plan Type</Label>
-								<div className="flex items-center space-x-2">
-									<RadioGroupItem
-										value="personal"
-										id="personal"
-										className="border-gray-400 text-white"
-									/>
-									<Label htmlFor="personal">Personal</Label>
-								</div>
-								<div className="flex items-center space-x-2">
-									<RadioGroupItem
-										value="family"
-										id="family"
-										className="border-gray-400 text-white"
-									/>
-									<Label htmlFor="family">Family</Label>
-								</div>
-								<div className="flex items-center space-x-2">
-									<RadioGroupItem
-										value="business"
-										id="business"
-										className="border-gray-400 text-white"
-									/>
-									<Label htmlFor="business">Business</Label>
-								</div>
-							</RadioGroup>
+							{/* <RadioGroup */}
+							{/* 	value={planType} */}
+							{/* 	onValueChange={setPlanType} */}
+							{/* 	className="flex flex-col space-y-1 " */}
+							{/* 	defaultValue="comfortable" */}
+							{/* > */}
+							{/* 	<Label>Plan Type</Label> */}
+							{/* 	<div className="flex items-center space-x-2"> */}
+							{/* 		<RadioGroupItem */}
+							{/* 			value="personal" */}
+							{/* 			id="personal" */}
+							{/* 			className="border-gray-400 text-white" */}
+							{/* 		/> */}
+							{/* 		<Label htmlFor="personal">Personal</Label> */}
+							{/* 	</div> */}
+							{/* 	<div className="flex items-center space-x-2"> */}
+							{/* 		<RadioGroupItem */}
+							{/* 			value="family" */}
+							{/* 			id="family" */}
+							{/* 			className="border-gray-400 text-white" */}
+							{/* 		/> */}
+							{/* 		<Label htmlFor="family">Family</Label> */}
+							{/* 	</div> */}
+							{/* 	<div className="flex items-center space-x-2"> */}
+							{/* 		<RadioGroupItem */}
+							{/* 			value="business" */}
+							{/* 			id="business" */}
+							{/* 			className="border-gray-400 text-white" */}
+							{/* 		/> */}
+							{/* 		<Label htmlFor="business">Business</Label> */}
+							{/* 	</div> */}
+							{/* </RadioGroup> */}
 
-							<div className="space-y-2">
-								<Label>Plan Visibility</Label>
-								<Select
-									value={planVisibility}
-									onValueChange={setPlanVisibility}
-								>
-									<SelectTrigger>
-										<SelectValue placeholder="Select visibility" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="private">
-											<div className="flex items-center">
-												<Lock className="mr-2 h-4 w-4" />
-												Private
-											</div>
-										</SelectItem>
-										<SelectItem value="shared">
-											<div className="flex items-center">
-												<Users className="mr-2 h-4 w-4" />
-												Shared with specific people
-											</div>
-										</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
+							{/* <div className="space-y-2"> */}
+							{/* 	<Label>Plan Visibility</Label> */}
+							{/* 	<Select */}
+							{/* 		value={planVisibility} */}
+							{/* 		onValueChange={setPlanVisibility} */}
+							{/* 	> */}
+							{/* 		<SelectTrigger> */}
+							{/* 			<SelectValue placeholder="Select visibility" /> */}
+							{/* 		</SelectTrigger> */}
+							{/* 		<SelectContent> */}
+							{/* 			<SelectItem value="private"> */}
+							{/* 				<div className="flex items-center"> */}
+							{/* 					<Lock className="mr-2 h-4 w-4" /> */}
+							{/* 					Private */}
+							{/* 				</div> */}
+							{/* 			</SelectItem> */}
+							{/* 			<SelectItem value="shared"> */}
+							{/* 				<div className="flex items-center"> */}
+							{/* 					<Users className="mr-2 h-4 w-4" /> */}
+							{/* 					Shared with specific people */}
+							{/* 				</div> */}
+							{/* 			</SelectItem> */}
+							{/* 		</SelectContent> */}
+							{/* 	</Select> */}
+							{/* </div> */}
 
-							<div className="space-y-2">
-								<Label>Plan Duration</Label>
-								<Select value={planDuration} onValueChange={setPlanDuration}>
-									<SelectTrigger>
-										<SelectValue placeholder="Select duration" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="1week">1 Week</SelectItem>
-										<SelectItem value="1month">1 Month</SelectItem>
-										<SelectItem value="3months">3 Months</SelectItem>
-										<SelectItem value="6months">6 Months</SelectItem>
-										<SelectItem value="1year">1 Year</SelectItem>
-										<SelectItem value="custom">Custom</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
-
-							<div className="space-y-2">
-								<Label htmlFor="initial-budget">Initial Budget</Label>
-								<div className="relative">
-									<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-										$
-									</span>
-									<Input
-										id="initial-budget"
-										type="number"
-										placeholder="0.00"
-										value={initialBudget}
-										onChange={(e) => setInitialBudget(e.target.value)}
-										className="pl-7"
-									/>
-								</div>
-							</div>
-
-							<div className="flex items-center space-x-2">
-								<Switch
-									id="auto-save"
-									checked={autoSave}
-									onCheckedChange={setAutoSave}
-									className="bg-gray-800 border-2 border-gray-600 data-[state=checked]:bg-green-500"
-								/>
-								<Label htmlFor="auto-save">Enable auto-save feature</Label>
-							</div>
+							{/* <div className="space-y-2"> */}
+							{/* 	<Label>Plan Duration</Label> */}
+							{/* 	<Select value={planDuration} onValueChange={setPlanDuration}> */}
+							{/* 		<SelectTrigger> */}
+							{/* 			<SelectValue placeholder="Select duration" /> */}
+							{/* 		</SelectTrigger> */}
+							{/* 		<SelectContent> */}
+							{/* 			<SelectItem value="1week">1 Week</SelectItem> */}
+							{/* 			<SelectItem value="1month">1 Month</SelectItem> */}
+							{/* 			<SelectItem value="3months">3 Months</SelectItem> */}
+							{/* 			<SelectItem value="6months">6 Months</SelectItem> */}
+							{/* 			<SelectItem value="1year">1 Year</SelectItem> */}
+							{/* 			<SelectItem value="custom">Custom</SelectItem> */}
+							{/* 		</SelectContent> */}
+							{/* 	</Select> */}
+							{/* </div> */}
+							{/**/}
+							{/* <div className="space-y-2"> */}
+							{/* 	<Label htmlFor="initial-budget">Initial Budget</Label> */}
+							{/* 	<div className="relative"> */}
+							{/* 		<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500"> */}
+							{/* 			$ */}
+							{/* 		</span> */}
+							{/* 		<Input */}
+							{/* 			id="initial-budget" */}
+							{/* 			type="number" */}
+							{/* 			placeholder="0.00" */}
+							{/* 			value={initialBudget} */}
+							{/* 			onChange={(e) => setInitialBudget(e.target.value)} */}
+							{/* 			className="pl-7" */}
+							{/* 		/> */}
+							{/* 	</div> */}
+							{/* </div> */}
+							{/**/}
+							{/* <div className="flex items-center space-x-2"> */}
+							{/* 	<Switch */}
+							{/* 		id="auto-save" */}
+							{/* 		checked={autoSave} */}
+							{/* 		onCheckedChange={setAutoSave} */}
+							{/* 		className="bg-gray-800 border-2 border-gray-600 data-[state=checked]:bg-green-500" */}
+							{/* 	/> */}
+							{/* 	<Label htmlFor="auto-save">Enable auto-save feature</Label> */}
+							{/* </div> */}
 						</CardContent>
 						<CardFooter>
 							<Button type="submit" className="w-full">
