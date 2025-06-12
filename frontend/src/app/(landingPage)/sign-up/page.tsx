@@ -44,9 +44,10 @@ export default function Component() {
 		// console.log(email,password,name)
 
 		try {
-        console.log(process.env.NEXT_PUBLIC_BACKEND)
+        // console.log(process.env.NEXT_PUBLIC_BACKEND)
 			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND}/signup`,
+			//	`${process.env.NEXT_PUBLIC_BACKEND}/signup`,
+				`/api/signup`,
 				{
 					method: "POST",
 					headers: {

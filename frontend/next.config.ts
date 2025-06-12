@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-	output: "standalone",
+
+	allowedDevOrigins: [
+    	'https://senzen.pantorn.me'
+  	],
+
+//	output: "standalone",
+// 2. Run the app using the output server
+// node .next/standalone/server.js
 	eslint: {
 		// Warning: This allows production builds to successfully complete even if
 		// your project has ESLint errors.
