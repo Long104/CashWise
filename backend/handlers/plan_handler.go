@@ -22,8 +22,8 @@ func GetPlanByID(db *gorm.DB, c *fiber.Ctx) error {
 	var plan models.Plan
 
 	if err := db.Preload("Transactions.Category").First(&plan, planId).Error; err != nil {
-	// if err := db.Preload(clause.Associations).First(&plan, planId).Error; err != nil {
-	// if err := db.First(&plan, planId).Error; err != nil {
+		// if err := db.Preload(clause.Associations).First(&plan, planId).Error; err != nil {
+		// if err := db.First(&plan, planId).Error; err != nil {
 		log.Println("Error fetching plan:", err)
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot fetch plan"})
 	}
@@ -46,7 +46,7 @@ func GetPlans(db *gorm.DB, c *fiber.Ctx) error {
 // createCategory creates a new category
 func CreatePlan(db *gorm.DB, c *fiber.Ctx) error {
 	plan := new(models.Plan)
-	if err := c.BodyParser(&plan); err != nil {
+	if err := c.BodyParser(plan); err != nil {
 		log.Println("Error parsing request body:", err) // Log parsing error
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request"})
 	}
@@ -66,7 +66,7 @@ func UpdatePlan(db *gorm.DB, c *fiber.Ctx) error {
 	plan := new(models.Plan)
 	db.First(plan, id)
 
-	if err := c.BodyParser(&plan); err != nil {
+	if err := c.BodyParser(plan); err != nil {
 		log.Println("Error parsing request body:", err) // Log parsing error
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request"})
 	}

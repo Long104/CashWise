@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -35,6 +36,8 @@ func CreateUser(c *fiber.Ctx) error {
 	if err := config.DB.Create(&user).Error; err != nil {
 		log.Fatalf("Error creating user: %v", err)
 	}
+
+	fmt.Println("userrrrrrrrrrrrrrr",user)
 
 	return c.JSON(fiber.Map{"message": "user login success", "success": true, "user": user})
 }
@@ -71,9 +74,9 @@ func LoginUser(c *fiber.Ctx) error {
 
 	// Set cookie
 	c.Cookie(&fiber.Cookie{
-		Name:    "jwt",
-		Value:   t,
-		Path:    "/",
+		Name:  "jwt",
+		Value: t,
+		Path:  "/",
 		// Domain:  "cashwise.com",
 		Expires: time.Now().Add(time.Hour * 72),
 		// HTTPOnly: true,
