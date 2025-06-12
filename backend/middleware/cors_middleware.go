@@ -18,7 +18,7 @@ func CORSMiddleware() fiber.Handler {
 		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH",
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
 		// AllowOrigins:     "http://localhost:3000", // Set to your frontend origin
-    // AllowOrigins: frontendOrigin,
+    		// AllowOrigins: frontendOrigin,
 		AllowOrigins:     os.Getenv("FRONTEND_URL"), // Set to your frontend origin
 		AllowCredentials: true,                    // Allows cookies and credentials to be sent
 	})

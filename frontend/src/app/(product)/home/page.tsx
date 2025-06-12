@@ -22,8 +22,7 @@ export default function FinancialPlans() {
 	const { data: plans } = plansQuery;
 
 	const router = useRouter();
-	async function goToPlan(planName: string, planId: number) {
-		try {
+	async function goToPlan(planName: string, planId: number) { try {
 			const formattedPlanName = planName.replace(/ /g, "_");
 			router.push(`/plan/${formattedPlanName}?id=${planId}`);
 		} catch (error) {

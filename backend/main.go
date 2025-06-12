@@ -22,13 +22,13 @@ func main() {
 	config.ConnectDatabase()
 	app := fiber.New()
 
-	app.Get("/api/health", func(c *fiber.Ctx) error {
+	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.SendString("health check ok")
 	})
 
 	app.Use(middleware.CORSMiddleware())
 
-	app.Use("/api/ws", func(c *fiber.Ctx) error {
+	app.Use("/ws", func(c *fiber.Ctx) error {
 		// IsWebSocketUpgrade returns true if the client
 		// requested upgrade to the WebSocket protocol.
 		if websocket.IsWebSocketUpgrade(c) {
@@ -48,7 +48,7 @@ func main() {
 
 	// app.Use("/admin", middleware.checkMiddleware)
 	// app.Use("/books", AuthRequired)
-	app.Get("api/validate-token", middleware.ValidateToken)
+	app.Get("/validate-token", middleware.ValidateToken)
 
 	routes.SetupRoutes(app)
   
