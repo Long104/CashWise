@@ -6,7 +6,7 @@ import (
 	"github.com/long104/CashWise/handlers"
 )
 
-func SetupRoutes(app *fiber.App) {
+func SetupRoutes(app fiber.Router) {
 	// user
 
 	app.Get("/user/:id", handlers.GetUser)

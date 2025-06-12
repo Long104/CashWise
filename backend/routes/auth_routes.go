@@ -5,7 +5,7 @@ import (
 	"github.com/long104/CashWise/controllers"
 )
 
-func SetupAuthRoutes(app *fiber.App) {
+func SetupAuthRoutes(app fiber.Router) {
 	app.Post("/signup", controllers.CreateUser)
 	app.Post("/login", controllers.LoginUser)
 	app.Post("/logout", controllers.LogoutUser)
