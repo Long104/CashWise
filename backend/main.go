@@ -20,6 +20,7 @@ func main() {
 	}
 	config.ConnectDatabase()
 	app := fiber.New()
+	api := app.Group("/api")
 
 
 	app.Use(middleware.CORSMiddleware())
@@ -39,9 +40,9 @@ func main() {
 		return fiber.ErrUpgradeRequired
 	})
 
-	routes.WsRoutes(app)
-	routes.SetupOAuthRoutes(app)
-	routes.SetupAuthRoutes(app)
+	// routes.WsRoutes(app)
+	routes.SetupOAuthRoutes(api)
+	routes.SetupAuthRoutes(api)
 
 	// app.Use(jwtware.New(jwtware.Config{
 	// 	SigningKey: []byte(os.Getenv("jwtSecretKey")),
@@ -51,7 +52,7 @@ func main() {
 	// app.Use("/books", AuthRequired)
 	app.Get("/validate-token", middleware.ValidateToken)
 
-	routes.SetupRoutes(app)
+	routes.SetupRoutes(api)
 
 	// setupRoutes(app)
 

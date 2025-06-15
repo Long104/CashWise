@@ -7,7 +7,7 @@ import (
 	"github.com/long104/CashWise/controllers" // Adjust import path as needed
 )
 
-func SetupOAuthRoutes(app *fiber.App) {
+func SetupOAuthRoutes(app fiber.Router) {
 	config.GoogleConfig()
 	config.GithubConfig()
 
