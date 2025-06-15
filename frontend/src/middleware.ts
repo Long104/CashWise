@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
 
 	const handleLogout = async () => {
 		try {
-			const response = await fetch(process.env.NEXT_PUBIC_BACKEND + "/logout", {
+			const response = await fetch(process.env.NEXT_PUBLIC_BACKEND + "/logout", {
 				method: "POST",
 				credentials: "include",
 			});
