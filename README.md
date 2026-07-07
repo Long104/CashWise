@@ -54,7 +54,7 @@
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v14 or above)
+- [Node.js](https://nodejs.org/) (v18 or above)
 - [Go](https://golang.org/) (v1.16 or above)
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
