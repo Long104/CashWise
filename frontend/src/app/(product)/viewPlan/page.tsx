@@ -136,7 +136,7 @@ export default function Dashboard() {
 										<XAxis dataKey="category" />
 										<YAxis />
 										<Tooltip />
-										<Bar dataKey="amount" fill="#8884d8" />
+										<Bar dataKey="amount" fill="hsl(var(--chart-1))" />
 									</BarChart>
 								</ResponsiveContainer>
 							</CardContent>

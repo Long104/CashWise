@@ -32,6 +32,10 @@ const config = {
 			screens: {
 				xs: "20rem",
 			},
+			fontFamily: {
+				sans: ["var(--font-geist-sans)", "sans-serif"],
+				mono: ["var(--font-geist-mono)", "monospace"],
+			},
 			dropShadow: {
 				"3xl": "0 35px 35px rgba(255, 255, 255, 0.15)",
 				"4xl": [

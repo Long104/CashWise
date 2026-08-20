@@ -33,7 +33,7 @@ export default async function RootLayout({
 			<AuthProvider>
 				{/* <UserProvider auth={user_token?.user_id}> */}
 					<body
-						className={`${geistSans.variable} ${geistMono.variable} antialiased bg-primary [&_*]:select-none overscroll-y-none`}
+						className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground [&_*]:select-none overscroll-y-none`}
 					>
 						<ThemeProvider
 							attribute="class"
