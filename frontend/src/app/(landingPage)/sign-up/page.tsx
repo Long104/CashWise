@@ -73,13 +73,13 @@ export default function Component() {
 
 	return (
 		<div className="min-h-screen flex items-center justify-center bg-background">
-			<Card className="w-full max-w-md">
+			<Card className="w-full max-w-[440px] border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 				<CardHeader>
-					<CardTitle className="text-2xl font-bold text-center">
-						Sign Up
+					<CardTitle className="font-serif text-2xl font-medium text-center text-foreground">
+						Create Account
 					</CardTitle>
-					<CardDescription className="text-center">
-						Create your account
+					<CardDescription className="text-center text-muted-foreground">
+						Begin your editorial ledger
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
@@ -111,14 +111,14 @@ export default function Component() {
 						{!data?.success && (
 							<p className="text-sm text-red-500">{data?.message}</p>
 						)}
-						<Button type="submit" className="w-full">
-							Sign Up
+						<Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+							Create Account
 						</Button>
 					</form>
 				</CardContent>
-				<CardFooter className="text-center text-sm text-gray-600">
+				<CardFooter className="text-center text-sm text-muted-foreground">
 					Already have an account?{" "}
-					<Link href="/sign-in" className="text-blue-600 hover:underline">
+					<Link href="/sign-in" className="text-primary hover:underline">
 						Log in
 					</Link>
 				</CardFooter>

@@ -60,61 +60,69 @@ export default function Dashboard() {
 
 			<main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 				<div className="px-4 py-6 sm:px-0">
+					<div className="mb-8">
+						<p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-2">
+							[ EXHIBIT • LEDGER DETAIL ]
+						</p>
+						<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
+							Plan Ledger
+						</h1>
+					</div>
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-						<Card>
+						<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-								<CardTitle className="text-sm font-medium">
+								<CardTitle className="text-sm font-medium text-muted-foreground">
 									Total Balance
 								</CardTitle>
-								<DollarSign className="h-4 w-4 text-muted-foreground" />
+								<DollarSign className="h-4 w-4 text-accent" strokeWidth={1.5} />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-mono text-3xl font-semibold tabular-nums text-foreground">
 									${userData.balance.toFixed(2)}
 								</div>
-								<p className="text-xs text-muted-foreground">
+								<p className="text-xs text-muted-foreground mt-1">
 									+20.1% from last month
 								</p>
 							</CardContent>
 						</Card>
-						<Card>
+						<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-								<CardTitle className="text-sm font-medium">Income</CardTitle>
-								<ArrowUpIcon className="h-4 w-4 text-green-500" />
+								<CardTitle className="text-sm font-medium text-muted-foreground">Income</CardTitle>
+								<ArrowUpIcon className="h-4 w-4 text-[#2D6A4F] dark:text-[#4ADE80]" strokeWidth={1.5} />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-mono text-3xl font-semibold tabular-nums text-foreground">
 									${userData.income.toFixed(2)}
 								</div>
-								<p className="text-xs text-muted-foreground">
+								<p className="text-xs text-muted-foreground mt-1">
 									+2.5% from last month
 								</p>
 							</CardContent>
 						</Card>
-						<Card>
+						<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-								<CardTitle className="text-sm font-medium">Expenses</CardTitle>
-								<ArrowDownIcon className="h-4 w-4 text-red-500" />
+								<CardTitle className="text-sm font-medium text-muted-foreground">Expenses</CardTitle>
+								<ArrowDownIcon className="h-4 w-4 text-[#B91C1C] dark:text-[#EF4444]" strokeWidth={1.5} />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-mono text-3xl font-semibold tabular-nums text-foreground">
 									${userData.expenses.toFixed(2)}
 								</div>
-								<p className="text-xs text-muted-foreground">
+								<p className="text-xs text-muted-foreground mt-1">
 									-4.3% from last month
 								</p>
 							</CardContent>
 						</Card>
-						<Card>
+						<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-								<CardTitle className="text-sm font-medium">Savings</CardTitle>
-								<PiggyBank className="h-4 w-4 text-muted-foreground" />
+								<CardTitle className="text-sm font-medium text-muted-foreground">Net Savings</CardTitle>
+								<PiggyBank className="h-4 w-4 text-accent" strokeWidth={1.5} />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-mono text-3xl font-semibold tabular-nums text-foreground">
 									${userData.savings.toFixed(2)}
 								</div>
-								<p className="text-xs text-muted-foreground">
+								<p className="text-xs text-muted-foreground mt-1">
 									+12.7% from last month
 								</p>
 							</CardContent>
@@ -122,9 +130,9 @@ export default function Dashboard() {
 					</div>
 
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-						<Card className="col-span-1">
+						<Card className="col-span-1 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader>
-								<CardTitle>Expense Breakdown</CardTitle>
+								<CardTitle className="font-serif text-xl font-medium">Expense Breakdown</CardTitle>
 								<CardDescription>
 									Your spending by category this month
 								</CardDescription>
@@ -132,46 +140,61 @@ export default function Dashboard() {
 							<CardContent className="pl-2">
 								<ResponsiveContainer width="100%" height={300}>
 									<BarChart data={expenseData}>
-										<CartesianGrid strokeDasharray="3 3" />
-										<XAxis dataKey="category" />
-										<YAxis />
-										<Tooltip />
-										<Bar dataKey="amount" fill="hsl(var(--chart-1))" />
+										<CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
+										<XAxis dataKey="category" tick={{ fontSize: 12 }} />
+										<YAxis tick={{ fontSize: 12 }} />
+										<Tooltip
+											contentStyle={{
+												backgroundColor: "hsl(var(--card))",
+												border: "1px solid hsl(var(--border))",
+												borderRadius: "8px",
+												fontSize: "12px",
+											}}
+										/>
+										<Bar dataKey="amount" fill="var(--chart-1)" radius={[4, 4, 0, 0]} />
 									</BarChart>
 								</ResponsiveContainer>
 							</CardContent>
 						</Card>
 
-						<Card className="col-span-1">
+						<Card className="col-span-1 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader>
-								<CardTitle>Recent Transactions</CardTitle>
+								<CardTitle className="font-serif text-xl font-medium">Recent Transactions</CardTitle>
 								<CardDescription>
 									Your latest financial activities
 								</CardDescription>
 							</CardHeader>
 							<CardContent>
-								<ul className="space-y-4">
+								<ul className="divide-y divide-border">
 									{transactionHistory.map((transaction) => (
-										<li key={transaction.id} className="flex items-center">
+										<li key={transaction.id} className="flex items-center py-3">
 											<div
-												className={`rounded-full p-2 ${transaction.amount > 0 ? "bg-green-100" : "bg-red-100"} mr-3`}
+												className={`rounded-full p-1.5 mr-3 ${
+													transaction.amount > 0
+														? "bg-[#EBF4EF] dark:bg-[#2D6A4F]/20"
+														: "bg-[#FDF2F2] dark:bg-[#B91C1C]/20"
+												}`}
 											>
 												{transaction.amount > 0 ? (
-													<ArrowUpIcon className="h-4 w-4 text-green-500" />
+													<ArrowUpIcon className="h-4 w-4 text-[#2D6A4F] dark:text-[#4ADE80]" strokeWidth={1.5} />
 												) : (
-													<ArrowDownIcon className="h-4 w-4 text-red-500" />
+													<ArrowDownIcon className="h-4 w-4 text-[#B91C1C] dark:text-[#EF4444]" strokeWidth={1.5} />
 												)}
 											</div>
 											<div className="flex-1">
-												<p className="text-sm font-medium">
+												<p className="text-sm font-medium text-foreground">
 													{transaction.description}
 												</p>
-												<p className="text-xs text-gray-500">
+												<p className="text-xs text-muted-foreground font-mono">
 													{transaction.date}
 												</p>
 											</div>
 											<p
-												className={`text-sm font-medium ${transaction.amount > 0 ? "text-green-600" : "text-red-600"}`}
+												className={`text-sm font-mono font-medium tabular-nums ${
+													transaction.amount > 0
+														? "text-[#2D6A4F] dark:text-[#4ADE80]"
+														: "text-[#B91C1C] dark:text-[#EF4444]"
+												}`}
 											>
 												{transaction.amount > 0 ? "+" : ""}
 												{transaction.amount.toFixed(2)}
@@ -179,16 +202,16 @@ export default function Dashboard() {
 										</li>
 									))}
 								</ul>
-								<Button variant="link" className="mt-4 w-full">
+								<Button variant="link" className="mt-4 w-full text-primary">
 									View All Transactions <ArrowRight className="ml-2 h-4 w-4" />
 								</Button>
 							</CardContent>
 						</Card>
 					</div>
 
-					<Card className="mt-8">
+					<Card className="mt-8 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 						<CardHeader>
-							<CardTitle>Budget Overview</CardTitle>
+							<CardTitle className="font-serif text-xl font-medium">Budget Overview</CardTitle>
 							<CardDescription>
 								Track your spending against your budget
 							</CardDescription>
@@ -204,21 +227,21 @@ export default function Dashboard() {
 										<div>
 											<div className="flex justify-between mb-1 text-sm font-medium">
 												<span>Housing</span>
-												<span>$1200 / $1500</span>
+												<span className="font-mono">$1200 / $1500</span>
 											</div>
 											<Progress value={80} className="h-2" />
 										</div>
 										<div>
 											<div className="flex justify-between mb-1 text-sm font-medium">
 												<span>Food</span>
-												<span>$400 / $500</span>
+												<span className="font-mono">$400 / $500</span>
 											</div>
 											<Progress value={80} className="h-2" />
 										</div>
 										<div>
 											<div className="flex justify-between mb-1 text-sm font-medium">
 												<span>Transportation</span>
-												<span>$200 / $300</span>
+												<span className="font-mono">$200 / $300</span>
 											</div>
 											<Progress value={66} className="h-2" />
 										</div>

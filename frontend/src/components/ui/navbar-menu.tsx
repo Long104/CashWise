@@ -38,11 +38,11 @@ export function NavigationMenuDemo() {
 	return (
 		<NavigationMenu className="[&>*]:bg-primary [&>*]:text-accent-foreground z-50">
 			<NavigationMenuList>
-<NavigationMenuItem>
-                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                      <Link href="/createPlan">Create Plan</Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
+				<NavigationMenuItem>
+					<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+						<Link href="/createPlan">Create Plan</Link>
+					</NavigationMenuLink>
+				</NavigationMenuItem>
 				{/* <NavigationMenuItem> */}
 					{/* <NavigationMenuTrigger>Pricing</NavigationMenuTrigger> */}
 					{/* <NavigationMenuContent> */}

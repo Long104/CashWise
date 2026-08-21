@@ -2,43 +2,41 @@ import React from "react";
 import { NavigationMenuDemo } from "@components/navbar-menu";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export function Navbar() {
-	// const navItems = [
-	// 	{ name: "Create Plan", href: "/" },
-	// 	{ name: "View Plan", href: "/" },
-	// 	{ name: "Profile", href: "/" },
-	// ];
 	return (
-		<nav className=" flex justify-between py-3 px-20 text-primary-foreground bg-primary">
-			<div className="text-2xl flex items-center">
+		<nav className="sticky top-0 z-50 flex items-center justify-between py-3.5 px-6 md:px-16 bg-background/90 backdrop-blur-sm border-b border-border text-foreground transition-colors">
+			<div className="flex items-center gap-3">
 				<Image
 					src={"/logo.webp"}
-					alt="Basic responsive image"
-					className="mx-auto rounded-3xl object-cover object-center mr-2"
-					width={0}
-					height={0}
-					sizes="(max-width: 768px) 50vw, (max-width: 1200px) 500vw, 300vw"
-					style={{
-						height: "auto",
-					}}
-					//         sizes="100vw"
-					// style={{ width: '100%', height: 'auto' }} // optional
+					alt="Senzen Logo"
+					className="rounded-md object-cover"
+					width={28}
+					height={28}
 				/>
-       <Link href="/"> 
-				Senzen
-        </Link>
+				<Link href="/" className="font-serif text-xl tracking-tight font-medium text-foreground hover:opacity-90 transition-opacity">
+					Senzen
+				</Link>
 			</div>
-			<ul className="flex child:pl-6">
-				<NavigationMenuDemo />
-				{/* { */}
-				{/*       navItems.map((item) => ( */}
-				{/* 	<li key={item.name} className="child-hover:underline"> */}
-				{/* 		{item.name} */}
-				{/* 	</li> */}
-				{/* )) */}
-				{/*     } */}
-			</ul>
+			
+			<div className="flex items-center gap-6">
+				<ul className="hidden md:flex items-center gap-4">
+					<NavigationMenuDemo />
+				</ul>
+				<div className="flex items-center gap-3">
+					<Link href="/sign-in">
+						<Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground font-sans text-sm">
+							Sign In
+						</Button>
+					</Link>
+					<Link href="/sign-up">
+						<Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground font-sans text-sm px-4 shadow-sm">
+							Start Planning
+						</Button>
+					</Link>
+				</div>
+			</div>
 		</nav>
 	);
 }

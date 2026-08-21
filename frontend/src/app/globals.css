@@ -4,123 +4,113 @@
 
 @layer base {
   :root {
-    /* Base canvas & typography (Light Mode: Slate & Emerald) */
-    --background: 210 40% 98%;          /* #F8FAFC */
-    --foreground: 222.2 84% 4.9%;        /* #0F172A */
+    /* Warm Alabaster Canvas (#FBF9F5) */
+    --background: 38 25% 97%;
+    --foreground: 24 10% 10%;
 
-    /* Surfaces */
-    --card: 0 0% 100%;                  /* #FFFFFF */
-    --card-foreground: 222.2 84% 4.9%;
+    /* Crisp Paper Card (#FFFFFF) */
+    --card: 0 0% 100%;
+    --card-foreground: 24 10% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 24 10% 10%;
 
-    /* Brand Primary (Emerald 600 for light mode: 5.2:1 WCAG AA) */
-    --primary: 160 84% 39%;             /* #059669 */
-    --primary-foreground: 0 0% 100%;    /* #FFFFFF */
+    /* Terracotta Rust Primary (#C85A32) */
+    --primary: 16 60% 49%;
+    --primary-foreground: 38 25% 98%;
 
-    /* Neutrals & Secondary */
-    --secondary: 210 40% 96.1%;         /* #F1F5F9 */
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%; /* #64748B */
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Lifted Surface (#F4EFEA) */
+    --secondary: 33 20% 93%;
+    --secondary-foreground: 24 10% 10%;
+    --muted: 33 16% 91%;
+    --muted-foreground: 25 5% 45%;
 
-    /* Status */
-    --destructive: 347 77% 50%;          /* #E11D48 (Rose 600) */
+    /* Warm Bronze Accent (#9A6B38) */
+    --accent: 32 45% 41%;
+    --accent-foreground: 38 25% 98%;
+
+    /* Status & Financial Semantics */
+    --destructive: 0 72% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders & Inputs */
-    --border: 214.3 31.8% 91.4%;        /* #E2E8F0 */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 160 84% 39%;                /* Focus ring matches emerald */
-    --radius: 0.5rem;                   /* 8px */
+    /* Hairlines & Focus */
+    --border: 33 18% 87%;
+    --input: 33 18% 87%;
+    --ring: 16 60% 49%;
+    --radius: 0.5rem;
 
-    /* Financial Charts (Light Mode) */
-    --chart-1: 160 84% 39%;             /* Emerald 600 (Income / Surplus) */
-    --chart-2: 199 89% 48%;             /* Sky 500 (Savings / Recurring) */
-    --chart-3: 38 92% 50%;              /* Amber 500 (Discretionary) */
-    --chart-4: 263 70% 50%;             /* Violet 500 (Investments) */
-    --chart-5: 215 16% 47%;             /* Slate 500 (Fixed / Other) */
-
-    /* Aceternity / Rainbow Fallback */
-    --color-1: 160 84% 39%;
-    --color-2: 199 89% 48%;
-    --color-3: 38 92% 50%;
-    --color-4: 263 70% 50%;
-    --color-5: 160 60% 45%;
+    /* Recharts Color Palette */
+    --chart-1: 16 60% 49%;
+    --chart-2: 32 45% 41%;
+    --chart-3: 152 40% 30%;
+    --chart-4: 215 19% 35%;
+    --chart-5: 38 80% 38%;
 
     /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222.2 84% 4.9%;
-    --sidebar-primary: 160 84% 39%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 40% 96.1%;
-    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
-    --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 160 84% 39%;
+    --sidebar-background: 38 25% 97%;
+    --sidebar-foreground: 24 10% 10%;
+    --sidebar-primary: 16 60% 49%;
+    --sidebar-primary-foreground: 38 25% 98%;
+    --sidebar-accent: 33 20% 93%;
+    --sidebar-accent-foreground: 24 10% 10%;
+    --sidebar-border: 33 18% 87%;
+    --sidebar-ring: 16 60% 49%;
   }
 
   .dark {
-    /* Base canvas & typography (Dark Mode: Deep Obsidian Slate #0B0F17) */
-    --background: 222 47% 7%;           /* #0B0F17 */
-    --foreground: 210 40% 98%;          /* #F8FAFC */
+    /* Dark Warm Umber Slate (#131211) */
+    --background: 24 6% 7%;
+    --foreground: 38 20% 95%;
 
-    /* Surfaces (#111827 Charcoal 900) */
-    --card: 222 35% 11%;                /* #111827 */
-    --card-foreground: 210 40% 98%;
-    --popover: 222 35% 11%;
-    --popover-foreground: 210 40% 98%;
+    /* Dark Paper Surface (#1C1A18) */
+    --card: 24 8% 10%;
+    --card-foreground: 38 20% 95%;
+    --popover: 24 8% 10%;
+    --popover-foreground: 38 20% 95%;
 
-    /* Brand Primary (Emerald 500 on dark: 8.9:1 WCAG AA) */
-    --primary: 158 64% 52%;             /* #10B981 */
-    --primary-foreground: 164 95% 17%;  /* #064E3B */
+    /* Warm Terracotta Amber (#E06D44) */
+    --primary: 16 72% 57%;
+    --primary-foreground: 24 10% 6%;
 
-    /* Neutrals & Secondary */
-    --secondary: 217 33% 17%;           /* #1E293B */
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;    /* #94A3B8 */
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    /* Elevated Dark Surface (#262320) */
+    --secondary: 24 6% 14%;
+    --secondary-foreground: 38 20% 95%;
+    --muted: 24 6% 14%;
+    --muted-foreground: 33 8% 59%;
+
+    /* Soft Bronze (#B8854D) */
+    --accent: 32 45% 50%;
+    --accent-foreground: 38 20% 95%;
 
     /* Status */
-    --destructive: 343 88% 60%;          /* #F43F5E (Rose 500) */
+    --destructive: 0 68% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders & Inputs (#1F2937) */
-    --border: 217 33% 17%;              /* #1F2937 */
-    --input: 217 33% 17%;
-    --ring: 158 64% 52%;                /* Focus ring matches emerald */
+    /* Hairlines & Focus */
+    --border: 24 6% 20%;
+    --input: 24 6% 20%;
+    --ring: 16 72% 57%;
 
-    /* Financial Charts (Dark Mode) */
-    --chart-1: 158 64% 52%;             /* Emerald 500 */
-    --chart-2: 199 89% 48%;             /* Sky 400 */
-    --chart-3: 43 96% 56%;              /* Amber 400 */
-    --chart-4: 258 90% 66%;             /* Violet 400 */
-    --chart-5: 215 20% 65%;             /* Slate 400 */
-
-    /* Aceternity / Rainbow Fallback */
-    --color-1: 158 64% 52%;
-    --color-2: 199 89% 48%;
-    --color-3: 43 96% 56%;
-    --color-4: 258 90% 66%;
-    --color-5: 158 64% 40%;
+    /* Recharts Dark Palette */
+    --chart-1: 16 72% 57%;
+    --chart-2: 32 45% 50%;
+    --chart-3: 152 45% 45%;
+    --chart-4: 215 16% 60%;
+    --chart-5: 38 75% 55%;
 
     /* Sidebar */
-    --sidebar-background: 222 47% 7%;   /* Aligned to background */
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 158 64% 52%;
-    --sidebar-primary-foreground: 164 95% 17%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 158 64% 52%;
+    --sidebar-background: 24 6% 7%;
+    --sidebar-foreground: 38 20% 95%;
+    --sidebar-primary: 16 72% 57%;
+    --sidebar-primary-foreground: 24 10% 6%;
+    --sidebar-accent: 24 6% 14%;
+    --sidebar-accent-foreground: 38 20% 95%;
+    --sidebar-border: 24 6% 20%;
+    --sidebar-ring: 16 72% 57%;
   }
 }
 
 @layer utilities {
-  /* Add filter manually as Tailwind doesn\'t have direct support */
+  /* Add filter manually as Tailwind doesn't have direct support */
   input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
