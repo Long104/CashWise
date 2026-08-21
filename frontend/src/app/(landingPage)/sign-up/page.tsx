@@ -105,12 +105,12 @@ export default function Component() {
 								required
 							/>
 						</div>
-						{!passwordMatch && (
-							<p className="text-sm text-red-500">Passwords do not match</p>
-						)}
-						{!data?.success && (
-							<p className="text-sm text-red-500">{data?.message}</p>
-						)}
+					{!passwordMatch && (
+						<p className="text-sm text-destructive">Passwords do not match</p>
+					)}
+					{!data?.success && (
+						<p className="text-sm text-destructive">{data?.message}</p>
+					)}
 						<Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
 							Create Account
 						</Button>

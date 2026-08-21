@@ -181,8 +181,8 @@ export default function DailyExpenses() {
 				<main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 					<div className="px-4 py-6 sm:px-0">
 						<div className="mb-8">
-							<p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-2">
-								[ EXHIBIT • DAILY EXPENSE LEDGER ]
+							<p className="font-mono text-xs text-primary mb-2">
+								01 / DAILY EXPENSE LEDGER
 							</p>
 							<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
 								Daily Expenses

@@ -46,8 +46,8 @@ export default function FinancialPlans() {
 			<div className="flex">
 				<main className="flex-1 p-6 overflow-auto">
 					<div className="mb-8">
-						<p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-2">
-							[ EXHIBIT • YOUR LEDGERS ]
+						<p className="font-mono text-xs text-primary mb-2">
+							01 / YOUR LEDGERS
 						</p>
 						<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
 							Financial Plans Overview
@@ -142,14 +142,14 @@ function LedgerRow({ label, value, tone = "neutral" }: { label: string; value: s
 				<span
 					className={`h-1.5 w-1.5 rounded-full ${
 						tone === "surplus"
-							? "bg-[#2D6A4F] dark:bg-[#4ADE80]"
+							? "bg-[hsl(var(--color-surplus-olive))] dark:bg-[hsl(var(--color-surplus-olive))]"
 							: tone === "muted"
 								? "bg-accent/40"
 								: "bg-border"
 					}`}
-				/>
+					/>
 				<span className="font-mono text-sm text-foreground tabular-nums">{value}</span>
-			</div>
+				</div>
 		</div>
 	);
 }

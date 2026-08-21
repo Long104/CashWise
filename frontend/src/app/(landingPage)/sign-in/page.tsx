@@ -173,7 +173,7 @@ export default function LoginPage() {
 					</form>
 
 					{data && (
-						<p className="text-sm text-red-500">
+						<p className="text-sm text-destructive">
 							check your email and password again
 						</p>
 					)}

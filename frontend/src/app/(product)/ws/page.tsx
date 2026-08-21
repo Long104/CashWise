@@ -82,8 +82,8 @@ const Chat = () => {
 	return (
 		<div className="flex flex-col items-center gap-4 p-4">
 			<div className="w-full max-w-lg">
-				<p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-2 text-center">
-					[ EXHIBIT • LIVE LEDGER CHAT ]
+				<p className="font-mono text-xs text-primary mb-2 text-center">
+					01 / LIVE LEDGER CHAT
 				</p>
 				<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground text-center mb-6">
 					WebSocket Chat

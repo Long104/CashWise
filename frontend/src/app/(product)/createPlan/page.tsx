@@ -82,8 +82,8 @@ export default function CreatePlan() {
 		<div className="min-h-screen bg-background">
 			<main className="max-w-3xl mx-auto py-12 sm:px-6 lg:px-8">
 				<div className="mb-8">
-					<p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-2">
-						[ EXHIBIT • NEW FINANCIAL BRIEF ]
+					<p className="font-mono text-xs text-primary mb-2">
+						01 / NEW FINANCIAL BRIEF
 					</p>
 					<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
 						Create Your Plan

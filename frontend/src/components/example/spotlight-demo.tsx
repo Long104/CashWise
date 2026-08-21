@@ -14,8 +14,8 @@ export function SpotlightPreview() {
 				<div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 					{/* Left column — editorial headline */}
 					<div className="flex flex-col">
-						<p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-6">
-							[ Exhibit A • Ledger 2026 ]
+						<p className="font-mono text-xs text-primary mb-6">
+							01 / EXHIBIT A • LEDGER 2026
 						</p>
 						<h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-foreground">
 							Master your cashflow with quiet clarity
@@ -90,8 +90,8 @@ export function SpotlightPreview() {
 						{/* Secondary stamp motif */}
 						<div className="absolute -bottom-4 -left-4 hidden md:block">
 							<div className="bg-secondary border border-border rounded-md px-3 py-2 shadow-sm">
-								<p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-									Balanced
+								<p className="font-mono text-[10px] text-muted-foreground">
+									02 / BALANCED
 								</p>
 							</div>
 						</div>
@@ -109,7 +109,7 @@ function LedgerRow({ label, value, tone }: { label: string; value: string; tone:
 			<div className="flex items-center gap-2">
 				<span
 					className={`h-1.5 w-1.5 rounded-full ${
-						tone === "surplus" ? "bg-[#2D6A4F] dark:bg-[#4ADE80]" : "bg-border"
+						tone === "surplus" ? "bg-[hsl(var(--color-surplus-olive))] dark:bg-[hsl(var(--color-surplus-olive))]" : "bg-border"
 					}`}
 				/>
 				<span className="font-mono text-sm text-foreground tabular-nums">{value}</span>

@@ -38,12 +38,20 @@
     --ring: 16 60% 49%;
     --radius: 0.5rem;
 
-    /* Recharts Color Palette */
-    --chart-1: 16 60% 49%;
-    --chart-2: 32 45% 41%;
-    --chart-3: 152 40% 30%;
-    --chart-4: 215 19% 35%;
-    --chart-5: 38 80% 38%;
+  /* Recharts Color Palette */
+  --chart-1: 16 60% 49%;
+  --chart-2: 32 45% 41%;
+  --chart-3: 152 40% 30%;
+  --chart-4: 215 19% 35%;
+  --chart-5: 38 80% 38%;
+
+  /* Financial Semantic Tokens */
+  --color-surplus-olive: 152 40% 30%; /* Surplus Olive */
+  --color-surplus-subtle: 152 50% 96%; /* Surplus Subtle */
+  --color-deficit-crimson: 0 72% 42%; /* Deficit Crimson */
+  --color-deficit-subtle: 0 86% 97%; /* Deficit Subtle */
+  --color-discretionary-amber: 38 80% 38%; /* Discretionary Amber */
+  --color-recurring-slate: 215 19% 35%; /* Recurring Slate */
 
     /* Sidebar */
     --sidebar-background: 38 25% 97%;
@@ -90,12 +98,20 @@
     --input: 24 6% 20%;
     --ring: 16 72% 57%;
 
-    /* Recharts Dark Palette */
-    --chart-1: 16 72% 57%;
-    --chart-2: 32 45% 50%;
-    --chart-3: 152 45% 45%;
-    --chart-4: 215 16% 60%;
-    --chart-5: 38 75% 55%;
+  /* Recharts Dark Palette */
+  --chart-1: 16 72% 57%;
+  --chart-2: 32 45% 50%;
+  --chart-3: 152 45% 45%;
+  --chart-4: 215 16% 60%;
+  --chart-5: 38 75% 55%;
+
+  /* Financial Semantic Tokens - Dark Mode */
+  --color-surplus-olive: 152 45% 45%; /* Surplus Olive (Dark) */
+  --color-surplus-subtle: 152 30% 15%; /* Surplus Subtle (Dark) */
+  --color-deficit-crimson: 0 68% 55%; /* Deficit Crimson (Dark) */
+  --color-deficit-subtle: 0 50% 12%; /* Deficit Subtle (Dark) */
+  --color-discretionary-amber: 38 75% 55%; /* Discretionary Amber (Dark) */
+  --color-recurring-slate: 215 16% 60%; /* Recurring Slate (Dark) */
 
     /* Sidebar */
     --sidebar-background: 24 6% 7%;

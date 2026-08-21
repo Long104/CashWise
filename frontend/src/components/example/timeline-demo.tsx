@@ -14,8 +14,8 @@ export function TimelineDemo() {
 			<div className="max-w-7xl mx-auto px-6 md:px-10">
 				{/* Section header with chapter number */}
 				<div className="mb-20">
-					<p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-4">
-						[ EXHIBIT B • Timeline 2026 ]
+					<p className="font-mono text-xs text-primary mb-4">
+						01 / TIMELINE • 2026
 					</p>
 					<h2 className="font-serif text-4xl md:text-5xl font-normal text-foreground">
 						How it works
@@ -172,7 +172,7 @@ function TimelineMetric({ label, value, tone }: { label: string; value: string; 
 			<div className="flex items-center gap-2">
 				<span
 					className={`h-1.5 w-1.5 rounded-full ${
-						tone === "surplus" ? "bg-[#2D6A4F] dark:bg-[#4ADE80]" : "bg-border"
+						tone === "surplus" ? "bg-[hsl(var(--color-surplus-olive))] dark:bg-[hsl(var(--color-surplus-olive))]" : "bg-border"
 					}`}
 				/>
 				<span className="font-mono text-sm text-foreground tabular-nums">{value}</span>

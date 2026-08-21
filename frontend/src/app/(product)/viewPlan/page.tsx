@@ -61,8 +61,8 @@ export default function Dashboard() {
 			<main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 				<div className="px-4 py-6 sm:px-0">
 					<div className="mb-8">
-						<p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-2">
-							[ EXHIBIT • LEDGER DETAIL ]
+						<p className="font-mono text-xs text-primary mb-2">
+							01 / LEDGER DETAIL
 						</p>
 						<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
 							Plan Ledger
@@ -88,7 +88,7 @@ export default function Dashboard() {
 						<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 								<CardTitle className="text-sm font-medium text-muted-foreground">Income</CardTitle>
-								<ArrowUpIcon className="h-4 w-4 text-[#2D6A4F] dark:text-[#4ADE80]" strokeWidth={1.5} />
+								<ArrowUpIcon className="h-4 w-4 text-[hsl(var(--color-surplus-olive))] dark:text-[hsl(var(--color-surplus-olive))]" strokeWidth={1.5} />
 							</CardHeader>
 							<CardContent>
 								<div className="font-mono text-3xl font-semibold tabular-nums text-foreground">
@@ -102,7 +102,7 @@ export default function Dashboard() {
 						<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 								<CardTitle className="text-sm font-medium text-muted-foreground">Expenses</CardTitle>
-								<ArrowDownIcon className="h-4 w-4 text-[#B91C1C] dark:text-[#EF4444]" strokeWidth={1.5} />
+								<ArrowDownIcon className="h-4 w-4 text-[hsl(var(--color-deficit-crimson))] dark:text-[hsl(var(--color-deficit-crimson))]" strokeWidth={1.5} />
 							</CardHeader>
 							<CardContent>
 								<div className="font-mono text-3xl font-semibold tabular-nums text-foreground">
@@ -167,46 +167,46 @@ export default function Dashboard() {
 							<CardContent>
 								<ul className="divide-y divide-border">
 									{transactionHistory.map((transaction) => (
-										<li key={transaction.id} className="flex items-center py-3">
-											<div
-												className={`rounded-full p-1.5 mr-3 ${
-													transaction.amount > 0
-														? "bg-[#EBF4EF] dark:bg-[#2D6A4F]/20"
-														: "bg-[#FDF2F2] dark:bg-[#B91C1C]/20"
-												}`}
-											>
-												{transaction.amount > 0 ? (
-													<ArrowUpIcon className="h-4 w-4 text-[#2D6A4F] dark:text-[#4ADE80]" strokeWidth={1.5} />
-												) : (
-													<ArrowDownIcon className="h-4 w-4 text-[#B91C1C] dark:text-[#EF4444]" strokeWidth={1.5} />
-												)}
-											</div>
-											<div className="flex-1">
-												<p className="text-sm font-medium text-foreground">
-													{transaction.description}
-												</p>
-												<p className="text-xs text-muted-foreground font-mono">
-													{transaction.date}
-												</p>
-											</div>
-											<p
-												className={`text-sm font-mono font-medium tabular-nums ${
-													transaction.amount > 0
-														? "text-[#2D6A4F] dark:text-[#4ADE80]"
-														: "text-[#B91C1C] dark:text-[#EF4444]"
-												}`}
-											>
-												{transaction.amount > 0 ? "+" : ""}
-												{transaction.amount.toFixed(2)}
-											</p>
-										</li>
-									))}
-								</ul>
-								<Button variant="link" className="mt-4 w-full text-primary">
-									View All Transactions <ArrowRight className="ml-2 h-4 w-4" />
-								</Button>
-							</CardContent>
-						</Card>
+<li key={transaction.id} className="flex items-center py-3">
+				<div
+					className={`rounded-full p-1.5 mr-3 ${
+						transaction.amount > 0
+							? "bg-[hsl(var(--color-surplus-subtle))] dark:bg-[hsl(var(--color-surplus-subtle))]"
+							: "bg-[hsl(var(--color-deficit-subtle))] dark:bg-[hsl(var(--color-deficit-subtle))]"
+					}`}
+				>
+					{transaction.amount > 0 ? (
+						<ArrowUpIcon className="h-4 w-4 text-[hsl(var(--color-surplus-olive))] dark:text-[hsl(var(--color-surplus-olive))]" strokeWidth={1.5} />
+					) : (
+						<ArrowDownIcon className="h-4 w-4 text-[hsl(var(--color-deficit-crimson))] dark:text-[hsl(var(--color-deficit-crimson))]" strokeWidth={1.5} />
+					)}
+				</div>
+				<div className="flex-1">
+					<p className="text-sm font-medium text-foreground">
+						{transaction.description}
+					</p>
+					<p className="text-xs text-muted-foreground font-mono">
+						{transaction.date}
+					</p>
+				</div>
+					<p
+						className={`text-sm font-mono font-medium tabular-nums ${
+						transaction.amount > 0
+							? "text-[hsl(var(--color-surplus-olive))] dark:text-[hsl(var(--color-surplus-olive))]"
+							: "text-[hsl(var(--color-deficit-crimson))] dark:text-[hsl(var(--color-deficit-crimson))]"
+						}`}
+					>
+						{transaction.amount > 0 ? "+" : ""}
+						{transaction.amount.toFixed(2)}
+					</p>
+				</li>
+				))}
+			</ul>
+				<Button variant="link" className="mt-4 w-full text-primary">
+					View All Transactions <ArrowRight className="ml-2 h-4 w-4" />
+				</Button>
+			</CardContent>
+		</Card>
 					</div>
 
 					<Card className="mt-8 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
