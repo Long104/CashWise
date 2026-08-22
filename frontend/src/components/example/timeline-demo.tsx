@@ -6,165 +6,97 @@ import Link from "next/link";
 
 export function TimelineDemo() {
 	return (
-		<section className="w-full py-24 bg-background relative overflow-hidden">
-			{/* Editorial hairline rule motif */}
-			<div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
+		<section id="features" className="w-full py-24 bg-background relative overflow-hidden">
 			<div className="max-w-7xl mx-auto px-6 md:px-10">
-				{/* Section header with chapter number */}
-				<div className="mb-20">
-					<p className="font-mono text-xs text-primary mb-4">
-						02 / METHOD — HOW IT WORKS
+				{/* Section header */}
+				<div className="mb-20 text-center">
+					<p className="font-mono text-xs text-[#1ec072] mb-4 uppercase tracking-wider">
+						02 / FEATURES
 					</p>
-					<h2 className="font-serif text-4xl md:text-5xl font-normal text-foreground">
-						How it works
+					<h2 className="font-sans text-4xl md:text-5xl font-bold tracking-tight text-[#101516]">
+						Everything you need to plan better
 					</h2>
 				</div>
 
-				<div className="space-y-16 relative">
-					{/* Vertical timeline line */}
-					<div className="absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-border z-0" />
-
-					<div className="space-y-16 relative z-10">
-						{/* Step 1: AUDIT */}
-						<div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-							<div className="w-full md:w-5/12 md:text-right order-2 md:order-1">
-								<Card className="bg-card border border-border shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)] rounded-lg overflow-hidden">
-									<CardHeader className="border-b border-border pb-4">
-										<div className="flex items-center justify-between">
-											<p className="font-mono text-xs text-muted-foreground">
-												01 / AUDIT
-											</p>
-											<span className="font-mono text-[10px] text-muted-foreground">SAMPLE LEDGER</span>
-										</div>
-									</CardHeader>
-									<CardContent className="pt-6">
-										<div className="space-y-4">
-											<TimelineMetric label="Income tracked" value="$12,400" tone="surplus" />
-											<TimelineMetric label="Expenses logged" value="$8,900" tone="neutral" />
-											<TimelineMetric label="Saved this week" value="$1,340" tone="surplus" />
-										</div>
-									</CardContent>
-								</Card>
+				{/* Feature grid: 3-column split */}
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+					{/* Feature 1: Automated Budgeting */}
+					<Card className="bg-white border border-[#e5e2dd] rounded-[8px] shadow-sm hover:shadow-md transition-shadow">
+						<CardHeader className="pb-2">
+							<div className="w-10 h-10 rounded-md bg-[#1ec072]/10 flex items-center justify-center mb-4">
+								<Target className="h-5 w-5 text-[#1ec072]" strokeWidth={2} />
 							</div>
+							<p className="font-sans font-semibold text-lg text-[#101516]">Automated Budgeting</p>
+						</CardHeader>
+						<CardContent>
+							<p className="font-sans text-sm text-muted-foreground leading-relaxed">
+								Set it once and let your money move itself. Rules route income to savings before you can spend it.
+							</p>
+						</CardContent>
+					</Card>
 
-							<div className="w-24 h-24 rounded-full bg-card border-2 border-border flex items-center justify-center z-20 relative">
-								<div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-									<span className="font-mono text-white font-medium">01</span>
-								</div>
+					{/* Feature 2: Visual Logic Builder */}
+					<Card className="bg-white border border-[#e5e2dd] rounded-[8px] shadow-sm hover:shadow-md transition-shadow">
+						<CardHeader className="pb-2">
+							<div className="w-10 h-10 rounded-md bg-[#1ec072]/10 flex items-center justify-center mb-4">
+								<Calendar className="h-5 w-5 text-[#1ec072]" strokeWidth={2} />
 							</div>
+							<p className="font-sans font-semibold text-lg text-[#101516]">Visual Logic Builder</p>
+						</CardHeader>
+						<CardContent>
+							<p className="font-sans text-sm text-muted-foreground leading-relaxed">
+								Design financial strategies with simple IF/THEN blocks. No code required — just drag, drop, done.
+							</p>
+						</CardContent>
+					</Card>
 
-							<div className="w-full md:w-5/12 order-1 md:order-2">
-									<h3 className="font-serif text-3xl md:text-4xl font-normal text-foreground mb-4">
-										Capture your data
-									</h3>
-									<p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed">
-										Automatically sync bank feeds, categorize transactions, and establish baseline spending patterns.
-									</p>
-								</div>
+					{/* Feature 3: Real-time Ledger Intelligence */}
+					<Card className="bg-white border border-[#e5e2dd] rounded-[8px] shadow-sm hover:shadow-md transition-shadow">
+						<CardHeader className="pb-2">
+							<div className="w-10 h-10 rounded-md bg-[#1ec072]/10 flex items-center justify-center mb-4">
+								<TrendingUp className="h-5 w-5 text-[#1ec072]" strokeWidth={2} />
 							</div>
+							<p className="font-sans font-semibold text-lg text-[#101516]">Real-time Ledger Intelligence</p>
+						</CardHeader>
+						<CardContent>
+							<p className="font-sans text-sm text-muted-foreground leading-relaxed">
+								Watch balances, budgets, and savings update live. Know exactly where every dollar stands.
+							</p>
+						</CardContent>
+					</Card>
+				</div>
 
-						{/* Step 2: PLAN */}
-						<div className="flex flex-col md:flex-row-reverse items-center gap-12 md:gap-16">
-							<div className="w-full md:w-5/12 md:text-left order-2 md:order-2">
-								<Card className="bg-card border border-border shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)] rounded-lg overflow-hidden">
-									<CardHeader className="border-b border-border pb-4">
-										<div className="flex items-center justify-between">
-											<p className="font-mono text-xs text-muted-foreground">
-												02 / PLAN
-											</p>
-											<span className="font-mono text-[10px] text-muted-foreground">SAMPLE LEDGER</span>
-										</div>
-									</CardHeader>
-									<CardContent className="pt-6">
-										<div className="space-y-4">
-											<TimelineMetric label="Goals set" value="4 targets" tone="surplus" />
-											<TimelineMetric label="Rules defined" value="12 rules" tone="neutral" />
-											<TimelineMetric label="Alerts active" value="5 alerts" tone="neutral" />
-										</div>
-									</CardContent>
-								</Card>
-							</div>
-
-							<div className="w-24 h-24 rounded-full bg-card border-2 border-border flex items-center justify-center z-20 relative">
-								<div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-									<span className="font-mono text-white font-medium">02</span>
-								</div>
-							</div>
-
-							<div className="w-full md:w-5/12 md:text-right order-1 md:order-1">
-										<h3 className="font-serif text-3xl md:text-4xl font-normal text-foreground mb-4">
-											Design your strategy
-										</h3>
-										<p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed">
-											Establish savings targets, allocate budget categories, and set up automated rules for your financial goals.
-										</p>
+				{/* Interactive strategy builder demo */}
+				<div id="strategies" className="bg-white border border-[#e5e2dd] rounded-[8px] p-8 md:p-12 shadow-sm">
+					<div className="text-center space-y-8">
+						<p className="font-mono text-xs text-[#1ec072] uppercase tracking-wider">STRATEGY BUILDER</p>
+						<h3 className="font-sans text-2xl md:text-3xl font-bold tracking-tight text-[#101516]">
+							Build a strategy in minutes
+						</h3>
+						<div className="max-w-xl mx-auto space-y-3 mt-8">
+							{[
+								{ step: "01", title: "Set a trigger", desc: "When monthly income arrives" },
+								{ step: "02", title: "Define the logic", desc: "IF income > $5,000 → save 20%" },
+								{ step: "03", title: "Watch it run", desc: "Money moves automatically, every cycle" },
+							].map((item) => (
+								<div key={item.step} className="flex items-start gap-4 text-left bg-[#f6f2ee] rounded-md p-4 border border-[#e5e2dd]">
+									<span className="font-mono text-xs font-bold text-[#1ec072] pt-0.5">{item.step}</span>
+									<div>
+										<p className="font-sans text-sm font-semibold text-[#101516]">{item.title}</p>
+										<p className="font-sans text-sm text-muted-foreground">{item.desc}</p>
 									</div>
-							</div>
-
-						{/* Step 3: PRESERVE */}
-						<div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-							<div className="w-full md:w-5/12 md:text-right order-2 md:order-1">
-								<Card className="bg-card border border-border shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)] rounded-lg overflow-hidden">
-									<CardHeader className="border-b border-border pb-4">
-										<div className="flex items-center justify-between">
-											<p className="font-mono text-xs text-muted-foreground">
-												03 / PRESERVE
-											</p>
-											<span className="font-mono text-[10px] text-muted-foreground">SAMPLE LEDGER</span>
-										</div>
-									</CardHeader>
-									<CardContent className="pt-6">
-											<div className="space-y-4">
-												<TimelineMetric label="Money preserved" value="$45,200" tone="surplus" />
-												<TimelineMetric label="Growth achieved" value="$3,120" tone="surplus" />
-												<TimelineMetric label="Milestones met" value="127" tone="surplus" />
-											</div>
-											<Link href="/createPlan">
-												<Button className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground">
-													Start Preserving
-													<ArrowRight className="ml-2 h-4 w-4" />
-											</Button>
-										</Link>
-									</CardContent>
-								</Card>
-							</div>
-
-							<div className="w-24 h-24 rounded-full bg-card border-2 border-border flex items-center justify-center z-20 relative">
-								<div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-									<span className="font-mono text-white font-medium">03</span>
 								</div>
-							</div>
-
-							<div className="w-full md:w-5/12 md:text-left order-1 md:order-2">
-										<h3 className="font-serif text-3xl md:text-4xl font-normal text-foreground mb-4">
-											Achieve your goals
-										</h3>
-										<p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed">
-											Watch your plans come to life with intelligent monitoring, automated insights, and preserved wealth.
-										</p>
-									</div>
-							</div>
-
+							))}
+						</div>
+						<Link href="/createPlan">
+							<Button size="lg" className="bg-[#1ec072] hover:bg-[#049f55] text-white font-sans shadow-sm px-6 h-12">
+								Try It Now
+								<ArrowRight className="ml-2 h-4 w-4" />
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</div>
 		</section>
-	);
-}
-
-function TimelineMetric({ label, value, tone }: { label: string; value: string; tone: "surplus" | "neutral" }) {
-	return (
-		<div className="flex items-center justify-between py-2">
-			<span className="font-sans text-sm text-muted-foreground">{label}</span>
-			<div className="flex items-center gap-2">
-				<span
-					className={`h-1.5 w-1.5 rounded-full ${
-						tone === "surplus" ? "bg-[hsl(var(--color-surplus-olive))] dark:bg-[hsl(var(--color-surplus-olive))]" : "bg-border"
-					}`}
-				/>
-				<span className="font-mono text-sm text-foreground tabular-nums">{value}</span>
-			</div>
-		</div>
 	);
 }

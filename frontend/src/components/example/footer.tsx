@@ -1,11 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export const Footer = () => {
 	return (
-		<footer className="w-full bg-[#181715] text-[#D6CFC7] border-t border-[#262320]">
+		<footer className="w-full bg-[#101516] text-white border-t border-white/10">
 			{/* Main footer container */}
 			<div className="max-w-7xl mx-auto px-6 md:px-10 py-16">
 				{/* Top brand and directory */}
@@ -16,40 +15,37 @@ export const Footer = () => {
 							<Image
 								src={"/logo.webp"}
 								alt="Senzen Logo"
-								className="rounded-md object-cover brightness-90"
+								className="rounded-md object-cover"
 								width={32}
 								height={32}
 							/>
-							<span className="font-serif text-2xl font-medium tracking-tight text-[#F7F4EF]">
+							<span className="font-sans text-xl font-bold tracking-tight text-white">
 								Senzen
 							</span>
 						</div>
-						<p className="font-sans text-sm text-[#9E968D] max-w-sm leading-relaxed">
-							An editorial ledger for mindful personal finance. Calm, private, and deliberate money management built for clarity.
-						</p>
-						<p className="font-mono text-xs text-[#9E968D]">
-							[ EXHIBIT • LEDGER SYSTEM 2026 ]
+						<p className="font-sans text-sm text-white/60 max-w-sm leading-relaxed">
+							Financial planning. Built better. Build automated money rules without writing code.
 						</p>
 					</div>
 
 					{/* Directory column 1 */}
 					<div className="space-y-3">
-						<h4 className="font-mono text-xs tracking-tight text-[#F7F4EF]">
-							01 / Product
+						<h4 className="font-sans text-sm font-semibold text-white">
+							Product
 						</h4>
-						<ul className="space-y-2 text-sm text-[#9E968D]">
+						<ul className="space-y-2 font-sans text-sm text-white/60">
 							<li>
-								<Link href="/createPlan" className="hover:text-[#F7F4EF] transition-colors">
+								<Link href="/createPlan" className="hover:text-white transition-colors">
 									Create Plan
 								</Link>
 							</li>
 							<li>
-								<Link href="/home" className="hover:text-[#F7F4EF] transition-colors">
+								<Link href="/home" className="hover:text-white transition-colors">
 									Dashboard
 								</Link>
 							</li>
 							<li>
-								<Link href="/pricing" className="hover:text-[#F7F4EF] transition-colors">
+								<Link href="/pricing" className="hover:text-white transition-colors">
 									Pricing
 								</Link>
 							</li>
@@ -58,48 +54,52 @@ export const Footer = () => {
 
 					{/* Directory column 2 */}
 					<div className="space-y-3">
-						<h4 className="font-mono text-xs tracking-tight text-[#F7F4EF]">
-							02 / Philosophy
+						<h4 className="font-sans text-sm font-semibold text-white">
+							Features
 						</h4>
-						<ul className="space-y-2 text-sm text-[#9E968D]">
+						<ul className="space-y-2 font-sans text-sm text-white/60">
 							<li>
-								<span className="text-[#9E968D]">Tactile Paper</span>
+								<Link href="/#features" className="hover:text-white transition-colors">
+									Automated Rules
+								</Link>
 							</li>
 							<li>
-								<span className="text-[#9E968D]">Editorial Ledgers</span>
+								<Link href="/#strategies" className="hover:text-white transition-colors">
+									Strategies
+								</Link>
 							</li>
 							<li>
-								<span className="text-[#9E968D]">No Data Selling</span>
+								<span>Bank-grade Encryption</span>
 							</li>
 						</ul>
 					</div>
 
 					{/* Directory column 3 */}
 					<div className="space-y-3">
-						<h4 className="font-mono text-xs tracking-tight text-[#F7F4EF]">
-							03 / Access
+						<h4 className="font-sans text-sm font-semibold text-white">
+							Account
 						</h4>
-						<ul className="space-y-2 text-sm text-[#9E968D]">
+						<ul className="space-y-2 font-sans text-sm text-white/60">
 							<li>
-								<Link href="/sign-in" className="hover:text-[#F7F4EF] transition-colors">
+								<Link href="/sign-in" className="hover:text-white transition-colors">
 									Sign In
 								</Link>
 							</li>
 							<li>
-								<Link href="/sign-up" className="hover:text-[#F7F4EF] transition-colors">
-									Register
+								<Link href="/sign-up" className="hover:text-white transition-colors">
+									Get Started Free
 								</Link>
 							</li>
 						</ul>
 					</div>
 				</div>
 
-				{/* Hairline divider with stamp */}
-				<div className="border-t border-[#262320] pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#9E968D]">
-					<div className="font-mono">
-						© {new Date().getFullYear()} SENZEN FINANCIAL SYSTEMS. ALL RIGHTS RESERVED.
+				{/* Hairline divider with legal line */}
+				<div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-sans text-xs text-white/50">
+					<div>
+						© {new Date().getFullYear()} Senzen Financial Systems. All rights reserved.
 					</div>
-					<div className="flex gap-6 font-sans">
+					<div className="flex gap-6">
 						<span>Security First</span>
 						<span>•</span>
 						<span>WCAG AA Compliant</span>

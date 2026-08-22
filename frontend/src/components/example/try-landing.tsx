@@ -114,7 +114,7 @@ function FeatureCard({
 				<div className="flex items-center justify-center h-12 w-12 rounded-md bg-secondary mb-4">
 					{icon}
 				</div>
-				<CardTitle className="font-serif text-xl font-medium">{title}</CardTitle>
+				<CardTitle className="font-sans text-xl font-semibold">{title}</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<p className="text-muted-foreground font-sans">{description}</p>

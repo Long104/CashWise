@@ -4,124 +4,108 @@
 
 @layer base {
   :root {
-    /* Warm Alabaster Canvas (#FBF9F5) */
-    --background: 38 25% 97%;
-    --foreground: 24 10% 10%;
+    /* Canvas / Background: #f6f2ee (HSL 38 22% 95%) */
+    --background: 38 22% 95%;
+    --foreground: 190 16% 8%;
 
-    /* Crisp Paper Card (#FFFFFF) */
+    /* Card / Surface: #ffffff */
     --card: 0 0% 100%;
-    --card-foreground: 24 10% 10%;
+    --card-foreground: 190 16% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 24 10% 10%;
+    --popover-foreground: 190 16% 8%;
 
-    /* Terracotta Rust Primary (#C85A32) */
-    --primary: 16 60% 49%;
-    --primary-foreground: 38 25% 98%;
+    /* Brand Primary Accent (Green): #1ec072 (HSL 151 73% 44%) */
+    --primary: 151 73% 44%;
+    --primary-foreground: 190 16% 8%;
 
-    /* Lifted Surface (#F4EFEA) */
-    --secondary: 33 20% 93%;
-    --secondary-foreground: 24 10% 10%;
-    --muted: 33 16% 91%;
-    --muted-foreground: 25 5% 45%;
+    /* Muted Ink / Secondary: #273234 / #666666 (HSL 190 14% 18%) */
+    --secondary: 190 14% 18%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 38 10% 88%;
+    --muted-foreground: 190 14% 18%;
 
-    /* Warm Bronze Accent (#9A6B38) */
-    --accent: 32 45% 41%;
-    --accent-foreground: 38 25% 98%;
+    /* Border / Hairlines: #e5e2dd (subtle cream-tinted hairline) */
+    --border: 38 10% 88%;
+    --input: 38 10% 88%;
+    --ring: 151 73% 44%;
+    --radius: 0.375rem;
 
-    /* Status & Financial Semantics */
-    --destructive: 0 72% 42%;
-    --destructive-foreground: 0 0% 100%;
+    /* Recharts Color Palette - Composer style */
+    --chart-1: 151 73% 44%;
+    --chart-2: 190 14% 18%;
+    --chart-3: 38 10% 88%;
+    --chart-4: 0 0% 100%;
+    --chart-5: 38 22% 95%;
 
-    /* Hairlines & Focus */
-    --border: 33 18% 87%;
-    --input: 33 18% 87%;
-    --ring: 16 60% 49%;
-    --radius: 0.5rem;
-
-  /* Recharts Color Palette */
-  --chart-1: 16 60% 49%;
-  --chart-2: 32 45% 41%;
-  --chart-3: 152 40% 30%;
-  --chart-4: 215 19% 35%;
-  --chart-5: 38 80% 38%;
-
-  /* Financial Semantic Tokens */
-  --color-surplus-olive: 152 40% 30%; /* Surplus Olive */
-  --color-surplus-subtle: 152 50% 96%; /* Surplus Subtle */
-  --color-deficit-crimson: 0 72% 42%; /* Deficit Crimson */
-  --color-deficit-subtle: 0 86% 97%; /* Deficit Subtle */
-  --color-discretionary-amber: 38 80% 38%; /* Discretionary Amber */
-  --color-recurring-slate: 215 19% 35%; /* Recurring Slate */
+    /* Financial Semantic Tokens */
+    --color-surplus-olive: 152 40% 30%; /* Surplus Olive */
+    --color-surplus-subtle: 152 50% 96%; /* Surplus Subtle */
+    --color-deficit-crimson: 0 72% 42%; /* Deficit Crimson */
+    --color-deficit-subtle: 0 86% 97%; /* Deficit Subtle */
+    --color-discretionary-amber: 38 80% 38%; /* Discretionary Amber */
+    --color-recurring-slate: 215 19% 35%; /* Recurring Slate */
 
     /* Sidebar */
-    --sidebar-background: 38 25% 97%;
-    --sidebar-foreground: 24 10% 10%;
-    --sidebar-primary: 16 60% 49%;
-    --sidebar-primary-foreground: 38 25% 98%;
-    --sidebar-accent: 33 20% 93%;
-    --sidebar-accent-foreground: 24 10% 10%;
-    --sidebar-border: 33 18% 87%;
-    --sidebar-ring: 16 60% 49%;
+    --sidebar-background: 38 22% 95%;
+    --sidebar-foreground: 190 16% 8%;
+    --sidebar-primary: 151 73% 44%;
+    --sidebar-primary-foreground: 190 16% 8%;
+    --sidebar-accent: 38 10% 88%;
+    --sidebar-accent-foreground: 190 16% 8%;
+    --sidebar-border: 38 10% 88%;
+    --sidebar-ring: 151 73% 44%;
   }
 
   .dark {
-    /* Dark Warm Umber Slate (#131211) */
-    --background: 24 6% 7%;
-    --foreground: 38 20% 95%;
+    /* Dark Canvas: #101516 (HSL 190 16% 8%) */
+    --background: 190 16% 8%;
+    --foreground: 38 22% 95%;
 
-    /* Dark Paper Surface (#1C1A18) */
+    /* Dark Card Surface: #1c1a18 */
     --card: 24 8% 10%;
-    --card-foreground: 38 20% 95%;
+    --card-foreground: 38 22% 95%;
     --popover: 24 8% 10%;
-    --popover-foreground: 38 20% 95%;
+    --popover-foreground: 38 22% 95%;
 
-    /* Warm Terracotta Amber (#E06D44) */
-    --primary: 16 72% 57%;
-    --primary-foreground: 24 10% 6%;
+    /* Brand Primary Accent Dark (Green): #049f55 (HSL 151 73% 44% dark hover) */
+    --primary: 151 73% 44%;
+    --primary-foreground: 190 16% 8%;
 
-    /* Elevated Dark Surface (#262320) */
-    --secondary: 24 6% 14%;
-    --secondary-foreground: 38 20% 95%;
-    --muted: 24 6% 14%;
-    --muted-foreground: 33 8% 59%;
+    /* Muted Ink / Secondary Dark: #666666 (HSL 0 0% 66%) */
+    --secondary: 0 0% 66%;
+    --secondary-foreground: 190 16% 8%;
+    --muted: 38 10% 20%;
+    --muted-foreground: 38 22% 95%;
 
-    /* Soft Bronze (#B8854D) */
-    --accent: 32 45% 50%;
-    --accent-foreground: 38 20% 95%;
+    /* Border / Hairlines Dark: #e5e2dd with opacity (#e5e2dd / 0.2) */
+    --border: 38 10% 88%;
+    --input: 38 10% 88%;
+    --ring: 151 73% 44%;
 
-    /* Status */
-    --destructive: 0 68% 55%;
-    --destructive-foreground: 0 0% 100%;
+    /* Recharts Dark Palette */
+    --chart-1: 151 73% 44%;
+    --chart-2: 190 14% 18%;
+    --chart-3: 38 10% 88%;
+    --chart-4: 0 0% 100%;
+    --chart-5: 38 22% 95%;
 
-    /* Hairlines & Focus */
-    --border: 24 6% 20%;
-    --input: 24 6% 20%;
-    --ring: 16 72% 57%;
-
-  /* Recharts Dark Palette */
-  --chart-1: 16 72% 57%;
-  --chart-2: 32 45% 50%;
-  --chart-3: 152 45% 45%;
-  --chart-4: 215 16% 60%;
-  --chart-5: 38 75% 55%;
-
-  /* Financial Semantic Tokens - Dark Mode */
-  --color-surplus-olive: 152 45% 45%; /* Surplus Olive (Dark) */
-  --color-surplus-subtle: 152 30% 15%; /* Surplus Subtle (Dark) */
-  --color-deficit-crimson: 0 68% 55%; /* Deficit Crimson (Dark) */
-  --color-deficit-subtle: 0 50% 12%; /* Deficit Subtle (Dark) */
-  --color-discretionary-amber: 38 75% 55%; /* Discretionary Amber (Dark) */
-  --color-recurring-slate: 215 16% 60%; /* Recurring Slate (Dark) */
+    /* Financial Semantic Tokens - Dark Mode */
+    --color-surplus-olive: 152 45% 45%; /* Surplus Olive (Dark) */
+    --color-surplus-subtle: 152 30% 15%; /* Surplus Subtle (Dark) */
+    --color-deficit-crimson: 0 68% 55%; /* Deficit Crimson (Dark) */
+    --color-deficit-subtle: 0 50% 12%; /* Deficit Subtle (Dark) */
+    --color-discretionary-amber: 38 75% 55%; /* Discretionary Amber (Dark) */
+    --color-recurring-slate: 215 16% 60%; /* Recurring Slate (Dark) */
 
     /* Sidebar */
-    --sidebar-background: 24 6% 7%;
-    --sidebar-foreground: 38 20% 95%;
-    --sidebar-primary: 16 72% 57%;
-    --sidebar-primary-foreground: 24 10% 6%;
-    --sidebar-accent: 24 6% 14%;
-    --sidebar-accent-foreground: 38 20% 95%;
-    --sidebar-border: 24 6% 20%;
-    --sidebar-ring: 16 72% 57%;
+    --sidebar-background: 190 16% 8%;
+    --sidebar-foreground: 38 22% 95%;
+    --sidebar-primary: 151 73% 44%;
+    --sidebar-primary-foreground: 190 16% 8%;
+    --sidebar-accent: 38 10% 88%;
+    --sidebar-accent-foreground: 190 16% 8%;
+    --sidebar-border: 38 10% 88%;
+    --sidebar-ring: 151 73% 44%;
   }
 }
 

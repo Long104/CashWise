@@ -184,14 +184,14 @@ export default function DailyExpenses() {
 							<p className="font-mono text-xs text-primary mb-2">
 								01 / DAILY EXPENSE LEDGER
 							</p>
-							<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
+							<h1 className="font-sans font-semibold text-3xl tracking-tight text-foreground">
 								Daily Expenses
 							</h1>
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 							<Card className="col-span-1 md:col-span-2 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 								<CardHeader>
-									<CardTitle className="font-serif text-xl font-medium">Add New Expense</CardTitle>
+									<CardTitle className="font-sans font-semibold text-xl">Add New Expense</CardTitle>
 									<CardDescription>Track your daily spending</CardDescription>
 								</CardHeader>
 								<form onSubmit={handleSubmit}>
@@ -317,7 +317,7 @@ export default function DailyExpenses() {
 
 							<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 								<CardHeader>
-									<CardTitle className="font-serif text-xl font-medium">Expense Summary</CardTitle>
+									<CardTitle className="font-sans font-semibold text-xl">Expense Summary</CardTitle>
 									<CardDescription>Your spending at a glance</CardDescription>
 								</CardHeader>
 								<CardContent>
@@ -376,7 +376,7 @@ export default function DailyExpenses() {
 
 						<Card className="mt-8 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader>
-								<CardTitle className="font-serif text-xl font-medium">Recent Expenses</CardTitle>
+								<CardTitle className="font-sans font-semibold text-xl">Recent Expenses</CardTitle>
 								<CardDescription>Your latest transactions</CardDescription>
 							</CardHeader>
 							<CardContent>

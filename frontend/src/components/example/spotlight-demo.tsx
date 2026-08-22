@@ -2,96 +2,99 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ArrowRight, LineChart, PiggyBank, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function SpotlightPreview() {
 	return (
 		<section className="relative w-full bg-background overflow-hidden">
-			{/* Editorial hairline rule motif */}
-			<div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
 			<div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28 min-h-[calc(100vh-4rem)] flex items-center justify-center">
 				<div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-					{/* Left column — editorial headline */}
+					{/* Left column — Composer bold sans headline */}
 					<div className="lg:col-span-7 flex flex-col">
-						<p className="font-mono text-xs text-primary mb-6">
-							01 / LEDGER
+						<p className="font-mono text-xs text-[#1ec072] mb-6 uppercase tracking-wider">
+							01 / COMPOSER
 						</p>
-						<h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-foreground">
-							Master your cashflow with quiet clarity
+						<h1 className="font-sans text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-[#101516]">
+							Build your money engine without code
 						</h1>
 						<p className="mt-6 font-sans text-lg md:text-xl leading-relaxed text-muted-foreground max-w-md">
-							A calm, deliberate ledger for your money. Audit what you spend, plan what you keep, and preserve what matters — one honest line at a time.
+							Build automated money rules without writing code.
 						</p>
-
-						<div className="mt-10 flex flex-col sm:flex-row gap-3">
+						<div className="mt-10 flex flex-col sm:flex-row gap-4">
 							<Link href="/sign-up">
-								<Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-sans shadow-sm w-full sm:w-auto">
-									Start Planning
+								<Button size="lg" className="bg-[#1EC072] hover:bg-[#049F55] text-[#101516] font-sans font-semibold shadow-sm w-full sm:w-auto px-6 h-12 focus-visible:ring-[#1EC072] focus-visible:ring-offset-2">
+									Get Started Free
 									<ArrowRight className="ml-2 h-4 w-4" />
 								</Button>
 							</Link>
-							<Link href="/sign-in">
-								<Button size="lg" variant="outline" className="border-border bg-card text-foreground hover:border-primary/40 font-sans w-full sm:w-auto">
-									View a Ledger
+							<Link href="/pricing">
+								<Button size="lg" variant="outline" className="border-[#e5e2dd] bg-background text-[#101516] hover:border-[#1EC072]/40 font-sans font-semibold w-full sm:w-auto px-6 h-12">
+									Explore Strategies
 								</Button>
 							</Link>
 						</div>
 					</div>
 
-					{/* Right column — live ledger card mockup */}
+					{/* Right column — live interactive product preview card */}
 					<div className="lg:col-span-5 relative">
-						<Card className="bg-card border border-border shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)] rounded-lg">
-							{/* Double hairline rule motif */}
-							<div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-							<CardHeader className="border-b border-border pb-4">
+						<Card className="bg-white border border-[#e5e2dd] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.02)] rounded-[8px]">
+							<CardHeader className="border-b border-[#e5e2dd] pb-4">
 								<div className="flex items-center justify-between">
 									<p className="font-mono text-xs text-muted-foreground">
-										FIG. 01 — WEEKLY SURPLUS
+										STRATEGY BUILDER • LIVE EXAMPLE
 									</p>
-									<span className="font-mono text-xs text-primary">+12.4%</span>
+									<span className="font-mono text-xs text-[#1ec072]">LIVE</span>
 								</div>
 							</CardHeader>
 							<CardContent className="pt-6">
-								<div className="flex items-baseline justify-between mb-6">
-									<span className="font-sans text-sm text-muted-foreground">Net this week</span>
-									<span className="font-mono text-3xl font-semibold text-foreground tabular-nums">
-										$1,284.50
-									</span>
-								</div>
-
-								<div className="space-y-3">
-									<LedgerRow label="Income" value="$3,200.00" tone="surplus" />
-									<LedgerRow label="Fixed costs" value="$1,540.00" tone="neutral" />
-									<LedgerRow label="Discretionary" value="$375.50" tone="neutral" />
-									<LedgerRow label="Auto-saved" value="$420.00" tone="surplus" />
-								</div>
-
-								<div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
-										<span className="font-sans text-xs text-muted-foreground">Projected month-end</span>
-										<span className="font-mono text-lg font-medium text-accent tabular-nums">$5,140.00</span>
+									<div className="space-y-4">
+										{/* Logic block example: IF monthly income > $5,000 -> Allocate 20% to Growth */}
+										<div className="flex items-center gap-2 mb-4">
+											<div className="w-2 h-2 rounded-full bg-[#1ec072] animate-pulse" />
+											<p className="font-mono text-xs text-muted-foreground">IF monthly income &gt; $5,000 → Allocate 20% to Growth</p>
+										</div>
+										{/* Visual logic flow */}
+										<div className="space-y-2">
+											<div className="flex items-center gap-2">
+												<div className="w-6 h-6 rounded border border-[#e5e2dd] bg-[#f6f2ee] flex items-center justify-center">
+													<span className="font-mono text-xs font-bold text-[#1ec072]">+</span>
+												</div>
+												<p className="font-sans text-sm text-foreground">Income: $5,000</p>
+											</div>
+											<div className="flex items-center gap-2 ml-6">
+												<div className="w-6 h-6 rounded border border-[#e5e2dd] bg-[#f6f2ee] flex items-center justify-center">
+													<span className="font-mono text-xs font-bold text-[#1ec072]">+</span>
+												</div>
+												<p className="font-sans text-sm text-foreground">Allocate 20% = $1,000</p>
+											</div>
+											<div className="flex items-center gap-2 ml-6">
+												<div className="w-6 h-6 rounded border border-[#e5e2dd] bg-[#f6f2ee] flex items-center justify-center">
+													<span className="font-mono text-xs font-bold text-[#1ec072]">-</span>
+												</div>
+												<p className="font-sans text-sm text-foreground">Growth Fund: $1,000</p>
+											</div>
+										</div>
+										{/* Stats row below logic */}
+										<div className="mt-6 pt-4 border-t border-[#e5e2dd] grid grid-cols-3 gap-4">
+											<div className="text-center">
+												<p className="font-mono text-xs text-muted-foreground uppercase mb-1">Account Minimum</p>
+												<p className="font-sans text-lg font-bold text-[#1ec072]">$0</p>
+											</div>
+											<div className="text-center">
+												<p className="font-mono text-xs text-muted-foreground uppercase mb-1">Automated Logic</p>
+												<p className="font-sans text-lg font-bold text-[#1ec072]">100%</p>
+											</div>
+											<div className="text-center">
+												<p className="font-mono text-xs text-muted-foreground uppercase mb-1">Real-time</p>
+												<p className="font-sans text-lg font-bold text-[#1ec072]">Tracking</p>
+											</div>
 									</div>
+								</div>
 							</CardContent>
 						</Card>
 					</div>
 				</div>
 			</div>
 		</section>
-	);
-}
-
-function LedgerRow({ label, value, tone }: { label: string; value: string; tone: "surplus" | "neutral" }) {
-	return (
-		<div className="flex items-center justify-between py-1.5">
-			<span className="font-sans text-sm text-muted-foreground">{label}</span>
-			<div className="flex items-center gap-2">
-				<span
-					className={`h-1.5 w-1.5 rounded-full ${
-						tone === "surplus" ? "bg-[hsl(var(--color-surplus-olive))] dark:bg-[hsl(var(--color-surplus-olive))]" : "bg-border"
-					}`}
-				/>
-				<span className="font-mono text-sm text-foreground tabular-nums">{value}</span>
-				</div>
-			</div>
 	);
 }

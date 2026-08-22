@@ -32,11 +32,10 @@ const config = {
 			screens: {
 				xs: "20rem",
 			},
-			fontFamily: {
-				sans: ["var(--font-sans)", "-apple-system", "sans-serif"],
-				serif: ["var(--font-newsreader)", "Playfair Display", "Georgia", "serif"],
-				mono: ["var(--font-mono)", "SF Mono", "Menlo", "monospace"],
-			},
+		fontFamily: {
+			sans: ["var(--font-sans)", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+			mono: ["var(--font-mono)", "SF Mono", "Menlo", "monospace"],
+		},
 			dropShadow: {
 				"3xl": "0 35px 35px rgba(255, 255, 255, 0.15)",
 				"4xl": [

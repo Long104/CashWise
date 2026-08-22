@@ -64,7 +64,7 @@ export default function Dashboard() {
 						<p className="font-mono text-xs text-primary mb-2">
 							01 / LEDGER DETAIL
 						</p>
-						<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
+						<h1 className="font-sans text-3xl font-bold tracking-tight text-foreground">
 							Plan Ledger
 						</h1>
 					</div>
@@ -132,7 +132,7 @@ export default function Dashboard() {
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 						<Card className="col-span-1 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader>
-								<CardTitle className="font-serif text-xl font-medium">Expense Breakdown</CardTitle>
+								<CardTitle className="font-sans text-xl font-semibold text-foreground">Expense Breakdown</CardTitle>
 								<CardDescription>
 									Your spending by category this month
 								</CardDescription>
@@ -159,7 +159,7 @@ export default function Dashboard() {
 
 						<Card className="col-span-1 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader>
-								<CardTitle className="font-serif text-xl font-medium">Recent Transactions</CardTitle>
+								<CardTitle className="font-sans text-xl font-semibold text-foreground">Recent Transactions</CardTitle>
 								<CardDescription>
 									Your latest financial activities
 								</CardDescription>
@@ -211,7 +211,7 @@ export default function Dashboard() {
 
 					<Card className="mt-8 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 						<CardHeader>
-							<CardTitle className="font-serif text-xl font-medium">Budget Overview</CardTitle>
+							<CardTitle className="font-sans text-xl font-semibold text-foreground">Budget Overview</CardTitle>
 							<CardDescription>
 								Track your spending against your budget
 							</CardDescription>

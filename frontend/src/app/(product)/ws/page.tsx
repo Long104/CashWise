@@ -85,7 +85,7 @@ const Chat = () => {
 				<p className="font-mono text-xs text-primary mb-2 text-center">
 					01 / LIVE LEDGER CHAT
 				</p>
-				<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground text-center mb-6">
+				<h1 className="font-sans text-3xl font-semibold tracking-tight text-foreground text-center mb-6">
 					WebSocket Chat
 				</h1>
 			</div>

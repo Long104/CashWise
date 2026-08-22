@@ -49,9 +49,9 @@ export default function FinancialPlans() {
 						<p className="font-mono text-xs text-primary mb-2">
 							01 / YOUR LEDGERS
 						</p>
-						<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
-							Financial Plans Overview
-						</h1>
+					<h1 className="font-sans text-3xl font-bold tracking-tight text-foreground">
+						Financial Plans Overview
+					</h1>
 						<p className="text-muted-foreground mt-2 font-sans">
 							A calm, deliberate record of every plan you keep.
 						</p>
@@ -73,7 +73,7 @@ export default function FinancialPlans() {
 										>
 											<CardHeader className="flex flex-row items-start justify-between space-y-0">
 												<div className="space-y-1">
-													<CardTitle className="font-serif text-xl font-semibold tracking-tight truncate">
+													<CardTitle className="font-sans text-xl font-semibold tracking-tight truncate">
 														{plan.name}
 													</CardTitle>
 													<CardDescription className="font-mono text-xs">
@@ -118,9 +118,9 @@ export default function FinancialPlans() {
 											<div className="w-16 h-16 rounded-full bg-secondary border border-border flex items-center justify-center mb-4">
 												<BookOpen className="h-7 w-7 text-accent" strokeWidth={1.5} />
 											</div>
-											<p className="text-foreground font-serif text-xl mb-2">No active plans found</p>
+											<p className="text-foreground font-sans text-xl font-medium mb-2">No active plans found</p>
 											<p className="text-muted-foreground mb-6 font-sans max-w-sm">
-												Begin your first editorial ledger — a calm, deliberate plan for your money.
+												Start your first financial plan — automated rules for your money.
 											</p>
 											<Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
 												<Link href="/createPlan">Create Your First Plan</Link>

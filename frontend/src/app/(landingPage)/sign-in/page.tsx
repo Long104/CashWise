@@ -77,11 +77,11 @@ export default function LoginPage() {
 		<div className="flex items-center justify-center min-h-screen bg-background">
 			<Card className="w-full max-w-[440px] border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 				<CardHeader className="flex flex-col gap-1">
-					<CardTitle className="font-serif text-2xl font-medium text-center text-foreground">
-						Sign In
+					<CardTitle className="font-sans text-2xl font-semibold text-center text-foreground">
+						Sign in to Senzen
 					</CardTitle>
 					<CardDescription className="text-center text-muted-foreground">
-						Access your editorial ledger
+						Welcome back — sign in to continue
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-4">
@@ -167,7 +167,7 @@ export default function LoginPage() {
 							/>
 						</div>
 
-						<Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground" type="submit">
+						<Button className="w-full mt-4 bg-[#101516] hover:bg-[#101516]/90 text-white font-sans font-semibold focus-visible:ring-2 focus-visible:ring-[#1EC072] focus-visible:ring-offset-2" type="submit">
 							Sign In
 						</Button>
 					</form>

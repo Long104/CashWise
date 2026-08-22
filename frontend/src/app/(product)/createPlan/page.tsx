@@ -85,9 +85,9 @@ export default function CreatePlan() {
 					<p className="font-mono text-xs text-primary mb-2">
 						01 / NEW FINANCIAL BRIEF
 					</p>
-					<h1 className="font-serif text-3xl font-normal tracking-tight text-foreground">
-						Create Your Plan
-					</h1>
+				<h1 className="font-sans text-3xl font-bold tracking-tight text-foreground">
+					Create Your Plan
+				</h1>
 					<p className="text-muted-foreground mt-2 font-sans">
 						A structured brief for your next chapter of calm money management.
 					</p>
@@ -99,7 +99,7 @@ export default function CreatePlan() {
 							<section className="space-y-4">
 								<div className="flex items-center gap-3 border-b border-border pb-2">
 									<span className="font-mono text-sm text-primary">01.</span>
-									<h2 className="font-serif text-xl font-medium text-foreground">Plan Identity</h2>
+									<h2 className="font-sans text-xl font-semibold text-foreground">Plan Identity</h2>
 								</div>
 								<div className="flex flex-col gap-2">
 									<Label htmlFor="plan-name">Plan name</Label>
@@ -126,7 +126,7 @@ export default function CreatePlan() {
 							<section className="space-y-4">
 								<div className="flex items-center gap-3 border-b border-border pb-2">
 									<span className="font-mono text-sm text-primary">02.</span>
-									<h2 className="font-serif text-xl font-medium text-foreground">Budget Allocation</h2>
+									<h2 className="font-sans text-xl font-semibold text-foreground">Budget Allocation</h2>
 								</div>
 
 								<div className="flex flex-col gap-2">
@@ -230,7 +230,7 @@ export default function CreatePlan() {
 							<section className="space-y-4">
 								<div className="flex items-center gap-3 border-b border-border pb-2">
 									<span className="font-mono text-sm text-primary">03.</span>
-									<h2 className="font-serif text-xl font-medium text-foreground">Automation & Rules</h2>
+									<h2 className="font-sans text-xl font-semibold text-foreground">Automation & Rules</h2>
 								</div>
 								<div className="flex items-center gap-3 rounded-md border border-border p-4 bg-secondary/40">
 									<Switch

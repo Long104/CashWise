@@ -74,14 +74,14 @@ export default function Component() {
 	return (
 		<div className="min-h-screen flex items-center justify-center bg-background">
 			<Card className="w-full max-w-[440px] border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
-				<CardHeader>
-					<CardTitle className="font-serif text-2xl font-medium text-center text-foreground">
-						Create Account
-					</CardTitle>
-					<CardDescription className="text-center text-muted-foreground">
-						Begin your editorial ledger
-					</CardDescription>
-				</CardHeader>
+					<CardHeader>
+						<CardTitle className="font-sans text-2xl font-semibold text-center text-foreground">
+							Create your Senzen account
+						</CardTitle>
+						<CardDescription className="text-center text-muted-foreground">
+							Begin your financial planning journey
+						</CardDescription>
+					</CardHeader>
 				<CardContent>
 					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 						<div className="flex flex-col gap-2">
@@ -111,7 +111,7 @@ export default function Component() {
 					{!data?.success && (
 						<p className="text-sm text-destructive">{data?.message}</p>
 					)}
-						<Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+						<Button type="submit" className="w-full bg-[#101516] hover:bg-[#101516]/90 text-white font-sans font-semibold focus-visible:ring-2 focus-visible:ring-[#1EC072] focus-visible:ring-offset-2">
 							Create Account
 						</Button>
 					</form>
