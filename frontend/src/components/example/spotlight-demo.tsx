@@ -5,49 +5,44 @@ import { ArrowRight } from "lucide-react";
 export function HeroComposer() {
 	return (
 		<section className="relative w-full bg-[#EEEEEE] overflow-hidden">
-			<div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-14 flex items-center justify-center">
-				<div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center">
-					{/* Headline block: green dot-matrix slab slices through "Senzen" */}
-					<div className="relative w-full flex flex-col items-center justify-center">
-						{/* Green dot-matrix slab (behind type) */}
+			<div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-16 md:pt-28 pb-16 md:pb-24">
+				<div className="w-full max-w-5xl mx-auto flex flex-col items-start text-left">
+					{/* Headline block: solid green slab with dot-matrix texture, sliced by "Senzen" */}
+					<div className="relative w-full flex flex-col items-start justify-start">
+						{/* Solid green slab with dot-matrix texture (behind type) */}
 						<div
 							aria-hidden="true"
-							className="absolute left-1/2 top-[34%] -translate-x-[8%] z-0 w-[320px] h-[184px] md:w-[440px] md:h-[253px] lg:w-[520px] lg:h-[299px] rounded-2xl"
+							className="absolute left-[18%] top-[30%] z-0 w-[280px] h-[170px] md:w-[420px] md:h-[250px] lg:w-[520px] lg:h-[310px] rounded-2xl bg-[#1EC072]"
 							style={{
-								backgroundImage: "radial-gradient(circle, #1EC072 2.5px, transparent 2.5px)",
+								backgroundImage: "radial-gradient(circle, rgba(10,10,10,0.14) 2.5px, transparent 2.5px)",
 								backgroundSize: "14px 14px",
 								backgroundPosition: "center",
 							}}
 						/>
-						{/* Solid green corner tab on slab bottom-left */}
-						<div
-							aria-hidden="true"
-							className="absolute left-1/2 top-[34%] -translate-x-[8%] z-0 translate-y-[92px] md:translate-y-[126px] lg:translate-y-[149px] h-4 w-14 rounded-bl-2xl rounded-tr-lg bg-[#1EC072]"
-						/>
 						{/* Pink swatch (top-right of headline zone) */}
 						<div
 							aria-hidden="true"
-							className="absolute right-[6%] top-0 z-0 h-16 w-10 md:h-24 md:w-14 rounded-xl bg-[#FFB8D2]"
+							className="absolute right-[8%] top-[-12px] z-0 h-16 w-10 md:h-24 md:w-14 rounded-xl bg-[#FFB8D2]"
 						/>
 						{/* Blue accent (bottom-left of headline zone) */}
 						<div
 							aria-hidden="true"
-							className="absolute left-[4%] bottom-[-24px] z-0 h-10 w-10 md:h-14 md:w-14 rounded-full bg-[#0047FF]"
+							className="absolute left-0 bottom-[-28px] z-0 h-10 w-10 md:h-14 md:w-14 rounded-full bg-[#0047FF]"
 						/>
 
 						{/* Headline */}
-						<h1 className="relative z-10 mx-auto font-sans font-extrabold text-[#0A0A0A] leading-[0.9]">
-							<span className="block text-3xl md:text-5xl lg:text-6xl tracking-tight mb-1">
+						<h1 className="relative z-10 font-sans font-extrabold text-[#0A0A0A] leading-[0.9]">
+							<span className="block text-3xl md:text-5xl lg:text-6xl tracking-tight mb-2">
 								Meet
 							</span>
-							<span className="block text-6xl md:text-8xl lg:text-[7rem] tracking-tighter">
+							<span className="block text-7xl md:text-[8.5rem] lg:text-[11rem] tracking-tighter">
 								Senzen
 							</span>
 						</h1>
 					</div>
 
 					{/* Subtitle */}
-					<p className="mt-8 text-xl md:text-2xl leading-relaxed text-[#555555] max-w-[34rem] mx-auto">
+					<p className="mt-12 text-lg md:text-xl leading-relaxed text-[#333333] max-w-[34rem]">
 						Build automated money rules with logic, backtest your budget, then execute—all in one place.
 					</p>
 
