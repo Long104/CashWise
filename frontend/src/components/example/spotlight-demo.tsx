@@ -15,7 +15,7 @@ export function SpotlightPreview() {
 					{/* Left column — editorial headline */}
 					<div className="lg:col-span-7 flex flex-col">
 						<p className="font-mono text-xs text-primary mb-6">
-							01 / EXHIBIT A • LEDGER 2026
+							01 / LEDGER
 						</p>
 						<h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-foreground">
 							Master your cashflow with quiet clarity
@@ -72,14 +72,6 @@ export function SpotlightPreview() {
 										<span className="font-mono text-lg font-medium text-accent tabular-nums">$5,140.00</span>
 									</div>
 							</CardContent>
-							{/* Exhibit stamp motif */}
-							<div className="absolute -bottom-4 -right-4 hidden md:block">
-								<div className="bg-secondary border border-border rounded-md px-3 py-2 shadow-sm">
-									<p className="font-mono text-[10px] text-muted-foreground">
-										03 / EXHIBIT B • LEDGER 2026
-									</p>
-								</div>
-							</div>
 						</Card>
 					</div>
 				</div>
