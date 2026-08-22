@@ -34,7 +34,7 @@ export const Footer = () => {
 
 					{/* Directory column 1 */}
 					<div className="space-y-3">
-						<h4 className="font-serif text-xs tracking-tight text-[#F7F4EF]">
+						<h4 className="font-mono text-xs tracking-tight text-[#F7F4EF]">
 							01 / Product
 						</h4>
 						<ul className="space-y-2 text-sm text-[#9E968D]">
@@ -58,7 +58,7 @@ export const Footer = () => {
 
 					{/* Directory column 2 */}
 					<div className="space-y-3">
-						<h4 className="font-serif text-xs tracking-tight text-[#F7F4EF]">
+						<h4 className="font-mono text-xs tracking-tight text-[#F7F4EF]">
 							02 / Philosophy
 						</h4>
 						<ul className="space-y-2 text-sm text-[#9E968D]">
@@ -76,7 +76,7 @@ export const Footer = () => {
 
 					{/* Directory column 3 */}
 					<div className="space-y-3">
-						<h4 className="font-serif text-xs tracking-tight text-[#F7F4EF]">
+						<h4 className="font-mono text-xs tracking-tight text-[#F7F4EF]">
 							03 / Access
 						</h4>
 						<ul className="space-y-2 text-sm text-[#9E968D]">

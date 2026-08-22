@@ -36,10 +36,10 @@ const pricingItems: { title: string; href: string; description: string }[] = [
 
 export function NavigationMenuDemo() {
 	return (
-		<NavigationMenu className="[&>*]:bg-primary [&>*]:text-accent-foreground z-50">
+		<NavigationMenu className="z-50">
 			<NavigationMenuList>
 				<NavigationMenuItem>
-					<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+					<NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-secondary text-foreground focus:bg-secondary")}>
 						<Link href="/createPlan">Create Plan</Link>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
