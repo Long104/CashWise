@@ -13,9 +13,9 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<div className="light bg-[#EEEEEE] text-[#0A0A0A]">
+		<div className="light flex min-h-screen flex-col bg-[#EEEEEE] text-[#0A0A0A]">
 			<Navbar />
-			{children}
+			<main className="flex flex-1 flex-col">{children}</main>
 		</div>
 	);
 }

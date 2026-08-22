@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"; import { Button } from "@/compone
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Footer } from "@example/footer";
 
 export default function Component() {
 	const router = useRouter();
@@ -72,7 +73,8 @@ export default function Component() {
 	};
 
 	return (
-		<div className="min-h-screen flex items-center justify-center bg-background">
+		<>
+			<div className="flex flex-1 items-center justify-center bg-background">
 			<Card className="w-full max-w-[440px] border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 					<CardHeader>
 						<CardTitle className="font-sans text-2xl font-semibold text-center text-foreground">
@@ -123,6 +125,8 @@ export default function Component() {
 					</Link>
 				</CardFooter>
 			</Card>
-		</div>
+			</div>
+			<Footer />
+		</>
 	);
 }
