@@ -10,7 +10,7 @@ export function SpotlightPreview() {
 			{/* Editorial hairline rule motif */}
 			<div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-			<div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
+			<div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28 min-h-[calc(100vh-4rem)] flex items-center justify-center">
 				<div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 					{/* Left column — editorial headline */}
 					<div className="lg:col-span-7 flex flex-col">

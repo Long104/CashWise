@@ -9,11 +9,9 @@ export default function Home() {
 		<>
 			{/* <div className="[&_*]:overscroll-none"> */}
 			<SpotlightPreview />
-			<TimelineDemo />
-			<section className="w-full py-24 bg-background relative overflow-hidden">
+			<section className="w-full py-16 md:py-20 bg-background relative overflow-hidden">
 				<div className="max-w-7xl mx-auto px-6 md:px-10">
-					{/* Trust Strip */}
-					<div className="w-full mb-20">
+					<div className="w-full">
 						<div className="bg-card border border-border rounded-lg p-8 md:p-12 shadow-sm">
 							<p className="font-mono text-xs text-primary mb-8">VERIFIED LEDGER • ENCRYPTED • NO ADS</p>
 							<div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 md:divide-x divide-border">
@@ -38,7 +36,11 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
-
+				</div>
+			</section>
+			<TimelineDemo />
+			<section className="w-full py-24 bg-background relative overflow-hidden">
+				<div className="max-w-7xl mx-auto px-6 md:px-10">
 					{/* CTA Box */}
 					<div className="w-full max-w-3xl mx-auto">
 						<div className="bg-card border border-border rounded-lg p-10 shadow-sm">
