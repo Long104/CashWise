@@ -1,4 +1,4 @@
-import { SpotlightPreview } from "@example/spotlight-demo";
+import { HeroComposer, StatsProofRow } from "@example/spotlight-demo";
 import { TimelineDemo } from "@example/timeline-demo";
 import { Footer } from "@example/footer";
 import { Button } from "@/components/ui/button";
@@ -8,34 +8,8 @@ export default function Home() {
 	return (
 		<>
 			{/* <div className="[&_*]:overscroll-none"> */}
-			<SpotlightPreview />
-			<section className="w-full py-16 md:py-20 bg-background relative overflow-hidden">
-				<div className="max-w-7xl mx-auto px-6 md:px-10">
-					<div className="w-full">
-						<div className="bg-card border border-border rounded-lg p-8 md:p-12 shadow-sm">
-							<p className="font-mono text-xs text-primary mb-8">AUTOMATED • REAL-TIME • ENCRYPTED</p>
-							<div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x divide-border">
-								<div className="md:pr-8">
-									<p className="font-mono text-[10px] text-muted-foreground mb-2">ACCOUNT MINIMUM</p>
-									<p className="font-sans text-3xl md:text-4xl font-bold text-[#1EC072]">$0</p>
-								</div>
-								<div className="md:px-8">
-									<p className="font-mono text-[10px] text-muted-foreground mb-2">AUTOMATED LOGIC</p>
-									<p className="font-sans text-3xl md:text-4xl font-bold text-[#1EC072]">100%</p>
-								</div>
-								<div className="md:px-8">
-									<p className="font-mono text-[10px] text-muted-foreground mb-2">REAL-TIME TRACKING</p>
-									<p className="font-sans text-3xl md:text-4xl font-bold text-[#1EC072]">24/7</p>
-								</div>
-								<div className="md:pl-8">
-									<p className="font-mono text-[10px] text-muted-foreground mb-2">BANK-GRADE ENCRYPTION</p>
-									<p className="font-sans text-3xl md:text-4xl font-bold text-[#1EC072]">AES-256</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+			<HeroComposer />
+			<StatsProofRow />
 			<TimelineDemo />
 			<section className="w-full py-24 bg-background relative overflow-hidden">
 				<div className="max-w-7xl mx-auto px-6 md:px-10">

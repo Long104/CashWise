@@ -13,9 +13,9 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<>
+		<div className="light bg-[#EEEEEE] text-[#0A0A0A]">
 			<Navbar />
 			{children}
-		</>
+		</div>
 	);
 }

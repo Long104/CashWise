@@ -114,6 +114,11 @@
   input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
+
+  /* Landing-page theme lock: render identically regardless of stored theme key */
+  .light {
+    color-scheme: light;
+  }
 }
 
 @layer base {

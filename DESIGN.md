@@ -150,6 +150,7 @@ Senzen is a **Product-First Financial Engine**. It follows the visual DNA of **C
 - **Neutrals: cool-tinted blue-charcoal and warm cream** — migrate away from warm espresso/terracotta ledger neutrals toward Composer's cream canvas and blue-charcoal ink; no default Tailwind gray ramp.
 - **Signature motif: live product proof blocks with thin rules and compact data visualizations** — recurring in hero, feature sections, and authenticated overview; no exhibit stamps, editorial labels, or decorative ledger rules.
 - **Dark mode: not used for the marketing redesign; authenticated surfaces retain existing dark-theme capability only where current app behavior requires it, with Composer-like light as the default.**
+- [2026-08-22] (global) forceLight theme lock on landing to avoid previous dark-mode collision bug — previous bug required light mode enforcement for Senzen landing.
 
 ## 2. Full Token Sheet
 
