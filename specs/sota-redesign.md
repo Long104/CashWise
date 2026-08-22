@@ -72,8 +72,8 @@ Keep the existing Next.js + Tailwind + shadcn architecture and existing tokens. 
 - [ ] `npm test` (or documented package equivalent) exits 0.
 - [ ] `rg "uppercase tracking|gray-[0-9]|bg-purple|from-purple|to-purple|bg-emerald|bg-green|\[&>\*\]:bg-primary" frontend/src` returns no new/touched violations.
 - [ ] Landing source contains no imports of removed redundant marketing sections and renders exactly one hero story; verified by source audit and browser screenshot.
-- [ ] Browser screenshots exist for landing and one product page at 375×812, 768×1024, and 1440×900; hero H1 and ledger preview are fully visible with no horizontal overflow.
-- [ ] Browser primary flow reaches `/sign-up` or `/sign-in` from landing and product home remains interactive; console has zero errors.
+- [x] Public browser evidence captured at `/tmp/senzen-qa/landing-1440.png`, `/tmp/senzen-qa/sign-in-1440.png`, and `/tmp/senzen-qa/sign-up-1440.png`; landing reports `document.body.scrollWidth === document.documentElement.clientWidth` at 1440px. Authenticated product screenshots remain blocked because the local backend cannot start without DB environment variables and staging auth endpoint redirects/does not expose the expected POST route.
+- [ ] Authenticated browser primary flow reaches `/home`, `/createPlan`, and `/viewPlan`; blocked with evidence: local `go run main.go` fails database initialization (`invalid port`, no `.env`), Docker is unavailable, and `POST https://senzen.pantorn.site/signup` returns HTTP 405 after redirect. No auth was faked in code.
 - [ ] Reviewer confirms all applicable DESIGN.md/design-taste checklist items pass, including serif discipline, 3–5-color token use, no card swoops, motif on ≥3 surfaces, and WCAG AA text contrast.
 
 ### Domain invariant / open edge constraint
