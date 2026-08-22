@@ -6,19 +6,19 @@ export function HeroComposer() {
 	return (
 		<section className="relative w-full bg-[#EEEEEE] overflow-hidden">
 			<div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-16 md:pt-28 pb-16 md:pb-24">
-				<div className="w-full max-w-5xl mx-auto flex flex-col items-start text-left">
+				<div className="w-full max-w-6xl mx-auto flex flex-col items-start text-left">
 					{/* Headline block: solid green slab with dot-matrix texture, sliced by "Senzen" */}
 					<div className="relative w-full flex flex-col items-start justify-start">
-						{/* Solid green slab with dot-matrix texture (behind type) */}
-						<div
-							aria-hidden="true"
-							className="absolute left-[18%] top-[30%] z-0 w-[280px] h-[170px] md:w-[420px] md:h-[250px] lg:w-[520px] lg:h-[310px] rounded-2xl bg-[#1EC072]"
-							style={{
-								backgroundImage: "radial-gradient(circle, rgba(10,10,10,0.14) 2.5px, transparent 2.5px)",
-								backgroundSize: "14px 14px",
-								backgroundPosition: "center",
-							}}
-						/>
+					{/* Solid green slab with dot-matrix texture — sharp rectangle behind headline only */}
+					<div
+						aria-hidden="true"
+						className="absolute left-[16%] top-[26%] z-0 w-[300px] h-[130px] md:w-[460px] md:h-[200px] lg:w-[560px] lg:h-[260px] bg-[#1EC072]"
+						style={{
+							backgroundImage: "radial-gradient(circle, rgba(10,10,10,0.14) 2.5px, transparent 2.5px)",
+							backgroundSize: "14px 14px",
+							backgroundPosition: "center",
+						}}
+					/>
 						{/* Pink swatch (top-right of headline zone) */}
 						<div
 							aria-hidden="true"
@@ -31,14 +31,14 @@ export function HeroComposer() {
 						/>
 
 						{/* Headline */}
-						<h1 className="relative z-10 font-sans font-extrabold text-[#0A0A0A] leading-[0.9]">
-							<span className="block text-3xl md:text-5xl lg:text-6xl tracking-tight mb-2">
-								Meet
-							</span>
-							<span className="block text-7xl md:text-[8.5rem] lg:text-[11rem] tracking-tighter">
-								Senzen
-							</span>
-						</h1>
+					<h1 className="relative z-10 font-sans font-extrabold text-[#0A0A0A] leading-[0.9]">
+						<span className="block text-3xl md:text-5xl lg:text-6xl tracking-tight mb-1">
+							Meet
+						</span>
+						<span className="block text-[4.5rem] md:text-[9rem] lg:text-[12rem] tracking-tighter">
+							Senzen
+						</span>
+					</h1>
 					</div>
 
 					{/* Subtitle */}
