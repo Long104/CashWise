@@ -1,76 +1,59 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
+import { Plus } from "lucide-react";
 
 const faqs = [
 	{
-		question: "How does Senzen differ from traditional budgeting apps?",
-		answer:
-			"Traditional budgeting tools rely on passive, retroactive expense tracking. Senzen uses deterministic rule-based logic to actively orchestrate your cash flow the moment income lands, eliminating manual intervention.",
+		question: "Is my bank connection safe?",
+		answer: "Read-only links, encrypted at rest, Senzen never moves money without a rule you wrote.",
 	},
 	{
-		question: "Do I have to move my primary bank accounts?",
-		answer:
-			"No. Senzen operates as an intelligent logic layer connecting to your existing checking and savings accounts via secure, read-only connections. You retain full custody.",
+		question: "Do I need to change banks?",
+		answer: "No. Senzen sits beside your accounts and coordinates them.",
 	},
 	{
-		question: "What happens when an irregular emergency occurs?",
-		answer:
-			"Senzen features an elastic buffer hold mechanism. If a balance falls below your defined safety threshold, lower-priority automated rules dynamically pause to absorb the shock without triggering overdrafts.",
+		question: "What happens when a rule can't run?",
+		answer: "It pauses into your buffer and tells you. Nothing bounces.",
 	},
 	{
-		question: "How are my credentials and data secured?",
-		answer:
-			"We enforce 256-bit encryption at rest and in transit, read-only tokenized banking connections, and strict data isolation. We never sell your financial data or execute unauthorized transfers.",
+		question: "How is this different from a budget app?",
+		answer: "Budgets track what you did. Senzen decides what happens next.",
 	},
 ];
 
 export function FaqSection() {
-	const [openIdx, setOpenIdx] = useState<number | null>(null);
+	const [openIndex, setOpenIndex] = useState<number | null>(null);
 
 	return (
-		<section className="py-20 sm:py-28" id="faq">
-			<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-				{/* Header */}
-				<div className="text-center mb-12">
-						<span className="font-mono text-xs text-stone-400 uppercase tracking-wider">
-							Clear Specifications
-						</span>
-					<h2 className="text-3xl font-bold text-stone-100 mt-2 tracking-tight">
-						Frequently Answered Questions
-					</h2>
-				</div>
-
-				{/* Accordion Stack */}
-				<div className="space-y-3">
-					{faqs.map((faq, idx) => {
-						const isOpen = openIdx === idx;
-						return (
-							<div
-								key={faq.question}
-								className="border border-stone-800/80 bg-[#141210] rounded-lg overflow-hidden transition-colors"
-							>
-								<button
-									type="button"
-									onClick={() => setOpenIdx(isOpen ? null : idx)}
-									className="w-full px-6 py-4 text-left flex items-center justify-between text-stone-200 hover:text-stone-100 font-medium text-base transition-colors"
-								>
-									<span>{faq.question}</span>
-									<ChevronDown
-										className={`w-4 h-4 text-stone-400 transition-transform duration-200 ${
-											isOpen ? "rotate-180 text-amber-400" : ""
-										}`}
-									/>
-								</button>
-								{isOpen && (
-									<div className="px-6 pb-4 pt-1 text-sm text-stone-400 leading-relaxed border-t border-stone-800/50">
-										{faq.answer}
-									</div>
-								)}
-							</div>
-						);
-					})}
+		<section className="w-full bg-[#EEEEEE]">
+			<div className="max-w-3xl mx-auto px-6 md:px-10 py-20 md:py-28">
+				<h2 className="font-sans text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#0A0A0A] text-center">
+					Questions, answered
+				</h2>
+				<div className="mt-12 md:mt-16 divide-y divide-[#E5E5E5] border-t border-[#E5E5E5]">
+					{faqs.map((faq, index) => (
+						<Collapsible
+							key={faq.question}
+							open={openIndex === index}
+							onOpenChange={(open) => setOpenIndex(open ? index : null)}
+						>
+							<CollapsibleTrigger className="group py-6 flex w-full items-center justify-between gap-6 text-left">
+								<span className="font-medium text-base md:text-lg text-[#0A0A0A]">
+									{faq.question}
+								</span>
+								<Plus
+									className={`h-5 w-5 shrink-0 text-[#0A0A0A] transition-transform duration-200 ${openIndex === index ? "rotate-45" : ""}`}
+								/>
+							</CollapsibleTrigger>
+							<CollapsibleContent>
+								<p className="pb-6 pr-10 text-base leading-relaxed text-[#333333]">
+									{faq.answer}
+								</p>
+							</CollapsibleContent>
+						</Collapsible>
+					))}
 				</div>
 			</div>
 		</section>
