@@ -1,12 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
-const planRows = [
-	"IF payday → route $300 → savings",
-	"IF balance > $800 → move 50% excess → buffer",
-	"ELSE → pause + notify",
-];
 
 export function AiPlanDemo() {
 	return (
@@ -18,45 +11,45 @@ export function AiPlanDemo() {
 							Ask for a plan in plain language
 						</h2>
 						<p className="mt-6 text-base md:text-lg leading-relaxed text-[#333333] max-w-md">
-							Senzen builds, runs, and adjusts money rules from one sentence — the same conversation you have in the planner, executed with mono precision.
+							Describe what you want to save for — Senzen drafts the plan, budgets, and categories. You stay in control.
 						</p>
 						<Link
 							href="/createPlan"
 							className="mt-8 inline-flex items-center gap-2 font-medium text-[#0A0A0A] underline underline-offset-4 decoration-1 hover:decoration-2 transition-all"
 						>
-							Try the planner
-							<ArrowRight className="h-4 w-4" />
+							Try the planner →
 						</Link>
 					</div>
 
 					<div>
 						<p className="text-lg leading-relaxed text-[#333333] mb-6 max-w-md">
-							I take home $3,200 a month. Can I save $600 without thinking about it?
+							I want to save $600 over the next 3 months for a trip.
 						</p>
 
 						<div className="bg-white rounded-xl border border-[#E5E5E5] p-6 md:p-8 space-y-6 max-w-lg">
 							<div>
-								<p className="text-sm leading-relaxed text-[#0A0A0A]">
-									Done. Here's your plan —
-								</p>
+								<p className="text-sm leading-relaxed text-[#0A0A0A]">Done. Here's your draft —</p>
 								<div className="space-y-4">
-									<p className="font-mono text-xs uppercase tracking-wider text-[#555555] mb-3">
-										RULE · AUTO-SAVE-600
-									</p>
-									<div className="space-y-3">
-										{planRows.map((row) => (
-											<div key={row} className="flex items-center gap-3">
-												<span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-[#1EC072]" />
-												<span className="font-mono text-sm text-[#0A0A0A]">{row}</span>
-											</div>
-										))}
+									<p className="font-mono text-xs uppercase tracking-wider text-[#555555]">Plan · Family Trip · $2,000 · 3 months</p>
+									<div className="space-y-2">
+										<div className="flex items-center justify-between py-1.5">
+											<span className="text-sm text-[#666666]">Budget</span>
+											<span className="font-mono text-sm tabular-nums text-[#0A0A0A]">$600 saved / $2,000</span>
+										</div>
+										<div className="h-1.5 w-full rounded-full bg-[#E5E5E5] overflow-hidden">
+											<div className="h-full w-[30%] rounded-full bg-[#1EC072]" />
+										</div>
+										<div className="flex items-center justify-between py-2">
+											<span className="text-sm text-[#666666]">Auto-save</span>
+											<span className="inline-flex items-center gap-2 rounded-full border border-[#E5E5E5] bg-[#F9F8F6] px-3 py-1 font-mono text-xs font-medium text-[#333333]">Off <span className="h-3 w-6 rounded-full bg-[#E5E5E5] relative"><span className="absolute left-0.5 top-0.5 h-2 w-2 rounded-full bg-white shadow" /></span> On</span>
+										</div>
+										<p className="font-mono text-xs leading-relaxed text-[#555555]">Auto-save is a per-plan toggle. Turn it on if you want Senzen to nudge you — it doesn't move money on its own.</p>
 									</div>
 								</div>
 							</div>
 
 							<div className="flex items-center gap-3 text-sm text-[#666666]">
-								<span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-[#1EC072]" />
-								<span>Plan ready · 3 rules · starts next payday</span>
+								<span className="h-2 w-2 rounded-full bg-[#1EC072]" /> Draft ready · edit budgets & categories before you start
 							</div>
 						</div>
 					</div>

@@ -6,20 +6,20 @@ import { Plus } from "lucide-react";
 
 const faqs = [
 	{
-		question: "Is my bank connection safe?",
-		answer: "Read-only links, encrypted at rest, Senzen never moves money without a rule you wrote.",
+		question: "Do I need to connect my bank?",
+		answer: "No. Senzen is manual by design — you log expenses daily and track progress yourself.",
 	},
 	{
-		question: "Do I need to change banks?",
-		answer: "No. Senzen sits beside your accounts and coordinates them.",
+		question: "What is a plan?",
+		answer: "A plan is a budget with a duration and categories. Create one, set budgets, then track spending against it.",
 	},
 	{
-		question: "What happens when a rule can't run?",
-		answer: "It pauses into your buffer and tells you. Nothing bounces.",
+		question: "What does auto-save do?",
+		answer: "It's a per-plan toggle. When on, Senzen nudges you to stay on track — it doesn't move money automatically.",
 	},
 	{
-		question: "How is this different from a budget app?",
-		answer: "Budgets track what you did. Senzen decides what happens next.",
+		question: "How is this different from a spreadsheet?",
+		answer: "Plans, budgets, categories, and a daily ledger in one place — with progress bars that keep you honest.",
 	},
 ];
 

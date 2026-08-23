@@ -47,7 +47,7 @@ export const Footer = () => {
 							SENZEN
 						</p>
 						<p className="mt-4 font-sans text-sm leading-relaxed text-[#BBBBBB] max-w-xs">
-							Automated money rules, executed weekly. Financial planning, built better.
+							Plans, budgets, and a daily ledger — progress you can see.
 						</p>
 					</div>
 					{columns.map((column) => (

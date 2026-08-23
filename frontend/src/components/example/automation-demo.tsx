@@ -1,134 +1,220 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 export function AutomationDemo() {
+	const [tab, setTab] = useState<"plans" | "ledger">("plans");
 	return (
 		<section className="w-full bg-[#EEEEEE] py-20 md:py-28 border-b border-[#E5E5E5]">
 			<div className="max-w-7xl mx-auto px-6 md:px-10">
-				<div className="flex flex-col items-center text-center mb-12">
+				<div className="flex flex-col items-center text-center mb-10">
 					<p className="font-mono text-xs font-semibold uppercase tracking-widest text-[#555555] mb-3">
-						[AUTONOMOUS_LEDGER_SURFACE]
+						Your money, led day by day
 					</p>
 					<h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#0A0A0A] max-w-2xl">
-						Every payday, routed deterministically before you wake up.
+						Plans you keep. Progress you can see.
 					</h2>
 					<p className="text-base md:text-lg text-[#333333] max-w-2xl mt-4 leading-relaxed">
-						No chat assistants. No prompt hallucinations. Senzen runs structured financial state machines triggered directly by your banking events.
+						Create a plan, set budgets by category, log expenses daily — and watch your progress stay on track.
 					</p>
 				</div>
 
-				{/* Single Warmwind OS product-surface card ("window") */}
-				<div className="w-full max-w-5xl mx-auto mt-12 bg-white rounded-lg border border-[#DCD8D3] shadow-[0_4px_24px_rgba(0,0,0,0.06)] overflow-hidden">
-					{/* Window Titlebar / Top Chrome */}
+				<div className="max-w-5xl mx-auto bg-white rounded-xl border border-[#E5E2DD] shadow-[0_4px_24px_rgba(0,0,0,0.06)] overflow-hidden">
 					<div className="h-11 bg-[#F9F8F6] border-b border-[#E5E2DD] px-4 flex items-center justify-between">
 						<div className="flex items-center gap-2">
+							<span className="h-2.5 w-2.5 rounded-full bg-[#E8E4DE] border border-[#E5E2DD]" />
 							<span className="h-2.5 w-2.5 rounded-full bg-[#E5E2DD]" />
 							<span className="h-2.5 w-2.5 rounded-full bg-[#DCD8D3]" />
-							<span className="h-2.5 w-2.5 rounded-full bg-[#D0CCC6]" />
-							<span className="font-mono text-xs font-semibold text-[#0A0A0A]">
-								senzen-engine://production-rules-v1.4
-							</span>
+							<span className="ml-2 font-mono text-xs font-medium tracking-tight text-[#555555]">Senzen — April Plan</span>
 						</div>
-						<div className="flex items-center gap-2 bg-[#EBF9F1] border border-[#1EC072]/30 px-2.5 py-0.5 rounded text-xs font-mono font-medium text-[#049F55]">
-							● LISTENER: ACTIVE [PORT 8080]
-						</div>
-					</div>
-
-					{/* Surface Sub-Header / Summary Metrics Strip */}
-					<div className="p-5 px-6 border-b border-[#E5E5E5] bg-[#FFFFFF]">
-						<div className="grid grid-cols-3 gap-6">
-							<div>
-								<p className="font-mono text-xs uppercase tracking-widest text-[#555555] mb-1">TOTAL INFLOW</p>
-								<p className="font-mono text-lg font-semibold text-[#0A0A0A]">$4,500.00</p>
-							</div>
-							<div>
-								<p className="font-mono text-xs uppercase tracking-widest text-[#555555] mb-1">ALLOCATED</p>
-								<p className="font-mono text-lg font-semibold text-[#0A0A0A]">$4,500.00 (100%)</p>
-							</div>
-							<div>
-								<p className="font-mono text-xs uppercase tracking-widest text-[#555555] mb-1">EXECUTION TIME</p>
-								<p className="font-mono text-lg font-semibold text-[#0A0A0A]">18ms</p>
-							</div>
+						<div className="hidden sm:flex items-center gap-1 rounded-full bg-[#F9F8F6] border border-[#E5E2DD] p-1">
+							<button
+								onClick={() => setTab("plans")}
+								className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${tab==="plans" ? "bg-[#0A0A0A] text-white" : "text-[#555555] hover:text-[#0A0A0A]"}`}>Plans</button>
+							<button
+								onClick={() => setTab("ledger")}
+								className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${tab==="ledger" ? "bg-[#0A0A0A] text-white" : "text-[#555555] hover:text-[#0A0A0A]"}`}>Daily ledger</button>
 						</div>
 					</div>
 
-					{/* Rule Ledger Rows (Dense, Realistic Business Rules) */}
-					<div className="bg-[#FFFFFF]">
-						<div className="font-mono text-[11px] uppercase tracking-wider text-[#666666] bg-[#FAFAFA] border-b border-[#E5E5E5] px-5 py-2.5 grid grid-cols-12 gap-2">
-							<div className="col-span-3">01. TRIGGER / EVENT</div>
-							<div className="col-span-4">02. CONDITION &amp; LOGIC</div>
-							<div className="col-span-3">03. ROUTED ACTION</div>
-							<div className="col-span-2 text-right">04. STATUS / TIME</div>
-						</div>
+					<div className="p-6 md:p-8 space-y-6">
+						<div className="space-y-6">
+							 {/* Tab 1 — Plans */}
+							{tab === "plans" && (
+								<div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-5 md:p-6 bg-white">
+									 {/* Card A: April Plan */}
+									<div className="rounded-xl border border-[#E5E5E5] bg-white p-4">
+										<div className="flex items-start justify-between">
+											<div>
+												<p className="font-sans text-base font-semibold tracking-tight text-[#0A0A0A]">April Plan</p>
+												<p className="font-mono text-xs text-[#555555]">personal · Apr 2026</p>
+											</div>
+											<span className="inline-flex items-center gap-1.5 rounded-full border border-[#1EC072]/30 bg-[#EBF9F1] px-2.5 py-1 font-mono text-xs font-medium text-[#049F55]">
+												<span className="h-1.5 w-1.5 rounded-full bg-[#1EC072]" /> on track
+											</span>
+										</div>
+										<div className="mt-4 space-y-2">
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Budget</span>
+												<span className="font-mono text-sm tabular-nums text-[#0A0A0A]">$1,500</span>
+											</div>
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Saved so far</span>
+												<span className="font-mono text-sm tabular-nums text-[#0A0A0A]">$1,200 / $1,500</span>
+											</div>
+											<div className="h-1.5 w-full rounded-full bg-[#E5E5E5] overflow-hidden">
+												<div className="h-full w-[80%] rounded-full bg-[#1EC072]" />
+											</div>
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Auto-save</span>
+												<span className="inline-flex items-center gap-1.5 font-mono text-sm text-[#0A0A0A]"><span className="h-1.5 w-1.5 rounded-full bg-[#1EC072]" /> Enabled</span>
+											</div>
+										</div>
+									</div>
 
-						{/* Row 1: Direct Deposit */}
-						<div className="px-5 py-3.5 grid grid-cols-12 gap-2 border-b border-[#E5E5E5] items-center hover:bg-[#FAFAFA] transition-colors">
-							<div className="col-span-3">
-								<span className="font-mono text-xs font-medium text-[#0A0A0A]">ACH_CREDIT // EMPLOYER_PAYROLL</span>
-							</div>
-							<div className="col-span-4">
-								<span className="font-mono text-xs text-[#333333]">IF amount &gt;= $3,000.00</span>
-							</div>
-							<div className="col-span-3">
-								<span className="font-mono text-xs font-semibold text-[#0A0A0A]">Deposit $3,200.00 → Checking</span>
-							</div>
-							<div className="col-span-2 text-right">
-								<span className="font-mono text-xs text-[#049F55]">✓ EXECUTED (00:01:04)</span>
-							</div>
-						</div>
+									 {/* Card B: Family Trip */}
+									<div className="rounded-xl border border-[#E5E5E5] bg-white p-4">
+										<div className="flex items-start justify-between">
+											<div>
+												<p className="font-sans text-base font-semibold tracking-tight text-[#0A0A0A]">Family Trip</p>
+												<p className="font-mono text-xs text-[#555555]">family · May 2026</p>
+											</div>
+											<span className="inline-flex items-center gap-1.5 rounded-full border border-[#1EC072]/30 bg-[#EBF9F1] px-2.5 py-1 font-mono text-xs font-medium text-[#049F55]">
+												<span className="h-1.5 w-1.5 rounded-full bg-[#1EC072]" /> on track
+											</span>
+										</div>
+										<div className="mt-4 space-y-2">
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Budget</span>
+												<span className="font-mono text-sm tabular-nums text-[#0A0A0A]">$2,000</span>
+											</div>
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Saved so far</span>
+												<span className="font-mono text-sm tabular-nums text-[#0A0A0A]">$800 / $2,000</span>
+											</div>
+											<div className="h-1.5 w-full rounded-full bg-[#E5E5E5] overflow-hidden">
+												<div className="h-full w-[40%] rounded-full bg-[#1EC072]" />
+											</div>
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Auto-save</span>
+												<span className="inline-flex items-center gap-1.5 font-mono text-sm text-[#0A0A0A]"><span className="h-1.5 w-1.5 rounded-full bg-[#1EC072]" /> Disabled</span>
+											</div>
+										</div>
+									</div>
 
-						{/* Row 2: Emergency Reserve Sweep */}
-						<div className="px-5 py-3.5 grid grid-cols-12 gap-2 border-b border-[#E5E5E5] items-center hover:bg-[#FAFAFA] transition-colors">
-							<div className="col-span-3">
-								<span className="font-mono text-xs font-medium text-[#0A0A0A]">RULE // RESERVE_SWEEP</span>
-							</div>
-							<div className="col-span-4">
-								<span className="font-mono text-xs text-[#333333]">SPLIT 15% (Checking &gt; Threshold)</span>
-							</div>
-							<div className="col-span-3">
-								<span className="font-mono text-xs font-semibold text-[#0A0A0A]">Transfer $480.00 → High-Yield Vault</span>
-							</div>
-							<div className="col-span-2 text-right">
-								<span className="font-mono text-xs text-[#049F55]">✓ EXECUTED (00:01:05)</span>
-							</div>
-						</div>
+									 {/* Card C: Buffer */}
+									<div className="rounded-xl border border-[#E5E5E5] bg-white p-4">
+										<div className="flex items-start justify-between">
+											<div>
+												<p className="font-sans text-base font-semibold tracking-tight text-[#0A0A0A]">Buffer</p>
+												<p className="font-mono text-xs text-[#555555]">personal · Apr 2026</p>
+											</div>
+											<span className="inline-flex items-center gap-1.5 rounded-full border border-[#1EC072]/30 bg-[#EBF9F1] px-2.5 py-1 font-mono text-xs font-medium text-[#049F55]">
+												<span className="h-1.5 w-1.5 rounded-full bg-[#1EC072]" /> on track
+											</span>
+										</div>
+										<div className="mt-4 space-y-2">
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Budget</span>
+												<span className="font-mono text-sm tabular-nums text-[#0A0A0A]">$600</span>
+											</div>
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Saved so far</span>
+												<span className="font-mono text-sm tabular-nums text-[#0A0A0A]">$600 / $600</span>
+											</div>
+											<div className="h-1.5 w-full rounded-full bg-[#E5E5E5] overflow-hidden">
+												<div className="h-full w-full rounded-full bg-[#1EC072]" />
+											</div>
+											<div className="flex items-center justify-between py-1">
+												<span className="text-sm text-[#666666]">Auto-save</span>
+												<span className="inline-flex items-center gap-1.5 font-mono text-sm text-[#0A0A0A]"><span className="h-1.5 w-1.5 rounded-full bg-[#1EC072]" /> Enabled</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							)}
 
-						{/* Row 3: Discretionary Buffer Split */}
-						<div className="px-5 py-3.5 grid grid-cols-12 gap-2 border-b border-[#E5E5E5] items-center hover:bg-[#FAFAFA] transition-colors">
-							<div className="col-span-3">
-								<span className="font-mono text-xs font-medium text-[#0A0A0A]">RULE // DISCRETIONARY_LOCK</span>
-							</div>
-							<div className="col-span-4">
-								<span className="font-mono text-xs text-[#333333]">SPLIT 10% (Fixed Buffer)</span>
-							</div>
-							<div className="col-span-3">
-								<span className="font-mono text-xs font-semibold text-[#0A0A0A]">Allocate $320.00 → Buffer Account</span>
-							</div>
-							<div className="col-span-2 text-right">
-								<span className="font-mono text-xs text-[#049F55]">✓ EXECUTED (00:01:05)</span>
-							</div>
-						</div>
+							 {/* Tab 2 — Daily ledger */}
+							{tab === "ledger" && (
+								<div className="p-5 md:p-6 bg-white space-y-5">
+									<div className="flex items-center justify-between py-1">
+										<span className="text-sm text-[#666666]">Total Expenses</span>
+										<span className="font-mono text-2xl font-semibold tabular-nums text-[#0A0A0A]">$342.50</span>
+									</div>
 
-						{/* Row 4: Auto-Invest DCA */}
-						<div className="px-5 py-3.5 grid grid-cols-12 gap-2 items-center hover:bg-[#FAFAFA] transition-colors">
-							<div className="col-span-3">
-								<span className="font-mono text-xs font-medium text-[#0A0A0A]">RULE // INDEX_PORTFOLIO_DCA</span>
-							</div>
-							<div className="col-span-4">
-								<span className="font-mono text-xs text-[#333333]">REMAINDER (Post-Sweeps)</span>
-							</div>
-							<div className="col-span-3">
-								<span className="font-mono text-xs font-semibold text-[#0A0A0A]">Execute $160.00 → S&amp;P 500 DCA</span>
-							</div>
-							<div className="col-span-2 text-right">
-								<span className="font-mono text-xs text-[#049F55]">✓ EXECUTED (00:01:06)</span>
-							</div>
+									<div className="text-sm text-[#666666] mb-3">
+										Groceries $128.40 · Transport $42.00 · Eating out $86.10 · Utilities $86.00
+									</div>
+
+								 {/* Category Chips */}
+									<div className="flex gap-2 mb-4">
+										<button
+											role="button"
+											className="rounded-full border border-[#E5E5E5] bg-[#F9F8F6] px-3 py-1 font-mono text-xs font-medium text-[#333333] hover:bg-[#EBF9F1]"
+										>Groceries</button>
+										<button
+											role="button"
+											className="rounded-full border border-[#E5E5E5] bg-[#F9F8F6] px-3 py-1 font-mono text-xs font-medium text-[#333333] hover:bg-[#EBF9F1]"
+										>Transport</button>
+										<button
+											role="button"
+											className="rounded-full border border-[#E5E5E5] bg-[#F9F8F6] px-3 py-1 font-mono text-xs font-medium text-[#333333] hover:bg-[#EBF9F1]"
+										>Eating out</button>
+										<button
+											role="button"
+											className="rounded-full border border-[#E5E5E5] bg-[#F9F8F6] px-3 py-1 font-mono text-xs font-medium text-[#333333] hover:bg-[#EBF9F1]"
+										>Utilities</button>
+									</div>
+
+								 {/* Transaction Rows */}
+									<div className="space-y-3 border-b border-[#E5E5E5] last:border-0">
+										<div className="flex items-center justify-between py-3">
+											<div className="flex items-center gap-3">
+												<div className="h-8 w-8 rounded-full bg-[#F9F8F6] border border-[#E5E2DD]"></div>
+												<span className="text-sm font-medium text-[#0A0A0A]">Groceries</span>
+											</div>
+											<span className="font-mono text-xs text-[#555555]">2026-04-08</span>
+											<span className="text-xs text-[#666666]">Weekly shop</span>
+											<span className="font-mono text-sm font-medium tabular-nums text-[#0A0A0A]">$64.20</span>
+										</div>
+
+										<div className="flex items-center justify-between py-3">
+											<div className="flex items-center gap-3">
+												<div className="h-8 w-8 rounded-full bg-[#F9F8F6] border border-[#E5E2DD]"></div>
+												<span className="text-sm font-medium text-[#0A0A0A]">Transport</span>
+											</div>
+											<span className="font-mono text-xs text-[#555555]">2026-04-09</span>
+											<span className="text-xs text-[#666666]">Bus pass</span>
+											<span className="font-mono text-sm font-medium tabular-nums text-[#0A0A0A]">$28.00</span>
+										</div>
+
+										<div className="flex items-center justify-between py-3">
+											<div className="flex items-center gap-3">
+												<div className="h-8 w-8 rounded-full bg-[#F9F8F6] border border-[#E5E2DD]"></div>
+												<span className="text-sm font-medium text-[#0A0A0A]">Eating out</span>
+											</div>
+											<span className="font-mono text-xs text-[#555555]">2026-04-10</span>
+											<span className="text-xs text-[#666666]">Lunch</span>
+											<span className="font-mono text-sm font-medium tabular-nums text-[#0A0A0A]">$18.50</span>
+										</div>
+
+										<div className="flex items-center justify-between py-3">
+											<div className="flex items-center gap-3">
+												<div className="h-8 w-8 rounded-full bg-[#F9F8F6] border border-[#E5E2DD]"></div>
+												<span className="text-sm font-medium text-[#0A0A0A]">Groceries</span>
+											</div>
+											<span className="font-mono text-xs text-[#555555]">2026-04-11</span>
+											<span className="text-xs text-[#666666]">Market</span>
+											<span className="font-mono text-sm font-medium tabular-nums text-[#0A0A0A]">$32.10</span>
+										</div>
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 
-					{/* Footer Console / Audit Log Strip */}
-					<div className="bg-[#101516] text-[#EEEEEE] px-5 py-3 border-t border-[#101516] flex items-center justify-between font-mono text-xs">
-						<div>&gt; [AUDIT_OK] 4 of 4 rules processed successfully. 0 errors, 0 manual interventions.</div>
-						<div>VERIFIED BY LEDGER HASH #8F29A</div>
+					<div className="bg-[#F9F8F6] border-t border-[#E5E2DD] px-5 py-3 flex items-center justify-between">
+						<span className="font-mono text-xs text-[#555555]">3 plans · 12 transactions · updated today</span>
+						<span className="font-mono text-xs text-[#555555]">Auto-save is a per-plan toggle</span>
 					</div>
 				</div>
 			</div>

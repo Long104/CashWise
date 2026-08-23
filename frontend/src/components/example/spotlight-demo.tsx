@@ -10,22 +10,14 @@ export function HeroComposer() {
 			<div className="relative z-10 w-full px-6 md:px-10 pt-6 pb-4 bg-[#EEEEEE]/90 backdrop-blur-sm border-b border-[#E5E5E5]">
 				<div className="max-w-7xl mx-auto flex items-center justify-between">
 					<div className="flex items-center gap-6 font-mono text-xs uppercase tracking-widest text-[#555555]">
-						<div className="flex items-center gap-2">
-							<div className="h-2 w-2 rounded-full bg-[#1EC072]" />
-							<span>[SYS_STATUS: ACTIVE]</span>
-						</div>
-						<span>LATENCY: 14MS</span>
-						<span>PIPELINE: PAYDAY_AUTOMATION_V2</span>
-						<span>EXECUTION_MODE: INSTANT_ROUTING</span>
+						<p>Plans · Budgets · Daily ledger</p>
 					</div>
 				</div>
 			</div>
 
 			<div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 flex-1 flex items-center">
 				<div className="w-full max-w-6xl flex flex-col items-start text-left">
-					<div className="mb-3 font-mono text-xs text-[#555555] uppercase tracking-wider">
-						[01 // CASHFLOW_ENGINE]
-					</div>
+					<div aria-hidden="true" className="mt-6 h-[2px] w-24 bg-[#0A0A0A]" />
 
 					<h1 className="font-sans font-extrabold text-[#0A0A0A] leading-[0.9]">
 						<span className="block text-3xl md:text-5xl lg:text-6xl tracking-tight mb-1">
@@ -47,13 +39,11 @@ export function HeroComposer() {
 						</span>
 					</h1>
 
-					<div aria-hidden="true" className="mt-6 h-[2px] w-24 bg-[#0A0A0A]" />
-
 					<p className="mt-6 text-lg md:text-xl leading-relaxed text-[#333333] max-w-xl">
-						Build automated money rules with logic, backtest your budget, then execute—all in one place.
+						Plan your money. Track every day. See yourself get ahead.
 					</p>
 
-					<div className="mt-10">
+					<div aria-hidden="true" className="mt-10">
 						<Link href="/sign-up" className="group inline-flex items-center gap-2 rounded-full bg-black text-white text-base md:text-lg px-8 py-3.5 hover:bg-neutral-800 transition-all active:scale-[0.98] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black">
 							Get started
 							<ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -67,35 +57,38 @@ export function HeroComposer() {
 					<div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E5E5]">
 						<div className="flex flex-col items-center py-8 sm:py-10 sm:px-8 first:sm:pl-0 last:sm:pr-0">
 							<div className="text-3xl md:text-4xl font-extrabold text-[#0A0A0A] tabular-nums tracking-tight">
-								$12.8M+
+								3 steps
 							</div>
 							<div className="mt-3 text-xs font-medium uppercase tracking-[0.08em] text-[#555555]">
-								Managed cashflow
+								Plan → Budget → Ledger
 							</div>
-							<div className="mt-3 font-mono text-xs text-[#049F55]">
-								+34% MoM
+							<div className="mt-3 font-mono text-xs text-[#555555]">
+								No spreadsheets
 							</div>
 						</div>
 						<div className="flex flex-col items-center py-8 sm:py-10 sm:px-8 first:sm:pl-0 last:sm:pr-0">
 							<div className="text-3xl md:text-4xl font-extrabold text-[#0A0A0A] tabular-nums tracking-tight">
-								45,210
+								Every expense
 							</div>
 							<div className="mt-3 text-xs font-medium uppercase tracking-[0.08em] text-[#555555]">
-								Rules executed
+								Categorized daily
 							</div>
-							<div className="mt-3 font-mono text-xs text-[#049F55]">
-								0.00ms ERR
+							<div className="mt-3 font-mono text-xs text-[#555555]">
+								Groceries · Transport · Eating out
 							</div>
 						</div>
 						<div className="flex flex-col items-center py-8 sm:py-10 sm:px-8 first:sm:pl-0 last:sm:pr-0">
 							<div className="text-3xl md:text-4xl font-extrabold text-[#0A0A0A] tabular-nums tracking-tight">
-								100.0%
+								$1,200 / $1,500
 							</div>
 							<div className="mt-3 text-xs font-medium uppercase tracking-[0.08em] text-[#555555]">
-								Deterministic logic
+								Progress you can see
 							</div>
-							<div className="mt-3 font-mono text-xs text-[#049F55]">
-								NO AI GUESSWORK
+							<div className="mt-3 font-mono text-xs text-[#555555]">
+								· on track
+								<span className="inline-flex items-center gap-1.5 rounded-full border border-[#1EC072]/30 bg-[#EBF9F1] px-2.5 py-1 font-mono text-xs font-medium text-[#049F55]">
+									<span className="h-1.5 w-1.5 rounded-full bg-[#1EC072]" />&nbsp;on track
+								</span>
 							</div>
 						</div>
 					</div>

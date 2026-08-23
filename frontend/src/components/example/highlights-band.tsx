@@ -3,26 +3,26 @@ import React from "react";
 const highlights = [
 	{
 		number: "01",
-		title: "Backtest before you commit",
-		body: "dry-run any rule against your last 90 days.",
+		title: "Plans for real life",
+		body: "Name it, set a budget, pick a duration.",
 		span: "md:col-span-3",
 	},
 	{
 		number: "02",
-		title: "Buffers absorb messy weeks",
-		body: "a rule can't run? it holds, never fails.",
+		title: "Budgets by category",
+		body: "Groceries, Transport, Eating out — your call.",
 		span: "md:col-span-2",
 	},
 	{
 		number: "03",
-		title: "Zero spreadsheets",
-		body: "plain-language rules, mono-precision execution.",
+		title: "Daily ledger",
+		body: "Log expenses as you go. Every entry counts.",
 		span: "md:col-span-2",
 	},
 	{
 		number: "04",
-		title: "Read-only by design",
-		body: "bank links view money, never move it without you.",
+		title: "Progress you can see",
+		body: "$1,200 / $1,500 · on track. Stay motivated.",
 		span: "md:col-span-3",
 	},
 ];

@@ -3,8 +3,8 @@ import "@/app/globals.css";
 import { Navbar } from "@/components/example/navbar";
 
 export const metadata: Metadata = {
-	title: "Senzen",
-	description: "Smart budgeting and financial planning made simple",
+	title: "Senzen — Plan your money. Track every day.",
+	description: "Plans, budgets, categories, and a daily ledger — progress you can see. Auto-save is a per-plan toggle.",
 };
 
 export default async function RootLayout({
