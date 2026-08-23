@@ -1,5 +1,15 @@
 import React from "react";
 
+const DottedHighlight = ({ color = "#8B5CF6", className = "" }: { color: string; className?: string }) => {
+  return (
+    <span aria-hidden="true" className={`absolute z-0 block ${className}`} style={{
+      backgroundColor: color,
+      backgroundImage: "radial-gradient(circle, rgba(10,10,10,0.12) 2.5px, transparent 2.5px)",
+      backgroundSize: "14px 14px",
+    }} />
+  );
+};
+
 const highlights = [
 	{
 		number: "01",
@@ -46,7 +56,7 @@ export function HighlightsBand() {
 						<div key={item.number} className={`py-8 md:py-10 ${item.span} ${rowBorders[i]}`}>
 							<div className="flex items-center gap-3">
 								<span className="font-mono text-sm text-[#555555]">{item.number}</span>
-								<span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-[#1EC072]" />
+								<DottedHighlight color="#8B5CF6" />
 								<h3 className="font-sans text-lg md:text-xl font-semibold tracking-tight text-[#0A0A0A]">
 									{item.title}
 								</h3>

@@ -4,6 +4,16 @@ import React, { useState } from "react";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 import { Plus } from "lucide-react";
 
+const DottedHighlight = ({ color = "#1EC072", className = "" }: { color: string; className?: string }) => {
+  return (
+    <span aria-hidden="true" className={`absolute z-0 block ${className}`} style={{
+      backgroundColor: color,
+      backgroundImage: "radial-gradient(circle, rgba(10,10,10,0.12) 2.5px, transparent 2.5px)",
+      backgroundSize: "14px 14px",
+    }} />
+  );
+};
+
 const faqs = [
 	{
 		question: "Do I need to connect my bank?",
@@ -31,6 +41,14 @@ export function FaqSection() {
 			<div className="max-w-3xl mx-auto px-6 md:px-10 py-20 md:py-28">
 				<h2 className="font-sans text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#0A0A0A] text-center">
 					Questions, answered
+					<span aria-hidden="true" className="absolute left-[-4%] bottom-[-0.35rem] z-0 block h-[44%] w-[108%] bg-[#1EC072]"
+						style={{
+							backgroundImage: "radial-gradient(circle, rgba(10,10,10,0.12) 2.5px, transparent 2.5px)",
+							backgroundSize: "14px 14px",
+						}}
+					>
+						answered
+					</span>
 				</h2>
 				<div className="mt-12 md:mt-16 divide-y divide-[#E5E5E5] border-t border-[#E5E5E5]">
 					{faqs.map((faq, index) => (

@@ -10,8 +10,19 @@ export function AutomationDemo() {
 					<p className="font-mono text-xs font-semibold uppercase tracking-widest text-[#555555] mb-3">
 						Your money, led day by day
 					</p>
-					<h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#0A0A0A] max-w-2xl">
-						Plans you keep. Progress you can see.
+					<h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#0A0A0A]">
+						Plans you keep. <span className="relative inline-block">
+							<span
+								aria-hidden="true"
+								className="absolute left-[-4%] bottom-[-0.35rem] z-0 block h-[44%] w-[108%] bg-[#0EA5E9]"
+								style={{
+									backgroundImage:
+										"radial-gradient(circle, rgba(10,10,10,0.12) 2.5px, transparent 2.5px)",
+									backgroundSize: "14px 14px",
+								}}
+							/>
+							<span className="relative z-10">Progress</span>
+						</span> you can see.
 					</h2>
 					<p className="text-base md:text-lg text-[#333333] max-w-2xl mt-4 leading-relaxed">
 						Create a plan, set budgets by category, log expenses daily — and watch your progress stay on track.
@@ -38,10 +49,10 @@ export function AutomationDemo() {
 
 					<div className="p-6 md:p-8 space-y-6">
 						<div className="space-y-6">
-							 {/* Tab 1 — Plans */}
+							{/* Tab 1 — Plans */}
 							{tab === "plans" && (
 								<div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-5 md:p-6 bg-white">
-									 {/* Card A: April Plan */}
+									{/* Card A: April Plan */}
 									<div className="rounded-xl border border-[#E5E5E5] bg-white p-4">
 										<div className="flex items-start justify-between">
 											<div>
@@ -70,7 +81,6 @@ export function AutomationDemo() {
 											</div>
 										</div>
 									</div>
-
 									 {/* Card B: Family Trip */}
 									<div className="rounded-xl border border-[#E5E5E5] bg-white p-4">
 										<div className="flex items-start justify-between">
@@ -100,7 +110,6 @@ export function AutomationDemo() {
 											</div>
 										</div>
 									</div>
-
 									 {/* Card C: Buffer */}
 									<div className="rounded-xl border border-[#E5E5E5] bg-white p-4">
 										<div className="flex items-start justify-between">
@@ -145,7 +154,7 @@ export function AutomationDemo() {
 										Groceries $128.40 · Transport $42.00 · Eating out $86.10 · Utilities $86.00
 									</div>
 
-								 {/* Category Chips */}
+									 {/* Category Chips */}
 									<div className="flex gap-2 mb-4">
 										<button
 											role="button"
@@ -165,7 +174,7 @@ export function AutomationDemo() {
 										>Utilities</button>
 									</div>
 
-								 {/* Transaction Rows */}
+									 {/* Transaction Rows */}
 									<div className="space-y-3 border-b border-[#E5E5E5] last:border-0">
 										<div className="flex items-center justify-between py-3">
 											<div className="flex items-center gap-3">
@@ -212,12 +221,13 @@ export function AutomationDemo() {
 						</div>
 					</div>
 
-					<div className="bg-[#F9F8F6] border-t border-[#E5E2DD] px-5 py-3 flex items-center justify-between">
-						<span className="font-mono text-xs text-[#555555]">3 plans · 12 transactions · updated today</span>
-						<span className="font-mono text-xs text-[#555555]">Auto-save is a per-plan toggle</span>
+						<div className="bg-[#F9F8F6] border-t border-[#E5E2DD] px-5 py-3 flex items-center justify-between">
+							<span className="font-mono text-xs text-[#555555]">3 plans · 12 transactions · updated today</span>
+							<span className="font-mono text-xs text-[#555555]">Auto-save is a per-plan toggle</span>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-	);
-}
+			</section>
+		);
+	}
+
