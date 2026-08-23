@@ -28,7 +28,7 @@ export function WeeklyClarity() {
 							Your money, one line a week
 						</h2>
 						<p className="mt-6 text-base md:text-lg leading-relaxed text-[#333333] max-w-md">
-							Every week closes itself out — saved, spent, on-track or behind, in a single ledger line you&apos;ll actually read.
+							Every week closes itself out — saved, spent, on-track or behind, in a single ledger line you'll actually read.
 						</p>
 						<Link
 							href="/home"
@@ -39,7 +39,7 @@ export function WeeklyClarity() {
 						</Link>
 					</div>
 
-					<div className="w-full bg-white border border-[#E5E5E5] rounded-[8px] p-6 md:p-8">
+					<div className="mt-8 border-t border-[#E5E5E5] pt-8">
 						<div className="space-y-6">
 							{ledgerRows.map((row) => (
 								<div key={row.label}>
@@ -47,7 +47,7 @@ export function WeeklyClarity() {
 										<span aria-hidden="true" className={`h-2 w-2 shrink-0 rounded-full ${row.onTrack ? "bg-[#1EC072]" : "bg-[#BBBBBB]"}`} />
 										<span className="font-mono text-sm text-[#0A0A0A]">{row.label}</span>
 									</div>
-									<div className="mt-3 h-1 w-full rounded bg-[#E5E5E5]">
+									<div className="h-1 w-full rounded bg-[#E5E5E5]">
 										<div className="h-1 rounded bg-[#1EC072]" style={{ width: row.fill }} />
 									</div>
 								</div>

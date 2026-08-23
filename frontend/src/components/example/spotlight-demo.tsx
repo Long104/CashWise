@@ -40,14 +40,14 @@ export function HeroComposer() {
 					<div className="w-full flex flex-col items-start text-left">
 						<div aria-hidden="true" className="h-[2px] w-24 bg-[#0A0A0A]" />
 
-						<h1 className="font-sans font-extrabold text-[#0A0A0A] leading-[0.9] mt-6">
-							<span className="block text-3xl md:text-5xl lg:text-6xl tracking-tight mb-1">
+						<h1 className="font-sans font-extrabold text-[#0A0A0A] leading-[0.9]">
+							<span className="block text-3xl md:text-5xl lg:text-6xl tracking-tight">
 								Meet
 							</span>
 							<span className="relative inline-block">
 								<span
 									aria-hidden="true"
-									className="absolute right-[-1rem] md:right-[-2rem] bottom-[-0.75rem] z-0 block h-[52%] w-[72%] bg-[#1EC072]"
+									className="absolute right-[-1rem] md:right-[-2rem] bottom-[-0.5rem] z-0 block h-[52%] w-[72%] bg-[#1EC072]"
 									style={{
 										backgroundImage:
 											"radial-gradient(circle, rgba(10,10,10,0.12) 2.5px, transparent 2.5px)",
@@ -60,7 +60,7 @@ export function HeroComposer() {
 							</span>
 						</h1>
 
-						<p className="mt-6 text-lg md:text-xl leading-relaxed text-[#333333] max-w-xl">
+						<p className="mt-8 text-lg md:text-xl leading-relaxed text-[#333333] max-w-xl">
 							Plan your money. Track every day. See yourself get ahead.
 						</p>
 
@@ -72,15 +72,12 @@ export function HeroComposer() {
 						</div>
 					</div>
 
-					{/* RIGHT: mascot slot */}
-					<div className="relative w-full max-w-[360px] aspect-square mx-auto lg:max-w-[520px] lg:mx-0 lg:ml-auto">
-						{/* dotted motif halo — emerald */}
-						<div aria-hidden="true" className="absolute inset-0 z-0 rounded-[2rem] bg-[#1EC072] opacity-[0.14]"
-							style={{ backgroundImage: "radial-gradient(circle, rgba(10,10,10,0.14) 2.5px, transparent 2.5px)", backgroundSize: "14px 14px" }} />
-						{/* inner card — warm white */}
-						<div className="absolute inset-[10%] z-10 rounded-[1.5rem] border border-[#E5E2DD] bg-white/90 backdrop-blur shadow-[0_8px_32px_rgba(0,0,0,0.06)] flex flex-col items-center justify-center p-8">
-							<img src="/logo.png" alt="Senzen" className="h-24 w-24 object-contain opacity-90" />
-						</div>
+					{/* RIGHT: mascot slot — full-size floating, no container chrome */}
+					<div className="relative w-full aspect-[4/3] mx-auto lg:max-w-[520px]">
+						{/* subtle dotted halo — flat, no box edge */}
+						<div aria-hidden="true" className="absolute inset-0 z-0 opacity-[0.14]"
+							style={{ backgroundImage: "radial-gradient(circle, #1EC072 3px, transparent 3px)", backgroundSize: "18px 18px" }} />
+						<img src="/logo.png" alt="Senzen" className="relative z-10 h-full w-full object-contain drop-shadow-2xl" />
 					</div>
 				</div>
 			</div>
