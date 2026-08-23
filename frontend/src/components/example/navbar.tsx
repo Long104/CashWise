@@ -13,7 +13,7 @@ export function Navbar() {
 		<nav className=" flex justify-between py-3 px-20 text-primary-foreground bg-primary">
 			<div className="text-2xl flex items-center">
 				<Image
-					src={"/logo.webp"}
+					src={"/logo.png"}
 					alt="Basic responsive image"
 					className="mx-auto rounded-3xl object-cover object-center mr-2"
 					width={0}

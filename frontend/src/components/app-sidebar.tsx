@@ -34,7 +34,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 		user: {
 			name: users?.name,
 			email: users?.email,
-			avatar: "/logo.webp",
+			avatar: "/logo.png",
 		},
 		teams: [
 			{

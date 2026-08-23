@@ -15,7 +15,7 @@ export const Footer = () => {
 				<div>
 					<div className="text-2xl flex">
 						<Image
-							src={"/logo.webp"}
+							src={"/logo.png"}
 							alt="Basic responsive image"
 							// className="mx-auto rounded-3xl object-cover object-center mr-2"
 							className="rounded-3xl object-cover object-center mr-2"
