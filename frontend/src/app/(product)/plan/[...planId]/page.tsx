@@ -177,13 +177,21 @@ export default function DailyExpenses() {
 
 	return (
 		<>
-			<div className="min-h-screen ">
+			<div className="min-h-screen bg-background">
 				<main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 					<div className="px-4 py-6 sm:px-0">
+						<div className="mb-8">
+							<p className="font-mono text-xs text-primary mb-2">
+								01 / DAILY EXPENSE LEDGER
+							</p>
+							<h1 className="font-sans font-semibold text-3xl tracking-tight text-foreground">
+								Daily Expenses
+							</h1>
+						</div>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-							<Card className="col-span-1 md:col-span-2">
+							<Card className="col-span-1 md:col-span-2 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 								<CardHeader>
-									<CardTitle>Add New Expense</CardTitle>
+									<CardTitle className="font-sans font-semibold text-xl">Add New Expense</CardTitle>
 									<CardDescription>Track your daily spending</CardDescription>
 								</CardHeader>
 								<form onSubmit={handleSubmit}>
@@ -197,7 +205,7 @@ export default function DailyExpenses() {
 														<DropdownMenuTrigger asChild>
 															<Button
 																variant="outline"
-																className="w-full justify-between"
+																className="w-full justify-between border-border"
 															>
 																{(Array.isArray(categories) &&
 																	categories.find(
@@ -208,7 +216,7 @@ export default function DailyExpenses() {
 																<ChevronDown className="ml-2 h-4 w-4 opacity-50" />
 															</Button>
 														</DropdownMenuTrigger>
-														<DropdownMenuContent className="w-[--radix-dropdown-trigger-width] min-w-[8rem]">
+														<DropdownMenuContent className="w-[--radix-dropdown-trigger-width] min-w-[8rem] border-border bg-popover">
 															{Array.isArray(categories) &&
 																categories?.map((category: category) => (
 																	<DropdownMenuItem
@@ -223,21 +231,22 @@ export default function DailyExpenses() {
 																	>
 																		{category?.name}
 																		<Button
-																			variant="outline"
-																			className="h-4 w-4 opacity-50 hover:opacity-100 bg-secondary"
+																			variant="ghost"
+																			size="icon"
+																			className="h-5 w-5 text-muted-foreground hover:text-destructive"
 																			onClick={(e) => {
 																				e.stopPropagation();
 																				setCategoryToDelete(category.id);
 																				setIsDeleteDialogOpen(true);
 																			}}
 																		>
-																			X
+																			✕
 																		</Button>
 																	</DropdownMenuItem>
 																))}
 															<DropdownMenuItem
 																onClick={() => setIsAddingCategory(true)}
-																className="justify-center font-medium"
+																className="justify-center font-medium text-primary"
 															>
 																+ Add new category
 															</DropdownMenuItem>
@@ -247,13 +256,15 @@ export default function DailyExpenses() {
 												<div className="space-y-2">
 													<Label htmlFor="amount">Amount</Label>
 													<div className="relative">
-														<DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+														<span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground font-mono">
+															$
+														</span>
 														<Input
 															id="amount"
 															name="amount"
 															type="number"
 															placeholder="0.00"
-															className="pl-10"
+															className="pl-8 font-mono"
 															required
 															value={
 																newTransaction.amount === 0
@@ -263,7 +274,6 @@ export default function DailyExpenses() {
 															onChange={(e) =>
 																setNewTransaction({
 																	...newTransaction,
-																	// amount: parseFloat(e.target.value),
 																	amount: isNaN(parseFloat(e.target.value))
 																		? 0
 																		: parseFloat(e.target.value),
@@ -298,35 +308,35 @@ export default function DailyExpenses() {
 										</div>
 									</CardContent>
 									<CardFooter>
-										{/* <Button className="w-full" onClick={addExpense}> */}
-										<Button className="w-full bg-secondary" type="submit">
+										<Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" type="submit">
 											<PlusCircle className="mr-2 h-4 w-4" /> Add Expense
 										</Button>
 									</CardFooter>
 								</form>
 							</Card>
 
-							<Card>
+							<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 								<CardHeader>
-									<CardTitle>Expense Summary</CardTitle>
+									<CardTitle className="font-sans font-semibold text-xl">Expense Summary</CardTitle>
 									<CardDescription>Your spending at a glance</CardDescription>
 								</CardHeader>
 								<CardContent>
-									<div className="text-2xl font-bold">
+									<div className="font-mono text-3xl font-semibold tabular-nums text-foreground">
+										$
 										{Array.isArray(plan?.Transactions)
 											? plan.Transactions.reduce(
 													(sum: number, transaction: { amount: string }) => {
-														const amount = parseFloat(transaction.amount) || 0; // Default to 0 if not a valid number
+														const amount = parseFloat(transaction.amount) || 0;
 														return sum + amount;
 													},
 													0,
 												).toFixed(2)
-											: 0}
+											: "0.00"}
 									</div>
-									<p className="text-sm text-muted-foreground">
+									<p className="text-sm text-muted-foreground mt-1">
 										Total Expenses
 									</p>
-									<div className="mt-4 space-y-2">
+									<div className="mt-6 divide-y divide-border">
 										{Array.isArray(categories) &&
 											categories?.map(
 												(category: { id: number; name: string }) => {
@@ -349,11 +359,11 @@ export default function DailyExpenses() {
 													return (
 														<div
 															key={category.id}
-															className="flex justify-between items-center"
+															className="flex justify-between items-center py-2.5"
 														>
-															<span className="text-sm">{category.name}</span>
-															<span className="text-sm font-medium">
-																${categoryTotal?.toFixed(2) ?? 0}
+															<span className="text-sm text-muted-foreground">{category.name}</span>
+															<span className="text-sm font-mono font-medium tabular-nums text-foreground">
+																${categoryTotal?.toFixed(2) ?? "0.00"}
 															</span>
 														</div>
 													);
@@ -364,9 +374,9 @@ export default function DailyExpenses() {
 							</Card>
 						</div>
 
-						<Card className="mt-6">
+						<Card className="mt-8 border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 							<CardHeader>
-								<CardTitle>Recent Expenses</CardTitle>
+								<CardTitle className="font-sans font-semibold text-xl">Recent Expenses</CardTitle>
 								<CardDescription>Your latest transactions</CardDescription>
 							</CardHeader>
 							<CardContent>
@@ -378,7 +388,7 @@ export default function DailyExpenses() {
 									</TabsList>
 									<TabsContent value="all">
 										<ScrollArea className="h-[300px]">
-											<div className="space-y-4">
+											<div className="divide-y divide-border">
 												{(plan?.Transactions ?? []).map(
 													(transaction: {
 														id: number;
@@ -389,40 +399,42 @@ export default function DailyExpenses() {
 													}) => (
 														<div
 															key={transaction.id}
-															className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow"
+															className="flex items-center justify-between py-3 px-1"
 														>
-															<div className="flex items-center space-x-4">
-																<div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
-																	<DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-300" />
+															<div className="flex items-center space-x-3">
+																<div className="bg-secondary p-2 rounded-full border border-border">
+																	<DollarSign className="h-4 w-4 text-accent" strokeWidth={1.5} />
 																</div>
 																<div>
-																	<p className="font-medium">
+																	<p className="font-medium text-sm text-foreground">
 																		{transaction?.category?.name}
 																	</p>
-																	<p className="text-sm text-gray-500 dark:text-gray-400">
+																	<p className="text-xs text-muted-foreground font-mono">
 																		{transaction.transaction_date}
 																	</p>
 																</div>
 															</div>
-															<div className="flex items-center space-x-4">
+															<div className="flex items-center space-x-3">
 																<div className="text-right">
-																	<p className="font-medium">
+																	<p className="font-mono text-sm font-medium tabular-nums text-foreground">
+																		$
 																		{parseFloat(
 																			transaction.amount || "0",
 																		).toFixed(2)}
 																	</p>
-																	<p className="text-sm text-gray-500 dark:text-gray-400">
+																	<p className="text-xs text-muted-foreground">
 																		{transaction.description}
 																	</p>
 																</div>
 																<Button
 																	variant="ghost"
 																	size="icon"
+																	className="h-8 w-8 text-muted-foreground hover:text-destructive"
 																	onClick={() =>
 																		handleDeleteTransaction(transaction.id)
 																	}
 																>
-																	<Trash2 className="h-4 w-4 text-red-500" />
+																	<Trash2 className="h-4 w-4" />
 																</Button>
 															</div>
 														</div>
@@ -432,10 +444,10 @@ export default function DailyExpenses() {
 										</ScrollArea>
 									</TabsContent>
 									<TabsContent value="today">
-										<p>Today&apos;s expenses...</p>
+										<p className="text-sm text-muted-foreground py-4">Today&apos;s expenses...</p>
 									</TabsContent>
 									<TabsContent value="week">
-										<p>This week&apos;s expenses...</p>
+										<p className="text-sm text-muted-foreground py-4">This week&apos;s expenses...</p>
 									</TabsContent>
 								</Tabs>
 							</CardContent>

@@ -16,6 +16,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Footer } from "@example/footer";
 
 const plans = [
 	{
@@ -74,7 +75,8 @@ export default function PricingPage() {
 	const [yearly, setYearly] = useState(false);
 
 	return (
-		<div className="min-h-screen bg-background">
+		<>
+			<div className="flex-1 bg-background">
 			<div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
 				<div className="text-center">
 					<h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
@@ -225,6 +227,8 @@ export default function PricingPage() {
 					</div>
 				</div>
 			</div>
-		</div>
+			</div>
+			<Footer />
+		</>
 	);
 }

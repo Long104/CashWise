@@ -1,50 +1,47 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "@/app/globals.css";
 import { AuthProvider } from "@/context/auth";
-import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/theme-provider";
-import { jwtDecode } from "jwt-decode";
 
-const geistSans = localFont({
-	src: "./fonts/GeistVF.woff",
-	variable: "--font-geist-sans",
-	weight: "100 900",
+const jakarta = Plus_Jakarta_Sans({
+	subsets: ["latin"],
+	variable: "--font-sans",
+	display: "swap",
 });
-const geistMono = localFont({
-	src: "./fonts/GeistMonoVF.woff",
-	variable: "--font-geist-mono",
-	weight: "100 900",
+
+const jetbrainsMono = JetBrains_Mono({
+	subsets: ["latin"],
+	variable: "--font-mono",
+	display: "swap",
 });
 
 export const metadata: Metadata = {
-	title: "Senzen",
-	description: "Smart budgeting and financial planning made simple",
+	title: "Senzen — Financial planning. Built better.",
+	description:
+		"Automated budgeting, a visual logic builder, and real-time ledger intelligence. Build your money engine without code.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<AuthProvider>
-				{/* <UserProvider auth={user_token?.user_id}> */}
-					<body
-						className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground [&_*]:select-none overscroll-y-none`}
+				<body
+					className={`${jakarta.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground overscroll-y-none`}
+				>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="light"
+						enableSystem={false}
+						disableTransitionOnChange
 					>
-						<ThemeProvider
-							attribute="class"
-							defaultTheme="dark"
-							enableSystem={false}
-							disableTransitionOnChange
-						>
-							{children}
-						</ThemeProvider>
-					</body>
-				{/* </UserProvider> */}
+						{children}
+					</ThemeProvider>
+				</body>
 			</AuthProvider>
 		</html>
 	);

@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"; import { Button } from "@/compone
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Footer } from "@example/footer";
 
 export default function Component() {
 	const router = useRouter();
@@ -72,16 +73,17 @@ export default function Component() {
 	};
 
 	return (
-		<div className="min-h-screen flex items-center justify-center bg-background">
-			<Card className="w-full max-w-md">
-				<CardHeader>
-					<CardTitle className="text-2xl font-bold text-center">
-						Sign Up
-					</CardTitle>
-					<CardDescription className="text-center">
-						Create your account
-					</CardDescription>
-				</CardHeader>
+		<>
+			<div className="flex flex-1 items-center justify-center bg-background">
+			<Card className="w-full max-w-[440px] border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
+					<CardHeader>
+						<CardTitle className="font-sans text-2xl font-semibold text-center text-foreground">
+							Create your Senzen account
+						</CardTitle>
+						<CardDescription className="text-center text-muted-foreground">
+							Begin your financial planning journey
+						</CardDescription>
+					</CardHeader>
 				<CardContent>
 					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 						<div className="flex flex-col gap-2">
@@ -105,24 +107,26 @@ export default function Component() {
 								required
 							/>
 						</div>
-						{!passwordMatch && (
-							<p className="text-sm text-red-500">Passwords do not match</p>
-						)}
-						{!data?.success && (
-							<p className="text-sm text-red-500">{data?.message}</p>
-						)}
-						<Button type="submit" className="w-full">
-							Sign Up
+					{!passwordMatch && (
+						<p className="text-sm text-destructive">Passwords do not match</p>
+					)}
+					{!data?.success && (
+						<p className="text-sm text-destructive">{data?.message}</p>
+					)}
+						<Button type="submit" className="w-full bg-[#101516] hover:bg-[#101516]/90 text-white font-sans font-semibold focus-visible:ring-2 focus-visible:ring-[#1EC072] focus-visible:ring-offset-2">
+							Create Account
 						</Button>
 					</form>
 				</CardContent>
-				<CardFooter className="text-center text-sm text-gray-600">
+				<CardFooter className="text-center text-sm text-muted-foreground">
 					Already have an account?{" "}
-					<Link href="/sign-in" className="text-blue-600 hover:underline">
+					<Link href="/sign-in" className="text-primary hover:underline">
 						Log in
 					</Link>
 				</CardFooter>
 			</Card>
-		</div>
+			</div>
+			<Footer />
+		</>
 	);
 }

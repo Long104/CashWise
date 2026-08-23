@@ -62,8 +62,8 @@ export function ChartWeek() {
 				<YAxis />
 				{/* <Tooltip /> */}
 				<Legend verticalAlign="top" height={36} />
-				<Bar dataKey="before" fill="hsl(var(--chart-1))" />
-				<Bar dataKey="after" fill="hsl(var(--chart-2))" />
+				<Bar dataKey="before" fill="var(--chart-1)" />
+				<Bar dataKey="after" fill="var(--chart-2)" />
 			</BarChart>
 		</ResponsiveContainer>
 	);

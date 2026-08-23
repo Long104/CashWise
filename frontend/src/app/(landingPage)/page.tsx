@@ -1,20 +1,22 @@
-import { SpotlightPreview } from "@example/spotlight-demo";
-import { TimelineDemo } from "@example/timeline-demo";
+import { HeroComposer, StatsProofRow } from "@example/spotlight-demo";
+import { AiPlanDemo } from "@example/ai-plan-demo";
+import { AutomationDemo } from "@example/automation-demo";
+import { HighlightsBand } from "@example/highlights-band";
+import { WeeklyClarity } from "@example/weekly-clarity";
+import { FaqSection } from "@example/faq-section";
 import { Footer } from "@example/footer";
-import { InfiniteMovingCardsDemo } from "@example/infinite-moving-cards-demo";
-import Try from "@example/try-landing";
-import Try2 from "@example/try2-landing";
+
 export default function Home() {
 	return (
 		<>
-			{/* <div className="[&_*]:overscroll-none"> */}
-			<SpotlightPreview />
-			<TimelineDemo />
-			<Try2 />
-			<InfiniteMovingCardsDemo />
-			<Try />
+			<HeroComposer />
+			<StatsProofRow />
+			<AiPlanDemo />
+			<AutomationDemo />
+			<HighlightsBand />
+			<WeeklyClarity />
+			<FaqSection />
 			<Footer />
-			{/* </div> */}
 		</>
 	);
 }

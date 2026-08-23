@@ -19,7 +19,7 @@ import Link from "next/link";
 
 export default function ProfilePage() {
 	return (
-		<div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 dark:from-black dark:to-slate-800">
+		<div className="min-h-screen bg-background">
 			<main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
 				<div className="text-center mb-16">
 					<h2 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl">
@@ -33,32 +33,32 @@ export default function ProfilePage() {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 					<FeatureCard
-						icon={<PieChart className="h-8 w-8 text-green-500" />}
+						icon={<PieChart className="h-8 w-8 text-primary" strokeWidth={1.5} />}
 						title="Budget Tracking"
 						description="Easily create and manage budgets for different expense categories."
 					/>
 					<FeatureCard
-						icon={<BarChart3 className="h-8 w-8 text-blue-500" />}
+						icon={<BarChart3 className="h-8 w-8 text-accent" strokeWidth={1.5} />}
 						title="Expense Analytics"
 						description="Gain insights into your spending habits with detailed analytics and reports."
 					/>
 					<FeatureCard
-						icon={<Wallet className="h-8 w-8 text-purple-500" />}
+						icon={<Wallet className="h-8 w-8 text-primary" strokeWidth={1.5} />}
 						title="Savings Goals"
 						description="Set and track savings goals for your future plans and dreams."
 					/>
 					<FeatureCard
-						icon={<CreditCard className="h-8 w-8 text-red-500" />}
+						icon={<CreditCard className="h-8 w-8 text-destructive" strokeWidth={1.5} />}
 						title="Bill Reminders"
 						description="Never miss a payment with automated bill reminders and tracking."
 					/>
 					<FeatureCard
-						icon={<Smartphone className="h-8 w-8 text-indigo-500" />}
+						icon={<Smartphone className="h-8 w-8 text-accent" strokeWidth={1.5} />}
 						title="Mobile App"
 						description="Access your financial data on-the-go with our user-friendly mobile app."
 					/>
 					<FeatureCard
-						icon={<Lock className="h-8 w-8 text-gray-500" />}
+						icon={<Lock className="h-8 w-8 text-muted-foreground" strokeWidth={1.5} />}
 						title="Bank-Level Security"
 						description="Rest easy knowing your financial data is protected with top-tier security measures."
 					/>
@@ -109,15 +109,15 @@ function FeatureCard({
 	description,
 }: { icon: React.ReactNode; title: string; description: string }) {
 	return (
-		<Card>
+		<Card className="border border-border bg-card">
 			<CardHeader>
-				<div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 dark:bg-green-900 mb-4">
+				<div className="flex items-center justify-center h-12 w-12 rounded-md bg-secondary mb-4">
 					{icon}
 				</div>
-				<CardTitle>{title}</CardTitle>
+				<CardTitle className="font-sans text-xl font-semibold">{title}</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<p className="text-gray-600 dark:text-gray-300">{description}</p>
+				<p className="text-muted-foreground font-sans">{description}</p>
 			</CardContent>
 		</Card>
 	);

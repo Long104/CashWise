@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 import useAuthStore from "@/zustand/auth";
+import { Footer } from "@example/footer";
 
 export default function LoginPage() {
 	const [password, setPassword] = useState("");
@@ -74,14 +75,15 @@ export default function LoginPage() {
 	// const github_login = process.env.NEXT_PUBLIC_BACKEND + `/github_login`;
 
 	return (
-		<div className="flex items-center justify-center min-h-screen bg-background">
-			<Card className="w-full max-w-md">
+		<>
+			<div className="flex flex-1 items-center justify-center bg-background">
+			<Card className="w-full max-w-[440px] border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
 				<CardHeader className="flex flex-col gap-1">
-					<CardTitle className="text-2xl font-bold text-center">
-						Login
+					<CardTitle className="font-sans text-2xl font-semibold text-center text-foreground">
+						Sign in to Senzen
 					</CardTitle>
-					<CardDescription className="text-center">
-						Choose your preferred login method
+					<CardDescription className="text-center text-muted-foreground">
+						Welcome back — sign in to continue
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-4">
@@ -89,7 +91,7 @@ export default function LoginPage() {
 						<a
 							href={process.env.NEXT_PUBLIC_BACKEND + "/google_login"}
 						>
-							<Button variant="outline" className="w-full">
+							<Button variant="outline" className="w-full border-border bg-card text-foreground hover:bg-secondary">
 								<svg
 									className="w-5 h-5 mr-2"
 									viewBox="0 0 21 20"
@@ -125,22 +127,22 @@ export default function LoginPage() {
 										</clipPath>
 									</defs>
 								</svg>
-								Login with Google
+								Continue with Google
 							</Button>
 						</a>
 
 						<a
 							href={process.env.NEXT_PUBLIC_BACKEND + "/github_login"}
 						>
-							<Button variant="outline" className="w-full">
+							<Button variant="outline" className="w-full border-border bg-card text-foreground hover:bg-secondary">
 								<Github className="w-5 h-5 mr-2" />
-								Login with GitHub
+								Continue with GitHub
 							</Button>
 						</a>
 					</div>
 					<div className="flex items-center flex-col">
 						<Separator className="flex-grow" />
-						<span className="mx-4 text-sm text-gray-400 py-2">or</span>
+						<span className="mx-4 text-sm text-muted-foreground py-2">or</span>
 						<Separator className="flex-grow" />
 					</div>
 					<form onSubmit={handleSubmitLogin}>
@@ -160,33 +162,35 @@ export default function LoginPage() {
 							<Input
 								id="password"
 								type="password"
-								placeholder="123!@#$%"
+								placeholder="••••••••"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								required
 							/>
 						</div>
 
-						<Button className="w-full mt-4 " variant="outline" type="submit">
-							Login
+						<Button className="w-full mt-4 bg-[#101516] hover:bg-[#101516]/90 text-white font-sans font-semibold focus-visible:ring-2 focus-visible:ring-[#1EC072] focus-visible:ring-offset-2" type="submit">
+							Sign In
 						</Button>
 					</form>
 
 					{data && (
-						<p className="text-sm text-red-500">
+						<p className="text-sm text-destructive">
 							check your email and password again
 						</p>
 					)}
 				</CardContent>
 				<CardFooter className="flex flex-col">
-					<p className="mt-2 text-xs text-center text-gray-700">
+					<p className="mt-2 text-xs text-center text-muted-foreground">
 						Don&apos;t have an account?{" "}
-						<Link href="/sign-up" className="text-blue-600 hover:underline">
+						<Link href="/sign-up" className="text-primary hover:underline">
 							Sign up
 						</Link>
 					</p>
 				</CardFooter>
 			</Card>
-		</div>
+			</div>
+			<Footer />
+		</>
 	);
 }

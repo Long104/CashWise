@@ -81,141 +81,173 @@ export default function CreatePlan() {
 	return (
 		<div className="min-h-screen bg-background">
 			<main className="max-w-3xl mx-auto py-12 sm:px-6 lg:px-8">
+				<div className="mb-8">
+					<p className="font-mono text-xs text-primary mb-2">
+						01 / NEW FINANCIAL BRIEF
+					</p>
+				<h1 className="font-sans text-3xl font-bold tracking-tight text-foreground">
+					Create Your Plan
+				</h1>
+					<p className="text-muted-foreground mt-2 font-sans">
+						A structured brief for your next chapter of calm money management.
+					</p>
+				</div>
 				<form onSubmit={handleSubmit}>
-					<Card>
-						<CardHeader>
-							<CardTitle>Plan Details</CardTitle>
-							<CardDescription>
-								Set up your new financial plan with Cashwise
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="flex flex-col gap-6">
-							<div className="flex flex-col gap-2">
-								<Label htmlFor="plan-name">Plan name</Label>
-								<Input
-									id="plan-name"
-									placeholder="e.g. My 2024 Savings Plan"
-									value={planName}
-									onChange={(e) => setPlanName(e.target.value)}
-									required
-								/>
-							</div>
-
-							<div className="flex flex-col gap-2">
-								<Label htmlFor="plan-description">Description (optional)</Label>
-								<Textarea
-									id="plan-description"
-									placeholder="Describe your financial goals and strategies"
-									value={planDescription}
-									onChange={(e) => setPlanDescription(e.target.value)}
-								/>
-							</div>
-
-							<RadioGroup
-								value={planType}
-								onValueChange={setPlanType}
-								className="flex flex-col gap-1 "
-								defaultValue="comfortable"
-							>
-								<Label>Plan Type</Label>
-								<div className="flex items-center gap-2">
-									<RadioGroupItem
-										value="personal"
-										id="personal"
-										className="border-gray-400 text-white"
-									/>
-									<Label htmlFor="personal">Personal</Label>
+					<Card className="border border-border bg-card shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
+						<CardContent className="flex flex-col gap-10 pt-6">
+							{/* 01. Plan Identity */}
+							<section className="space-y-4">
+								<div className="flex items-center gap-3 border-b border-border pb-2">
+									<span className="font-mono text-sm text-primary">01.</span>
+									<h2 className="font-sans text-xl font-semibold text-foreground">Plan Identity</h2>
 								</div>
-								<div className="flex items-center gap-2">
-									<RadioGroupItem
-										value="family"
-										id="family"
-										className="border-gray-400 text-white"
-									/>
-									<Label htmlFor="family">Family</Label>
-								</div>
-								<div className="flex items-center gap-2">
-									<RadioGroupItem
-										value="business"
-										id="business"
-										className="border-gray-400 text-white"
-									/>
-									<Label htmlFor="business">Business</Label>
-								</div>
-							</RadioGroup>
-
-							<div className="flex flex-col gap-2">
-								<Label>Plan Visibility</Label>
-								<Select
-									value={planVisibility}
-									onValueChange={setPlanVisibility}
-								>
-									<SelectTrigger>
-										<SelectValue placeholder="Select visibility" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="private">
-											<div className="flex items-center">
-												<Lock className="mr-2 h-4 w-4" />
-												Private
-											</div>
-										</SelectItem>
-										<SelectItem value="shared">
-											<div className="flex items-center">
-												<Users className="mr-2 h-4 w-4" />
-												Shared with specific people
-											</div>
-										</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
-
-							<div className="flex flex-col gap-2">
-								<Label>Plan Duration</Label>
-								<Select value={planDuration} onValueChange={setPlanDuration}>
-									<SelectTrigger>
-										<SelectValue placeholder="Select duration" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="1week">1 Week</SelectItem>
-										<SelectItem value="1month">1 Month</SelectItem>
-										<SelectItem value="3months">3 Months</SelectItem>
-										<SelectItem value="6months">6 Months</SelectItem>
-										<SelectItem value="1year">1 Year</SelectItem>
-										<SelectItem value="custom">Custom</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
-
-							<div className="flex flex-col gap-2">
-								<Label htmlFor="initial-budget">Initial Budget</Label>
-								<div className="relative">
-									<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-										$
-									</span>
+								<div className="flex flex-col gap-2">
+									<Label htmlFor="plan-name">Plan name</Label>
 									<Input
-										id="initial-budget"
-										type="number"
-										placeholder="0.00"
-										value={initialBudget}
-										onChange={(e) => setInitialBudget(e.target.value)}
-										className="pl-7"
+										id="plan-name"
+										placeholder="e.g. My 2024 Savings Plan"
+										value={planName}
+										onChange={(e) => setPlanName(e.target.value)}
+										required
 									/>
 								</div>
-							</div>
+								<div className="flex flex-col gap-2">
+									<Label htmlFor="plan-description">Description (optional)</Label>
+									<Textarea
+										id="plan-description"
+										placeholder="Describe your financial goals and strategies"
+										value={planDescription}
+										onChange={(e) => setPlanDescription(e.target.value)}
+									/>
+								</div>
+							</section>
 
-							<div className="flex items-center gap-2">
-								<Switch
-									id="auto-save"
-									checked={autoSave}
-									onCheckedChange={setAutoSave}
-									className="bg-gray-800 border-2 border-gray-600 data-[state=checked]:bg-green-500"
-								/>
-								<Label htmlFor="auto-save">Enable auto-save feature</Label>
-							</div>
+							{/* 02. Budget Allocation */}
+							<section className="space-y-4">
+								<div className="flex items-center gap-3 border-b border-border pb-2">
+									<span className="font-mono text-sm text-primary">02.</span>
+									<h2 className="font-sans text-xl font-semibold text-foreground">Budget Allocation</h2>
+								</div>
+
+								<div className="flex flex-col gap-2">
+									<Label>Plan Type</Label>
+									<RadioGroup
+										value={planType}
+										onValueChange={setPlanType}
+										className="grid grid-cols-1 sm:grid-cols-3 gap-3"
+										defaultValue="personal"
+									>
+										{[
+											{ value: "personal", label: "Personal", desc: "Individual focus" },
+											{ value: "family", label: "Family", desc: "Shared household" },
+											{ value: "business", label: "Business", desc: "Operational funds" },
+										].map((opt) => (
+											<Label
+												key={opt.value}
+												htmlFor={opt.value}
+												className={`flex flex-col gap-1 rounded-md border p-4 cursor-pointer transition-colors ${
+													planType === opt.value
+														? "border-primary bg-primary/5"
+														: "border-border bg-card hover:border-primary/40"
+												}`}
+											>
+												<div className="flex items-center gap-2">
+													<RadioGroupItem
+														value={opt.value}
+														id={opt.value}
+														className="border-border text-primary"
+													/>
+													<span className="font-sans font-medium text-foreground">{opt.label}</span>
+												</div>
+												<span className="font-sans text-xs text-muted-foreground pl-6">{opt.desc}</span>
+											</Label>
+										))}
+									</RadioGroup>
+								</div>
+
+								<div className="flex flex-col gap-2">
+									<Label>Plan Visibility</Label>
+									<Select
+										value={planVisibility}
+										onValueChange={setPlanVisibility}
+									>
+										<SelectTrigger>
+											<SelectValue placeholder="Select visibility" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="private">
+												<div className="flex items-center">
+													<Lock className="mr-2 h-4 w-4" />
+													Private
+												</div>
+											</SelectItem>
+											<SelectItem value="shared">
+												<div className="flex items-center">
+													<Users className="mr-2 h-4 w-4" />
+													Shared with specific people
+												</div>
+											</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
+
+								<div className="flex flex-col gap-2">
+									<Label>Plan Duration</Label>
+									<Select value={planDuration} onValueChange={setPlanDuration}>
+										<SelectTrigger>
+											<SelectValue placeholder="Select duration" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="1week">1 Week</SelectItem>
+											<SelectItem value="1month">1 Month</SelectItem>
+											<SelectItem value="3months">3 Months</SelectItem>
+											<SelectItem value="6months">6 Months</SelectItem>
+											<SelectItem value="1year">1 Year</SelectItem>
+											<SelectItem value="custom">Custom</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
+
+								<div className="flex flex-col gap-2">
+									<Label htmlFor="initial-budget">Initial Budget</Label>
+									<div className="relative">
+										<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-muted-foreground font-mono">
+											$
+										</span>
+										<Input
+											id="initial-budget"
+											type="number"
+											placeholder="0.00"
+											value={initialBudget}
+											onChange={(e) => setInitialBudget(e.target.value)}
+											className="pl-7 font-mono"
+										/>
+									</div>
+								</div>
+							</section>
+
+							{/* 03. Automation & Rules */}
+							<section className="space-y-4">
+								<div className="flex items-center gap-3 border-b border-border pb-2">
+									<span className="font-mono text-sm text-primary">03.</span>
+									<h2 className="font-sans text-xl font-semibold text-foreground">Automation & Rules</h2>
+								</div>
+								<div className="flex items-center gap-3 rounded-md border border-border p-4 bg-secondary/40">
+									<Switch
+										id="auto-save"
+										checked={autoSave}
+										onCheckedChange={setAutoSave}
+										className="data-[state=checked]:bg-primary"
+									/>
+									<div>
+										<Label htmlFor="auto-save" className="font-sans">Enable auto-save feature</Label>
+										<p className="font-sans text-xs text-muted-foreground">Automatically set aside surplus into savings.</p>
+									</div>
+								</div>
+							</section>
 						</CardContent>
-						<CardFooter>
-							<Button type="submit" className="w-full">
+						<CardFooter className="pt-2">
+							<Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
 								Create Financial Plan
 							</Button>
 						</CardFooter>

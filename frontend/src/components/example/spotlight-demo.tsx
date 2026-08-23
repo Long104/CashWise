@@ -1,31 +1,74 @@
 import React from "react";
 import Link from "next/link";
-import { Spotlight } from "../ui/spotlight";
+import { ArrowRight } from "lucide-react";
 
-export function SpotlightPreview() {
+export function HeroComposer() {
 	return (
-		<div className="h-[40rem] w-full flex md:items-center md:justify-center bg-primary antialiased bg-grid-white/[0.02] relative overflow-hidden select-none">
-			{/* <div className="h-[40rem] w-full flex md:items-center md:justify-center bg-primary antialiased bg-grid-white/[0.02] relative "> */}
-			<Spotlight
-				className="-top-40 left-0 md:left-60 md:-top-20"
-				fill="white"
-			/>
-			<div className=" p-4 max-w-7xl  mx-auto relative z-10  w-full pt-20 md:pt-0">
-				<h1 className="p-2 text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
-					Senzen <br /> Money Management.
-				</h1>
-				<p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
-					Application that help you to manage your money, track your expenses
-					and income, and plan your budget.
-				</p>
-				<p className="mt-10 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
-					<button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-						<Link href="/sign-in" className="text-white">
-							Start Planing
+		<section className="relative w-full bg-[#EEEEEE] overflow-hidden">
+			<div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-16 md:pt-28 pb-16 md:pb-24">
+				<div className="w-full max-w-6xl mx-auto flex flex-col items-start text-left">
+					<h1 className="font-sans font-extrabold text-[#0A0A0A] leading-[0.9]">
+						<span className="block text-3xl md:text-5xl lg:text-6xl tracking-tight mb-1">
+							Meet
+						</span>
+						<span className="relative inline-block">
+							<span
+								aria-hidden="true"
+								className="absolute right-[-1rem] md:right-[-2rem] bottom-[-0.75rem] z-0 block h-[52%] w-[72%] bg-[#1EC072]"
+								style={{
+									backgroundImage:
+										"radial-gradient(circle, rgba(10,10,10,0.12) 2.5px, transparent 2.5px)",
+									backgroundSize: "14px 14px",
+								}}
+							/>
+							<span className="relative z-10 block text-[4.5rem] md:text-[9rem] lg:text-[12rem] tracking-tighter">
+								Senzen
+							</span>
+						</span>
+					</h1>
+
+					<div aria-hidden="true" className="mt-6 h-[2px] w-32 bg-[#0A0A0A]" />
+
+					<p className="mt-8 text-lg md:text-xl leading-relaxed text-[#333333] max-w-[34rem]">
+						Build automated money rules with logic, backtest your budget, then execute—all in one place.
+					</p>
+
+					<div className="mt-10">
+						<Link href="/sign-up" className="group inline-flex items-center gap-2 rounded-full bg-black text-white text-lg px-8 py-4 hover:bg-neutral-800 transition-all active:scale-[0.98] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black">
+							Get started
+							<ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5" />
 						</Link>
-					</button>
-				</p>
+					</div>
+				</div>
 			</div>
-		</div>
+		</section>
+	);
+}
+
+export function StatsProofRow() {
+	const stats = [
+		{ value: "$12M+", label: "Managed cashflow" },
+		{ value: "45k+", label: "Plans executed" },
+		{ value: "100%", label: "Automated rules" },
+	];
+
+	return (
+		<section className="w-full bg-[#EEEEEE] pb-16 md:pb-20">
+			<div className="max-w-4xl mx-auto px-6 md:px-10">
+				<div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E5E5] border-y border-[#E5E5E5]">
+					{stats.map((stat) => (
+						<div key={stat.label} className="flex flex-col items-center py-8 sm:py-10 sm:px-8 first:sm:pl-0 last:sm:pr-0">
+							<div className="text-4xl md:text-5xl font-extrabold text-[#0A0A0A] tabular-nums tracking-tight">
+								{stat.value}
+							</div>
+							<div aria-hidden="true" className="mt-3 h-[3px] w-10 bg-[#1EC072]" />
+							<div className="mt-3 text-xs font-medium uppercase tracking-[0.08em] text-[#555555]">
+								{stat.label}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
 	);
 }

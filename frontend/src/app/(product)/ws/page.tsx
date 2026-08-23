@@ -81,25 +81,32 @@ const Chat = () => {
 
 	return (
 		<div className="flex flex-col items-center gap-4 p-4">
-			<h1 className="text-2xl font-bold">WebSocket Chat</h1>
-			<div className="w-full max-w-lg border p-4 rounded-lg">
-				<div className="h-64 overflow-y-auto mb-4 bg-gray-100 p-2 rounded">
+			<div className="w-full max-w-lg">
+				<p className="font-mono text-xs text-primary mb-2 text-center">
+					01 / LIVE LEDGER CHAT
+				</p>
+				<h1 className="font-sans text-3xl font-semibold tracking-tight text-foreground text-center mb-6">
+					WebSocket Chat
+				</h1>
+			</div>
+			<div className="w-full max-w-lg border border-border bg-card rounded-lg shadow-[0_1px_3px_rgba(28,25,23,0.04),0_6px_16px_rgba(28,25,23,0.02)]">
+				<div className="h-64 overflow-y-auto mb-4 bg-secondary/40 p-3 rounded m-3 divide-y divide-border">
 					{chatMessages.map((msg, idx) => (
-						<p key={idx} className="text-sm text-gray-800">
-							<strong>{msg.user}:</strong> {msg.message}
+						<p key={idx} className="text-sm text-foreground py-2 font-sans">
+							<strong className="text-primary">{msg.user}:</strong> {msg.message}
 						</p>
 					))}
 				</div>
-				<div className="flex items-center gap-2">
+				<div className="flex items-center gap-2 p-3">
 					<input
-						className="flex-1 border p-2 rounded"
+						className="flex-1 border border-border bg-background p-2 rounded-md text-foreground font-mono text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
 						type="text"
 						value={message}
 						onChange={(e) => setMessage(e.target.value)}
 						placeholder="Type your message..."
 					/>
 					<button
-						className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+						className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 font-sans"
 						onClick={sendMessage}
 					>
 						Send

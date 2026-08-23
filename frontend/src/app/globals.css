@@ -4,125 +4,120 @@
 
 @layer base {
   :root {
-    /* Base canvas & typography (Light Mode: Slate & Emerald) */
-    --background: 210 40% 98%;          /* #F8FAFC */
-    --foreground: 222.2 84% 4.9%;        /* #0F172A */
+    /* Canvas / Background: #f6f2ee (HSL 38 22% 95%) */
+    --background: 38 22% 95%;
+    --foreground: 190 16% 8%;
 
-    /* Surfaces */
-    --card: 0 0% 100%;                  /* #FFFFFF */
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card / Surface: #ffffff */
+    --card: 0 0% 100%;
+    --card-foreground: 190 16% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 190 16% 8%;
 
-    /* Brand Primary (Emerald 600 for light mode: 5.2:1 WCAG AA) */
-    --primary: 160 84% 39%;             /* #059669 */
-    --primary-foreground: 0 0% 100%;    /* #FFFFFF */
+    /* Brand Primary Accent (Green): #1ec072 (HSL 151 73% 44%) */
+    --primary: 151 73% 44%;
+    --primary-foreground: 190 16% 8%;
 
-    /* Neutrals & Secondary */
-    --secondary: 210 40% 96.1%;         /* #F1F5F9 */
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%; /* #64748B */
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted Ink / Secondary: #273234 / #666666 (HSL 190 14% 18%) */
+    --secondary: 190 14% 18%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 38 10% 88%;
+    --muted-foreground: 190 14% 18%;
 
-    /* Status */
-    --destructive: 347 77% 50%;          /* #E11D48 (Rose 600) */
-    --destructive-foreground: 0 0% 100%;
+    /* Border / Hairlines: #e5e2dd (subtle cream-tinted hairline) */
+    --border: 38 10% 88%;
+    --input: 38 10% 88%;
+    --ring: 151 73% 44%;
+    --radius: 0.375rem;
 
-    /* Borders & Inputs */
-    --border: 214.3 31.8% 91.4%;        /* #E2E8F0 */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 160 84% 39%;                /* Focus ring matches emerald */
-    --radius: 0.5rem;                   /* 8px */
+    /* Recharts Color Palette - Composer style */
+    --chart-1: 151 73% 44%;
+    --chart-2: 190 14% 18%;
+    --chart-3: 38 10% 88%;
+    --chart-4: 0 0% 100%;
+    --chart-5: 38 22% 95%;
 
-    /* Financial Charts (Light Mode) */
-    --chart-1: 160 84% 39%;             /* Emerald 600 (Income / Surplus) */
-    --chart-2: 199 89% 48%;             /* Sky 500 (Savings / Recurring) */
-    --chart-3: 38 92% 50%;              /* Amber 500 (Discretionary) */
-    --chart-4: 263 70% 50%;             /* Violet 500 (Investments) */
-    --chart-5: 215 16% 47%;             /* Slate 500 (Fixed / Other) */
-
-    /* Aceternity / Rainbow Fallback */
-    --color-1: 160 84% 39%;
-    --color-2: 199 89% 48%;
-    --color-3: 38 92% 50%;
-    --color-4: 263 70% 50%;
-    --color-5: 160 60% 45%;
+    /* Financial Semantic Tokens */
+    --color-surplus-olive: 152 40% 30%; /* Surplus Olive */
+    --color-surplus-subtle: 152 50% 96%; /* Surplus Subtle */
+    --color-deficit-crimson: 0 72% 42%; /* Deficit Crimson */
+    --color-deficit-subtle: 0 86% 97%; /* Deficit Subtle */
+    --color-discretionary-amber: 38 80% 38%; /* Discretionary Amber */
+    --color-recurring-slate: 215 19% 35%; /* Recurring Slate */
 
     /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222.2 84% 4.9%;
-    --sidebar-primary: 160 84% 39%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 40% 96.1%;
-    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
-    --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 160 84% 39%;
+    --sidebar-background: 38 22% 95%;
+    --sidebar-foreground: 190 16% 8%;
+    --sidebar-primary: 151 73% 44%;
+    --sidebar-primary-foreground: 190 16% 8%;
+    --sidebar-accent: 38 10% 88%;
+    --sidebar-accent-foreground: 190 16% 8%;
+    --sidebar-border: 38 10% 88%;
+    --sidebar-ring: 151 73% 44%;
   }
 
   .dark {
-    /* Base canvas & typography (Dark Mode: Deep Obsidian Slate #0B0F17) */
-    --background: 222 47% 7%;           /* #0B0F17 */
-    --foreground: 210 40% 98%;          /* #F8FAFC */
+    /* Dark Canvas: #101516 (HSL 190 16% 8%) */
+    --background: 190 16% 8%;
+    --foreground: 38 22% 95%;
 
-    /* Surfaces (#111827 Charcoal 900) */
-    --card: 222 35% 11%;                /* #111827 */
-    --card-foreground: 210 40% 98%;
-    --popover: 222 35% 11%;
-    --popover-foreground: 210 40% 98%;
+    /* Dark Card Surface: #1c1a18 */
+    --card: 24 8% 10%;
+    --card-foreground: 38 22% 95%;
+    --popover: 24 8% 10%;
+    --popover-foreground: 38 22% 95%;
 
-    /* Brand Primary (Emerald 500 on dark: 8.9:1 WCAG AA) */
-    --primary: 158 64% 52%;             /* #10B981 */
-    --primary-foreground: 164 95% 17%;  /* #064E3B */
+    /* Brand Primary Accent Dark (Green): #049f55 (HSL 151 73% 44% dark hover) */
+    --primary: 151 73% 44%;
+    --primary-foreground: 190 16% 8%;
 
-    /* Neutrals & Secondary */
-    --secondary: 217 33% 17%;           /* #1E293B */
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;    /* #94A3B8 */
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    /* Muted Ink / Secondary Dark: #666666 (HSL 0 0% 66%) */
+    --secondary: 0 0% 66%;
+    --secondary-foreground: 190 16% 8%;
+    --muted: 38 10% 20%;
+    --muted-foreground: 38 22% 95%;
 
-    /* Status */
-    --destructive: 343 88% 60%;          /* #F43F5E (Rose 500) */
-    --destructive-foreground: 0 0% 100%;
+    /* Border / Hairlines Dark: #e5e2dd with opacity (#e5e2dd / 0.2) */
+    --border: 38 10% 88%;
+    --input: 38 10% 88%;
+    --ring: 151 73% 44%;
 
-    /* Borders & Inputs (#1F2937) */
-    --border: 217 33% 17%;              /* #1F2937 */
-    --input: 217 33% 17%;
-    --ring: 158 64% 52%;                /* Focus ring matches emerald */
+    /* Recharts Dark Palette */
+    --chart-1: 151 73% 44%;
+    --chart-2: 190 14% 18%;
+    --chart-3: 38 10% 88%;
+    --chart-4: 0 0% 100%;
+    --chart-5: 38 22% 95%;
 
-    /* Financial Charts (Dark Mode) */
-    --chart-1: 158 64% 52%;             /* Emerald 500 */
-    --chart-2: 199 89% 48%;             /* Sky 400 */
-    --chart-3: 43 96% 56%;              /* Amber 400 */
-    --chart-4: 258 90% 66%;             /* Violet 400 */
-    --chart-5: 215 20% 65%;             /* Slate 400 */
-
-    /* Aceternity / Rainbow Fallback */
-    --color-1: 158 64% 52%;
-    --color-2: 199 89% 48%;
-    --color-3: 43 96% 56%;
-    --color-4: 258 90% 66%;
-    --color-5: 158 64% 40%;
+    /* Financial Semantic Tokens - Dark Mode */
+    --color-surplus-olive: 152 45% 45%; /* Surplus Olive (Dark) */
+    --color-surplus-subtle: 152 30% 15%; /* Surplus Subtle (Dark) */
+    --color-deficit-crimson: 0 68% 55%; /* Deficit Crimson (Dark) */
+    --color-deficit-subtle: 0 50% 12%; /* Deficit Subtle (Dark) */
+    --color-discretionary-amber: 38 75% 55%; /* Discretionary Amber (Dark) */
+    --color-recurring-slate: 215 16% 60%; /* Recurring Slate (Dark) */
 
     /* Sidebar */
-    --sidebar-background: 222 47% 7%;   /* Aligned to background */
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 158 64% 52%;
-    --sidebar-primary-foreground: 164 95% 17%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 158 64% 52%;
+    --sidebar-background: 190 16% 8%;
+    --sidebar-foreground: 38 22% 95%;
+    --sidebar-primary: 151 73% 44%;
+    --sidebar-primary-foreground: 190 16% 8%;
+    --sidebar-accent: 38 10% 88%;
+    --sidebar-accent-foreground: 190 16% 8%;
+    --sidebar-border: 38 10% 88%;
+    --sidebar-ring: 151 73% 44%;
   }
 }
 
 @layer utilities {
-  /* Add filter manually as Tailwind doesn\'t have direct support */
+  /* Add filter manually as Tailwind doesn't have direct support */
   input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
+  }
+
+  /* Landing-page theme lock: render identically regardless of stored theme key */
+  .light {
+    color-scheme: light;
   }
 }
 
