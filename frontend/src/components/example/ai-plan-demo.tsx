@@ -29,28 +29,17 @@ export function AiPlanDemo() {
 						</Link>
 					</div>
 
-					<div className="relative w-full bg-white border border-[#E5E5E5] rounded-[8px] overflow-hidden">
-						<div
-							aria-hidden="true"
-							className="h-6 w-full"
-							style={{
-								backgroundImage:
-									"radial-gradient(circle, rgba(10,10,10,0.08) 2.5px, transparent 2.5px)",
-								backgroundSize: "14px 14px",
-							}}
-						/>
-						<div className="p-6 md:p-8 space-y-6">
-							<div className="flex justify-end">
-								<p className="max-w-[80%] rounded-2xl bg-[#0A0A0A] px-5 py-3 text-sm leading-relaxed text-[#EEEEEE]">
-									I take home $3,200 a month. Can I save $600 without thinking about it?
-								</p>
-							</div>
+					<div>
+						<p className="text-lg leading-relaxed text-[#333333] mb-6 max-w-md">
+							I take home $3,200 a month. Can I save $600 without thinking about it?
+						</p>
 
-							<div className="max-w-[90%] rounded-2xl border border-[#E5E5E5] bg-white px-5 py-4 space-y-4">
+						<div className="bg-white rounded-xl border border-[#E5E5E5] p-6 md:p-8 space-y-6 max-w-lg">
+							<div>
 								<p className="text-sm leading-relaxed text-[#0A0A0A]">
-									Done. Here&apos;s your plan —
+									Done. Here's your plan —
 								</p>
-								<div>
+								<div className="space-y-4">
 									<p className="font-mono text-xs uppercase tracking-wider text-[#555555] mb-3">
 										RULE · AUTO-SAVE-600
 									</p>
@@ -65,11 +54,9 @@ export function AiPlanDemo() {
 								</div>
 							</div>
 
-							<div className="flex items-center gap-3">
+							<div className="flex items-center gap-3 text-sm text-[#666666]">
 								<span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-[#1EC072]" />
-								<span className="font-mono text-xs text-[#0A0A0A]">
-									Plan ready · 3 rules · starts next payday
-								</span>
+								<span>Plan ready · 3 rules · starts next payday</span>
 							</div>
 						</div>
 					</div>
