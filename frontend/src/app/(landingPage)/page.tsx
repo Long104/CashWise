@@ -1,4 +1,4 @@
-import { HeroComposer, StatsProofRow } from "@example/spotlight-demo";
+import { HeroComposer } from "@example/spotlight-demo";
 import { AiPlanDemo } from "@example/ai-plan-demo";
 import { AutomationDemo } from "@example/automation-demo";
 import { HighlightsBand } from "@example/highlights-band";
@@ -10,7 +10,6 @@ export default function Home() {
 	return (
 		<>
 			<HeroComposer />
-			<StatsProofRow />
 			<AiPlanDemo />
 			<AutomationDemo />
 			<HighlightsBand />
