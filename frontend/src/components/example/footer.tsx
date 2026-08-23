@@ -1,79 +1,80 @@
 import React from "react";
 import Link from "next/link";
 
-const columns = [
-	{
-		title: "Product",
-		links: [
-			{ label: "Create Plan", href: "/createPlan" },
-			{ label: "Dashboard", href: "/home" },
-			{ label: "Pricing", href: "/pricing" },
-		],
-	},
-	{
-		title: "Company",
-		links: [
-			{ label: "About", href: "#" },
-			{ label: "Careers", href: "#" },
-			{ label: "Contact", href: "#" },
-		],
-	},
-	{
-		title: "Legal",
-		links: [
-			{ label: "Privacy", href: "#" },
-			{ label: "Terms", href: "#" },
-			{ label: "Security", href: "#" },
-		],
-	},
-];
-
-export const Footer = () => {
+export function Footer() {
 	return (
-		<footer className="w-full bg-[#0A0A0A] text-[#EEEEEE]">
-			<div
-				aria-hidden="true"
-				className="h-8 w-full"
-				style={{
-					backgroundImage:
-						"radial-gradient(circle, rgba(238,238,238,0.18) 2.5px, transparent 2.5px)",
-					backgroundSize: "14px 14px",
-				}}
-			/>
-			<div className="max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-16">
-				<div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12">
-					<div>
-						<p className="font-mono text-xl font-bold tracking-tight text-[#EEEEEE]">
-							SENZEN
-						</p>
-						<p className="mt-4 font-sans text-sm leading-relaxed text-[#BBBBBB] max-w-xs">
-							Automated money rules, executed weekly. Financial planning, built better.
-						</p>
+		<footer className="w-full border-t border-stone-800/80 bg-[#0C0A09] text-stone-400 text-sm py-16">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-5 gap-8">
+				{/* Col 1 & 2 (Brand) */}
+				<div className="col-span-2 space-y-4">
+					<div className="font-bold text-stone-100 text-lg">Senzen</div>
+					<p className="text-stone-400 text-xs max-w-sm leading-relaxed">
+						The sovereign financial operating system. Rule-driven budgeting,
+						algorithmic routing, and deterministic wealth velocity.
+					</p>
+					<div className="flex items-center gap-2 font-mono text-xs text-emerald-400">
+						<span className="w-2 h-2 rounded-full bg-emerald-500" />
+						All Systems Operational
 					</div>
-					{columns.map((column) => (
-						<div key={column.title}>
-							<h4 className="font-sans text-sm font-semibold text-[#EEEEEE]">
-								{column.title}
-							</h4>
-							<ul className="mt-4 space-y-2 font-sans text-sm">
-								{column.links.map((link) => (
-									<li key={link.label}>
-										<Link
-											href={link.href}
-											className="text-[#BBBBBB] hover:text-[#EEEEEE] transition-colors"
-										>
-											{link.label}
-										</Link>
-									</li>
-								))}
-							</ul>
-						</div>
-					))}
 				</div>
-				<div className="mt-12 border-t border-white/10 pt-6 font-sans text-xs text-[#999999]">
-					© {new Date().getFullYear()} Senzen Financial Systems. All rights reserved.
+
+				{/* Col 3 (Platform) */}
+				<div className="space-y-2.5">
+					<div className="font-semibold text-stone-200 text-xs font-mono uppercase tracking-wider">
+						Platform
+					</div>
+					<ul className="space-y-2.5 text-sm">
+						<li>
+							<Link href="#sandbox" className="hover:text-stone-100 transition-colors">Logic Engine</Link>
+						</li>
+						<li>
+							<Link href="#demo" className="hover:text-stone-100 transition-colors">Interactive Sandbox</Link>
+						</li>
+						<li>
+							<Link href="/createPlan" className="hover:text-stone-100 transition-colors">Plan Builder</Link>
+						</li>
+						<li>
+							<Link href="/pricing" className="hover:text-stone-100 transition-colors">Plans &amp; Tiers</Link>
+						</li>
+					</ul>
+				</div>
+
+				{/* Col 4 (Resources) */}
+				<div className="space-y-2.5">
+					<div className="font-semibold text-stone-200 text-xs font-mono uppercase tracking-wider">
+						Architecture
+					</div>
+					<ul className="space-y-2.5 text-sm">
+						<li>
+							<Link href="#features" className="hover:text-stone-100 transition-colors">Deterministic Rules</Link>
+						</li>
+						<li>
+							<Link href="#faq" className="hover:text-stone-100 transition-colors">Security &amp; Encryption</Link>
+						</li>
+						<li>
+							<Link href="/docs" className="hover:text-stone-100 transition-colors">Documentation</Link>
+						</li>
+					</ul>
+				</div>
+
+				{/* Col 5 (Legal) */}
+				<div className="space-y-2.5">
+					<div className="font-semibold text-stone-200 text-xs font-mono uppercase tracking-wider">
+						Sovereignty
+					</div>
+					<ul className="space-y-2.5 text-sm">
+						<li>
+							<Link href="/privacy" className="hover:text-stone-100 transition-colors">Privacy Policy</Link>
+						</li>
+						<li>
+							<Link href="/terms" className="hover:text-stone-100 transition-colors">Terms of Protocol</Link>
+						</li>
+						<li>
+							<span className="text-xs text-stone-500">&copy; {new Date().getFullYear()} Senzen Inc.</span>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</footer>
 	);
-};
+}
