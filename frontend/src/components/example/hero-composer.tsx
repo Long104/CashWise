@@ -29,15 +29,15 @@ export function HeroComposer() {
 
 					{/* Headline */}
 					<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-stone-100 leading-[1.08]">
-						Programmable Capital.<br />
+						Meet{" "}
 						<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-emerald-400 to-sky-400">
-							Automated to the Cent.
+							Senzen
 						</span>
 					</h1>
 
 					{/* Sub-headline */}
 					<p className="text-base sm:text-lg text-stone-400 max-w-2xl mx-auto leading-relaxed">
-						Construct modular financial logic routines. Automatically route paydays, absorb volatile weeks, and backtest your wealth velocity before execution.
+						Build automated money rules with logic, backtest your budget, then execute—all in one place.
 					</p>
 
 					{/* CTA Button Group */}
@@ -71,13 +71,13 @@ export function HeroComposer() {
 								<span className="w-2.5 h-2.5 rounded-full bg-stone-800" />
 							</div>
 							<span className="font-mono text-xs uppercase tracking-wider text-stone-400">
-								LOGIC_PIPELINE // PAYDAY_ROUTER_V3
+								Simulation Active
 							</span>
 						</div>
 
 						<div className="flex items-center gap-2 px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs">
 							<span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-							<span>SIMULATION ACTIVE</span>
+							<span>Simulation Active</span>
 						</div>
 					</div>
 
@@ -89,10 +89,10 @@ export function HeroComposer() {
 							onClick={() => setActiveInflow(activeInflow === 3200 ? 4500 : activeInflow === 4500 ? 6000 : 3200)}
 							className="text-left border border-amber-500/40 bg-amber-500/5 p-3.5 rounded-lg hover:border-amber-500/80 transition-colors"
 						>
-							<div className="flex items-center gap-2 mb-1">
-								<DollarSign className="w-4 h-4 text-amber-400" />
-								<span className="font-mono text-xs text-amber-400">01 · If Payday</span>
-							</div>
+						<div className="flex items-center gap-2 mb-1">
+							<DollarSign className="w-4 h-4 text-amber-400" />
+							<span className="font-mono text-xs text-amber-400">When payday arrives</span>
+						</div>
 							<div className="font-mono text-lg font-bold text-stone-100 tabular-nums">
 								${activeInflow.toLocaleString()}.00
 							</div>
@@ -102,7 +102,7 @@ export function HeroComposer() {
 						<div className="border border-emerald-500/40 bg-emerald-500/5 p-3.5 rounded-lg">
 							<div className="flex items-center gap-2 mb-1">
 								<Zap className="w-4 h-4 text-emerald-400" />
-								<span className="font-mono text-xs text-emerald-400">02 · Split Logic</span>
+								<span className="font-mono text-xs text-emerald-400">Split 70/30</span>
 							</div>
 							<div className="font-mono text-sm text-stone-200">
 								Auto-Split: 40% Save / 10% Buff
@@ -113,7 +113,7 @@ export function HeroComposer() {
 						<div className="border border-sky-500/40 bg-sky-500/5 p-3.5 rounded-lg">
 							<div className="flex items-center gap-2 mb-1">
 								<TrendingUp className="w-4 h-4 text-sky-400" />
-								<span className="font-mono text-xs text-sky-400">03 · Liquidity Shield</span>
+								<span className="font-mono text-xs text-sky-400">Liquidity Shield</span>
 							</div>
 							<div className="font-mono text-sm text-stone-200">
 								Zero-Deficit Guarantee

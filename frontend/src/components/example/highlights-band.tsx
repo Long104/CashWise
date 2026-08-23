@@ -6,9 +6,9 @@ export function HighlightsBand() {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Grid Header */}
 				<div className="max-w-2xl mx-auto text-center mb-14">
-					<span className="font-mono text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
-						DETERMINISTIC ADVANTAGE
-					</span>
+						<span className="font-mono text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
+							Deterministic Advantage
+						</span>
 					<h2 className="text-3xl sm:text-4xl font-bold text-stone-100 mt-3 tracking-tight">
 						Engineered for Complete Capital Certainty.
 					</h2>
@@ -18,7 +18,7 @@ export function HighlightsBand() {
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 					{/* Card 1: 90-Day Deterministic Backtester (Span 2 Cols) */}
 					<div className="md:col-span-2 bg-[#171412] border border-stone-800 hover:border-amber-500/40 rounded-xl p-6 transition-all">
-						<span className="font-mono text-xs text-amber-400">01 // BACKTEST ENGINE</span>
+						<span className="font-mono text-xs text-amber-400">Backtest Engine</span>
 						<h3 className="text-xl font-bold text-stone-100 mt-2">Dry-Run Against Real Historical Volatility</h3>
 						<p className="text-stone-400 text-sm mt-1 mb-4 leading-relaxed">
 							Verify every conditional trigger against 90 days of prior transactions before committing real funds.
@@ -48,7 +48,7 @@ export function HighlightsBand() {
 
 					{/* Card 2: Dynamic Buffer Shield */}
 					<div className="bg-[#171412] border border-stone-800 hover:border-emerald-500/40 rounded-xl p-6 transition-all">
-						<span className="font-mono text-xs text-emerald-400">02 // VOLATILITY SHIELD</span>
+						<span className="font-mono text-xs text-emerald-400">Volatility Shield</span>
 						<h3 className="text-xl font-bold text-stone-100 mt-2">Elastic Buffer Reserves</h3>
 						<p className="text-stone-400 text-sm mt-1 mb-4 leading-relaxed">
 							Irregular expenses absorb cleanly without breaking monthly targets or triggering deficit loops.
@@ -81,7 +81,7 @@ export function HighlightsBand() {
 
 					{/* Card 3: Sub-Second Payday Routing */}
 					<div className="bg-[#171412] border border-stone-800 hover:border-sky-500/40 rounded-xl p-6 transition-all">
-						<span className="font-mono text-xs text-sky-400">03 // INSTANT DISPATCH</span>
+						<span className="font-mono text-xs text-sky-400">Instant Dispatch</span>
 						<h3 className="text-xl font-bold text-stone-100 mt-2">Zero-Latency Routing</h3>
 						<p className="text-stone-400 text-sm mt-1 mb-4 leading-relaxed">
 							Direct deposits evaluate through the logic engine and route instantly across buckets.
@@ -89,15 +89,15 @@ export function HighlightsBand() {
 						{/* Mini Visual: Visual pipeline nodes with execution timestamps */}
 						<div className="space-y-2">
 							<div className="flex items-center justify-between px-3 py-2 bg-stone-900/50 rounded-md border border-sky-500/20">
-								<span className="font-mono text-xs text-sky-400">DEPOSIT_IN</span>
+								<span className="font-mono text-xs text-sky-400">Deposit in</span>
 								<span className="font-mono text-xs text-stone-400 tabular-nums">00:00:01</span>
 							</div>
 							<div className="flex items-center justify-between px-3 py-2 bg-stone-900/50 rounded-md border border-sky-500/20">
-								<span className="font-mono text-xs text-sky-400">SPLIT_EVAL</span>
+								<span className="font-mono text-xs text-sky-400">Split logic</span>
 								<span className="font-mono text-xs text-stone-400 tabular-nums">00:00:02</span>
 							</div>
 							<div className="flex items-center justify-between px-3 py-2 bg-stone-900/50 rounded-md border border-sky-500/20">
-								<span className="font-mono text-xs text-sky-400">ROUTE_EXEC</span>
+								<span className="font-mono text-xs text-sky-400">Route execution</span>
 								<span className="font-mono text-xs text-stone-400 tabular-nums">00:00:02</span>
 							</div>
 						</div>
@@ -105,7 +105,7 @@ export function HighlightsBand() {
 
 					{/* Card 4: AI Natural Language Compiler (Span 2 Cols) */}
 					<div className="md:col-span-2 bg-[#171412] border border-stone-800 hover:border-amber-500/40 rounded-xl p-6 transition-all">
-						<span className="font-mono text-xs text-amber-400">04 // SYNTACTIC COMPILER</span>
+						<span className="font-mono text-xs text-amber-400">Syntactic Compiler</span>
 						<h3 className="text-xl font-bold text-stone-100 mt-2">Plain English to Strict Logic Blocks</h3>
 						<p className="text-stone-400 text-sm mt-1 mb-4 leading-relaxed">
 							Describe your financial objectives casually. Senzen extracts variables, constraints, and automated triggers.

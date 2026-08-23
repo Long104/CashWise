@@ -11,9 +11,9 @@ export function AiPlanDemo() {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Section Header */}
 				<div className="text-center max-w-2xl mx-auto mb-10">
-					<span className="font-mono text-xs text-sky-400 bg-sky-500/10 border border-sky-500/20 px-3 py-1 rounded-full">
-						AUTHENTIC APPLICATION INTERFACE
-					</span>
+						<span className="font-mono text-xs text-sky-400 bg-sky-500/10 border border-sky-500/20 px-3 py-1 rounded-full">
+							System Interface
+						</span>
 					<h2 className="text-3xl font-bold text-stone-100 mt-3">Inspect the Operating System</h2>
 					<p className="text-stone-400 text-sm mt-2">
 						Switch views to see how Senzen plans structure income and enforce real-time discipline.
@@ -51,7 +51,7 @@ export function AiPlanDemo() {
 						{/* Live Ping */}
 						<span className="font-mono text-xs text-stone-400 flex items-center gap-2">
 							<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-							SANDBOX FEED
+							Sandbox Feed
 						</span>
 					</div>
 

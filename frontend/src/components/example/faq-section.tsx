@@ -34,9 +34,9 @@ export function FaqSection() {
 			<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Header */}
 				<div className="text-center mb-12">
-					<span className="font-mono text-xs text-stone-400 uppercase tracking-wider">
-						CLEAR SPECIFICATIONS
-					</span>
+						<span className="font-mono text-xs text-stone-400 uppercase tracking-wider">
+							Clear Specifications
+						</span>
 					<h2 className="text-3xl font-bold text-stone-100 mt-2 tracking-tight">
 						Frequently Answered Questions
 					</h2>
