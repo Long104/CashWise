@@ -8,7 +8,7 @@
 
 ## 🚀 Overview
 
-**Cash Wise** is a modern, full-stack personal finance application designed to help users manage their money with ease. Built with a focus on performance, scalability, and user experience, it offers a seamless way to track expenses, manage budgets, and gain financial insights.
+**SenZen** is a modern, full-stack personal finance application designed to help users manage their money with ease. Built with a focus on performance, scalability, and user experience, it offers a seamless way to track expenses, manage budgets, and gain financial insights.
 
 ---
 
@@ -54,7 +54,7 @@
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v14 or above)
+- [Node.js](https://nodejs.org/) (v20.9.0 or above)
 - [Go](https://golang.org/) (v1.16 or above)
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
