@@ -3,7 +3,8 @@ import Link from "next/link";
 
 export function AiPlanDemo() {
 	return (
-		<section className="w-full bg-[#EEEEEE]">
+		<section className="relative w-full overflow-hidden bg-[#EEEEEE]">
+
 			<div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
 					<div>

@@ -11,21 +11,24 @@ const ledgerRows = [
 
 export function WeeklyClarity() {
 	return (
-		<section className="w-full bg-[#EEEEEE]">
-			<div
-				aria-hidden="true"
-				className="h-12 w-full"
-				style={{
-					backgroundImage:
-						"radial-gradient(circle, rgba(10,10,10,0.08) 2.5px, transparent 2.5px)",
-					backgroundSize: "14px 14px",
-				}}
-			/>
+		<section className="relative w-full overflow-hidden bg-[#EEEEEE]">
 			<div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
 					<div>
 						<h2 className="font-sans text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#0A0A0A]">
-							Your money, one line a week
+							Your money,{" "}
+							<span className="relative inline-block">
+								<span
+									aria-hidden="true"
+									className="absolute left-[-4%] bottom-[-0.35rem] z-0 block h-[44%] w-[108%] bg-[#0EA5E9]"
+									style={{
+										backgroundImage: "radial-gradient(circle, rgba(10,10,10,0.12) 2.5px, transparent 2.5px)",
+										backgroundSize: "14px 14px",
+									}}
+								/>
+								<span className="relative z-10">one line</span>
+							</span>{" "}
+							a week
 						</h2>
 						<p className="mt-6 text-base md:text-lg leading-relaxed text-[#333333] max-w-md">
 							Every week closes itself out — saved, spent, on-track or behind, in a single ledger line you'll actually read.

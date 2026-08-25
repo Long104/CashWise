@@ -27,14 +27,11 @@ export function HeroStatsBand() {
 
 export function HeroComposer() {
 	return (
-		<section className="relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-[#EEEEEE] border-b border-[#E5E5E5]">
+		<section className="relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-[#EEEEEE]">
 			<div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#E5E5E5_1px,transparent_1px),linear-gradient(to_bottom,#E5E5E5_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-50" />
 
-			<div className="relative z-10 w-full px-6 md:px-10 pt-6 pb-4 bg-[#EEEEEE]/90 backdrop-blur-sm border-b border-[#E5E5E5]">
-				<p className="font-mono text-xs uppercase tracking-widest text-[#555555]">Plans · Budgets · Daily ledger</p>
-			</div>
 
-			<div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-6 md:px-10 flex items-center">
+			<div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-6 md:px-10 flex items-center pb-[10vh] lg:pb-[14vh]">
 				<div className="w-full grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center py-10 lg:py-0">
 					{/* LEFT: headline block */}
 					<div className="w-full flex flex-col items-start text-left">
@@ -72,13 +69,13 @@ export function HeroComposer() {
 						</div>
 					</div>
 
-					{/* RIGHT: mascot slot — full-size floating, no container chrome */}
-					<div className="relative w-full aspect-[4/3] mx-auto lg:max-w-[520px]">
-						{/* subtle dotted halo — flat, no box edge */}
-						<div aria-hidden="true" className="absolute inset-0 z-0 opacity-[0.14]"
-							style={{ backgroundImage: "radial-gradient(circle, #1EC072 3px, transparent 3px)", backgroundSize: "18px 18px" }} />
-						<img src="/logo.png" alt="Senzen" className="relative z-10 h-full w-full object-contain drop-shadow-2xl" />
-					</div>
+				{/* RIGHT: mascot slot — full-size floating, no container chrome */}
+				<div className="relative w-full flex-1 min-h-[420px] lg:min-h-[540px]">
+					{/* subtle dotted halo — flat, no box edge */}
+					<div aria-hidden="true" className="absolute inset-0 z-0 opacity-[0.14]"
+						style={{ backgroundImage: "radial-gradient(circle, #1EC072 3px, transparent 3px)", backgroundSize: "18px 18px" }} />
+					<img src="/logo-hero.png" alt="Senzen" className="relative z-10 h-full w-full object-contain drop-shadow-2xl" />
+				</div>
 				</div>
 			</div>
 		</section>

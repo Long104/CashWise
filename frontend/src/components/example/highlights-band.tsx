@@ -46,7 +46,7 @@ const rowBorders = [
 
 export function HighlightsBand() {
 	return (
-		<section className="w-full border-y border-[#E5E5E5] bg-[#EEEEEE]">
+		<section className="relative w-full overflow-hidden bg-[#EEEEEE]">
 			<div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24">
 				<p className="font-mono text-xs uppercase tracking-wider text-[#555555]">
 					MORE FROM SENZEN

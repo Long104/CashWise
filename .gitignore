@@ -29,3 +29,11 @@ infra/terraform/*.tfstate.*
 infra/terraform/.terraform.lock.hcl
 infra/terraform/terraform.tfvars
 *.tfplan
+
+# agent internals — never push
+.worktrees/
+.ctx/
+qa-screenshots/
+
+# root-level working images (source assets; shipped assets live in frontend/public/)
+/*.png

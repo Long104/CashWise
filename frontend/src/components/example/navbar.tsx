@@ -22,8 +22,8 @@ export function Navbar() {
 					{/* Left: Senzen Logo with green icon */}
 					<div className="flex items-center gap-8">
 						<Link href="/" className="flex items-center gap-2.5 group">
-							<div className="w-7 h-7 rounded-lg bg-[#1EC072] flex items-center justify-center text-[#0A0A0A] font-sans font-black text-base shadow-sm">
-								S
+							<div className="w-7 h-7 rounded-lg bg-[#1EC072] flex items-center justify-center shadow-sm">
+								<img src="/logo.png" alt="Senzen" className="h-[84%] w-[84%] rounded-[5px] object-cover" />
 							</div>
 							<span className="font-sans text-xl font-extrabold tracking-tight text-[#0A0A0A] group-hover:opacity-90 transition-opacity">
 								Senzen
